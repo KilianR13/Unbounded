@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cd8vtm74dv7l6"]
+
+[ext_resource type="Texture2D" uid="uid://86c2gwyxkfss" path="res://res/textures/granite-2250-mm-architextures.jpg" id="1_304pb"]
+
+[resource]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_304pb")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.143588
+texture_filter = 1

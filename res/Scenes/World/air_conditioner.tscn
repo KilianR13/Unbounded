@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4245poducxtf"]
+
+[ext_resource type="PackedScene" uid="uid://bp77l8xja1b1m" path="res://res/models/world/Air conditioner.glb" id="1_kjwnc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cg6y4"]
+size = Vector3(550, 400, 350)
+
+[node name="Air conditioner" instance=ExtResource("1_kjwnc")]
+
+[node name="Air_Conditioner2" parent="." index="0"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Air_Conditioner2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Air_Conditioner2/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+shape = SubResource("BoxShape3D_cg6y4")

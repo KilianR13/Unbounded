@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhrui54sa7pe5"]
+
+[ext_resource type="PackedScene" uid="uid://d3y8f03bdv0ta" path="res://res/models/world/train/High Speed Front.glb" id="1_fww67"]
+[ext_resource type="Script" path="res://res/scripts/train.gd" id="1_prrlo"]
+[ext_resource type="PackedScene" uid="uid://smwvsq1dm0g" path="res://res/models/world/train/High Speed Wagon.glb" id="2_ktbta"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hk1q"]
+size = Vector3(102, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_30acr"]
+size = Vector3(9, 4, 4)
+
+[node name="train" type="Node3D"]
+script = ExtResource("1_prrlo")
+
+[node name="frontWagon" parent="." instance=ExtResource("1_fww67")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2, -36.75, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="frontWagon"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.633, 0.47, 5.68248e-08)
+visible = false
+light_energy = 10.0
+spot_range = 30.0
+spot_angle = 60.0
+
+[node name="middleWagon" parent="." instance=ExtResource("2_ktbta")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2, -12.25, 0, 0)
+
+[node name="middleWagon2" parent="." instance=ExtResource("2_ktbta")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2, 12.25, 0, 0)
+
+[node name="backWagon" parent="." instance=ExtResource("1_fww67")]
+transform = Transform3D(-2.2, 0, 3.01992e-07, 0, 2.2, 0, -3.32191e-07, 0, -2, 36.75, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="backWagon"]
+transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -6.57576, 0.469697, 1.86101e-06)
+visible = false
+light_energy = 10.0
+spot_range = 30.0
+spot_angle = 60.0
+
+[node name="collision" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+disable_mode = 2
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, -0.1)
+shape = SubResource("BoxShape3D_0hk1q")
+
+[node name="playerImpact" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="playerImpact"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 2.2, -0.1)
+shape = SubResource("BoxShape3D_30acr")
+
+[connection signal="body_entered" from="playerImpact" to="." method="_on_player_impact_body_entered"]

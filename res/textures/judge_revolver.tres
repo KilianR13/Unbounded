@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cqpae5pfvxuf7"]
+
+[sub_resource type="Shader" id="Shader_ua8yw"]
+code = "shader_type spatial;
+
+uniform float time_factor : hint_range(0.0, 10.0) = 1.0;
+void fragment() {
+    // Oscila la intensidad del rojo con el tiempo
+    float intensity = 0.5 + 0.5 * sin(TIME * time_factor);
+
+    // Color rojo con fluctuación (naranja cálido sin usar canal verde)
+    vec3 flame_color = vec3(0.4 + 0.2 * intensity, 0.0, 0.0);  // Solo rojo, sin verde
+
+    ALBEDO = flame_color;
+}"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_ua8yw")
+shader_parameter/time_factor = 3.0

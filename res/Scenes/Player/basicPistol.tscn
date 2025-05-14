@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://cerilfkdcr1yq"]
+
+[ext_resource type="PackedScene" uid="uid://vaand4c0axsh" path="res://res/models/weapons/BasicPistol.glb" id="1_q8v5j"]
+[ext_resource type="AudioStream" uid="uid://7m3f6d2e0odn" path="res://res/sfx/pistolGunshot.wav" id="2_qqwfn"]
+
+[sub_resource type="Animation" id="Animation_qhlu4"]
+resource_name = "shoot"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pistol_03_Cube_002:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0.6), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pistol_03_Cube_002:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(-0.610865, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sb65"]
+_data = {
+"shoot": SubResource("Animation_qhlu4")
+}
+
+[node name="PistolNode" instance=ExtResource("1_q8v5j")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RootNode" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_8sb65")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="RootNode" index="2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.48879, 0.560868, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="gunshot" type="AudioStreamPlayer2D" parent="RootNode" index="3"]
+stream = ExtResource("2_qqwfn")
+pitch_scale = 0.8
+max_polyphony = 3
+panning_strength = 0.0
