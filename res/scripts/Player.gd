@@ -65,9 +65,11 @@ var has_used_ultimate = false
 @onready var pistola = $playerHead/Camera3D/Pistol
 @onready var JudgeRevolver = $playerHead/Camera3D/JudgeRevolverRoot
 @onready var rifle = $playerHead/Camera3D/RifleNode
-@onready var hitscan_RayCast = $playerHead/hitscanRayCast
+@onready var hitscan_RayCast = $playerHead/Camera3D/hitscanRayCast
+@onready var hitscan_RayCast_endpoint = $playerHead/Camera3D/raycastEnd
 @onready var ultimateChargeTimer = $ultimateChargeTimer
 
+var bullet_trail = load("res://res/Scenes/Player/bloodSplatter.tscn")
 
 func _ready():
 	var armas = []
@@ -186,7 +188,7 @@ func _physics_process(delta):
 		match current_weapon_state:
 			WeaponState.WEAPON_PISTOL:
 				if pistolAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast)
+					currentWeapon.shoot(hitscan_RayCast, hitscan_RayCast_endpoint)
 					pistolAmmo -= 1
 					print("Pistola: ", pistolAmmo)
 			WeaponState.WEAPON_RIFLE:

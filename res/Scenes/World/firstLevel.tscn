@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://e03yx2ymkxms"]
+[gd_scene load_steps=113 format=3 uid="uid://e03yx2ymkxms"]
 
 [ext_resource type="Script" path="res://res/Scenes/World/firstLevel.gd" id="1_54ki8"]
 [ext_resource type="PackedScene" uid="uid://h2d7jnxcsmt1" path="res://res/Scenes/Player/player.tscn" id="1_fd6uq"]
@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://wxvu3536hlhu" path="res://res/sfx/music/Combat_Loop.wav" id="31_w6dd7"]
 [ext_resource type="AudioStream" uid="uid://ikrkeb5bff83" path="res://res/sfx/music/Combat_Buildup.wav" id="32_ondn4"]
 [ext_resource type="Script" path="res://res/scripts/world/CombatManager.gd" id="33_llbyv"]
+[ext_resource type="PackedScene" uid="uid://bx7cxbm5k174a" path="res://res/Scenes/Enemies/zombie_enemy.tscn" id="35_uskfi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c16q8"]
 albedo_texture = ExtResource("4_b058n")
@@ -13516,7 +13517,7 @@ transform = Transform3D(-1, 0, -1.96295e-06, 0, 1, 0, 1.50996e-07, 0, -13, 10.07
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.47, 9.5, -7)
 
 [node name="secondSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72, 3, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 20, 6)
 
 [node name="basicBuilding_copypaste" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 52)
@@ -34964,6 +34965,10 @@ volume_db = -8.0
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("33_llbyv")
+
+[node name="Zombie" parent="." instance=ExtResource("35_uskfi")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 73, 0, 0)
+player_path = NodePath("../Player")
 
 [connection signal="body_entered" from="FirstZone/Walls/OPENDOOR_DEBUG/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="FirstZone/Decoration/ladder/ladderArea" to="Player" method="_on_ladder_area_body_entered"]

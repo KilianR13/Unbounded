@@ -58,13 +58,16 @@ visible = false
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.0744072, -0.0825578, -0.0533723)
 visible = false
 
-[node name="hitscanRayCast" type="RayCast3D" parent="playerHead"]
-transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0.65, 0)
-target_position = Vector3(0, 0, -100000)
+[node name="hitscanRayCast" type="RayCast3D" parent="playerHead/Camera3D"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.05, 0)
+target_position = Vector3(0, 0, -10000)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 debug_shape_thickness = 1
+
+[node name="raycastEnd" type="Node3D" parent="playerHead/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10000)
 
 [node name="DoubleJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_l3tqo")
