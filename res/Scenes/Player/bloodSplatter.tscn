@@ -3,9 +3,10 @@
 [ext_resource type="Script" path="res://res/scripts/bloodSplatter.gd" id="1_maojp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5ep5"]
-albedo_color = Color(0.317647, 0.121569, 0.0745098, 1)
+albedo_color = Color(0.501961, 0.121569, 0.0745098, 1)
+metallic = 0.62
 metallic_specular = 0.0
-roughness = 0.9
+roughness = 0.8
 emission = Color(0.560784, 0, 0, 1)
 emission_energy_multiplier = 0.4
 
@@ -39,6 +40,7 @@ draw_pass_1 = SubResource("SphereMesh_bxqye")
 script = ExtResource("1_maojp")
 
 [node name="lifeTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 autostart = true
 

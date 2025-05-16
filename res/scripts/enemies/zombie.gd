@@ -6,7 +6,7 @@ var player = null
 
 const SPEED = 3.0
 const ATTACK_DETECTION_RANGE = 1
-var health = 1000
+var health = 10
 var dead = false
 var rotated = false
 var state_machine
@@ -58,14 +58,13 @@ func _physics_process(_delta):
 					look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
 			move_and_slide()
 		anim_tree.set("parameters/conditions/attack", _target_in_range())
-		anim_tree.set("parameters/conditions/run", !_target_in_range())
+		anim_tree.set("parameters/conditions/chase", !_target_in_range())
 		
 
 func _target_in_range():
 	return global_position.distance_to(player.global_position) < ATTACK_DETECTION_RANGE
 
 func receive_hit(damage, headshotMultiplier, is_headshot = false):
-	print("Golpe")
 	if is_headshot:
 		damage *= headshotMultiplier
 	health -= damage
