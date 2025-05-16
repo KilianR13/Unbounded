@@ -25,16 +25,21 @@ initial_velocity_max = 8.0
 scale_curve = SubResource("CurveTexture_ti1ah")
 
 [sub_resource type="SphereMesh" id="SphereMesh_bxqye"]
-radius = 0.04
-height = 0.08
+radius = 0.02
+height = 0.04
 
 [node name="BloodSplatter" type="GPUParticles3D"]
 material_override = SubResource("StandardMaterial3D_y5ep5")
 emitting = false
-amount = 18
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_merlx")
 draw_pass_1 = SubResource("SphereMesh_bxqye")
 script = ExtResource("1_maojp")
+
+[node name="lifeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="lifeTimer" to="." method="_on_life_timer_timeout"]

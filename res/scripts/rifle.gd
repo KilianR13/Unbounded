@@ -39,7 +39,7 @@ func shoot(raycast: RayCast3D):
 			var hit_position = raycast.get_collision_point()
 			var blood_fx = preload("res://res/Scenes/Player/bloodSplatter.tscn").instantiate()
 			get_tree().current_scene.add_child(blood_fx)
-			blood_fx.trigger(hit_position, self.global_position, is_headshot)
+			blood_fx.trigger(hit_position, self.global_position)
 			if is_headshot:
 				emit_signal("criticalHit", 5)
 	raycast.enabled = false

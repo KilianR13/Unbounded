@@ -6,7 +6,7 @@ var player = null
 
 const SPEED = 3.0
 const ATTACK_DETECTION_RANGE = 1
-var health = 10
+var health = 1000
 var dead = false
 var rotated = false
 var state_machine

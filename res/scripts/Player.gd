@@ -188,7 +188,7 @@ func _physics_process(delta):
 		match current_weapon_state:
 			WeaponState.WEAPON_PISTOL:
 				if pistolAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast, hitscan_RayCast_endpoint)
+					currentWeapon.shoot(hitscan_RayCast)
 					pistolAmmo -= 1
 					print("Pistola: ", pistolAmmo)
 			WeaponState.WEAPON_RIFLE:

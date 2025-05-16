@@ -21,7 +21,7 @@ func _ready():
 	fogonazoSpotLight.visible = false
 
 
-func shoot(raycast: RayCast3D , raycastEndPoint: Node3D):
+func shoot(raycast: RayCast3D):
 	if !animationPlayer.is_playing():
 		animationPlayer.play("shoot")
 		fogonazo()
@@ -33,17 +33,15 @@ func shoot(raycast: RayCast3D , raycastEndPoint: Node3D):
 		
 		
 		if raycast.is_colliding():
-			print("Colliding")
 			var collider = raycast.get_collider()
 			if collider.is_in_group("enemy"):
-				print("Enemigo")
 				var enemy_node = collider.get_owner()
 				var is_headshot = collider.is_in_group("enemy_head")
 				enemy_node.receive_hit(damage, critMultiplier, is_headshot)
 				var hit_position = raycast.get_collision_point()
 				var blood_fx = preload("res://res/Scenes/Player/bloodSplatter.tscn").instantiate()
 				get_tree().current_scene.add_child(blood_fx)
-				blood_fx.trigger(hit_position, barrelPos.global_position, is_headshot)
+				blood_fx.trigger(hit_position, barrelPos.global_position)
 				if is_headshot:
 					emit_signal("criticalHit", 5)
 		raycast.enabled = false
