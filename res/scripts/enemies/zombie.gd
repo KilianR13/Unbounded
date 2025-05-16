@@ -4,7 +4,7 @@ signal enemy_killed
 
 var player = null
 
-const SPEED = 3.0
+const SPEED = 8.0
 const ATTACK_DETECTION_RANGE = 1
 var health = 10
 var dead = false
@@ -13,18 +13,16 @@ var state_machine
 
 
 @export var player_path: NodePath
-@export var activate: bool = true
 
 @onready var navAgent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
 @onready var generalCollisionShape = $CollisionShape3D
-@onready var tween: Tween
 
 var ai_update_interval : int = 2  # Número de fotogramas entre cada actualización de la IA
 var ai_update_counter : int = 0  # Contador de fotogramas
 
 func _ready():
-	anim_tree.set("parameters/conditions/alerted", true)
+	
 	player = get_node(player_path)
 	state_machine = anim_tree.get("parameters/playback")
 	set_physics_process(false)
@@ -37,7 +35,7 @@ func dump_first_physics_frame() -> void:
 
 
 func _physics_process(_delta):
-	if activate and !dead:
+	if !dead and player.isAlive and state_machine.get_current_node() != "idleAnimation":
 		ai_update_counter += 1
 		
 		if ai_update_counter >= ai_update_interval:
@@ -71,7 +69,7 @@ func receive_hit(damage, headshotMultiplier, is_headshot = false):
 	if health <= 0:
 		if !dead:
 			disable_enemy_areas_local()
-			emit_signal("enemy_killed", self)
+			emit_signal("enemy_killed")
 		dead = true # Detiene el movimiento del enemigo.
 		generalCollisionShape.disabled = true
 		anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.

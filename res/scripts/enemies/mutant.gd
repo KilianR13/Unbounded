@@ -36,7 +36,7 @@ func dump_first_physics_frame() -> void:
 
 
 func _physics_process(_delta):
-	if activate and !dead:
+	if activate and !dead and player.isAlive:
 		ai_update_counter += 1
 		
 		if ai_update_counter >= ai_update_interval:
@@ -67,14 +67,15 @@ func receive_hit(damage, headshotMultiplier, is_headshot = false):
 	health -= damage
 	if health <= 0:
 		if !dead:
+			anim_tree.set("parameters/conditions/attack", false)
 			disable_enemy_areas_local()
 			emit_signal("enemy_killed", self)
-		dead = true # Detiene el movimiento del enemigo.
-		generalCollisionShape.disabled = true
-		anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.
-		anim_tree.set("parameters/conditions/die", true)
-		await get_tree().create_timer(8.0).timeout # La animación dura 8 segundos.
-		queue_free()
+			dead = true # Detiene el movimiento del enemigo.
+			generalCollisionShape.disabled = true
+			anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.
+			anim_tree.set("parameters/conditions/die", true)
+			await get_tree().create_timer(8.0).timeout # La animación dura 8 segundos.
+			queue_free()
 
 func disable_enemy_areas_local():
 	for child in get_children():

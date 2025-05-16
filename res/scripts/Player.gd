@@ -72,7 +72,6 @@ var has_used_ultimate = false
 var bullet_trail = load("res://res/Scenes/Player/bloodSplatter.tscn")
 
 func _ready():
-	var armas = []
 	for child in camera.get_children():
 		# Solo conectar si el nodo tiene las señales
 		if child.has_signal("criticalHit") and child.has_signal("shotFinished"):
