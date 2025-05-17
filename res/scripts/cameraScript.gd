@@ -1,14 +1,14 @@
 extends Camera3D
 
-@export var period = 0.1
-@export var magnitude = 0.1
+@export var period: float = 0.1
+@export var magnitude: float = 0.1
 
-func _camera_shake():
-	var initial_transform = self.transform 
-	var elapsed_time = 0.0
+func _camera_shake() -> void:
+	var initial_transform: Transform3D = self.transform 
+	var elapsed_time: float = 0.0
 
 	while elapsed_time < period:
-		var offset = Vector3(
+		var offset: Vector3 = Vector3(
 			randf_range(-magnitude, magnitude),
 			randf_range(-magnitude, magnitude),
 			0.0

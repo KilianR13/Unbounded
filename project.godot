@@ -11,17 +11,24 @@ config_version=5
 [application]
 
 config/name="shooterProject"
+run/main_scene="res://res/Scenes/Menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-CombatManager="*res://res/scripts/world/CombatManager.gd"
+CombatManager="res://res/scripts/world/CombatManager.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=2
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [filesystem]
@@ -102,3 +109,4 @@ textures/canvas_textures/default_texture_filter=0
 textures/canvas_textures/default_texture_repeat=1
 textures/default_filters/anisotropic_filtering_level=4
 textures/default_filters/texture_mipmap_bias=-0.5
+occlusion_culling/use_occlusion_culling=true

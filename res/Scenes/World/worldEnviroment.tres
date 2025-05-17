@@ -10,6 +10,7 @@ glow_strength = 1.11
 glow_bloom = 0.1
 glow_blend_mode = 0
 fog_light_color = Color(0.196078, 0.196078, 0.196078, 1)
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.004
 volumetric_fog_emission = Color(0.141176, 0.141176, 0.141176, 1)
 volumetric_fog_length = 255.0

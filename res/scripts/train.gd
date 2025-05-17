@@ -1,26 +1,26 @@
 extends Node3D
 
-@onready var frontLight = $frontWagon/SpotLight3D
-@onready var backLight = $backWagon/SpotLight3D
+@onready var frontLight: SpotLight3D = $frontWagon/SpotLight3D
+@onready var backLight: SpotLight3D = $backWagon/SpotLight3D
 
-signal playerHit(body)
+signal playerHit(body: CharacterBody3D)
 
-@onready var hit_area = $playerImpact
+@onready var hit_area: Area3D = $playerImpact
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	lightOff()
 
 
-func lightOn():
+func lightOn() -> void:
 	frontLight.visible = true
 	backLight.visible = true
 
-func lightOff():
+func lightOff() -> void:
 	frontLight.visible = false
 	backLight.visible = false
 
 
-func _on_player_impact_body_entered(body):
+func _on_player_impact_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
 		emit_signal("playerHit", body)
