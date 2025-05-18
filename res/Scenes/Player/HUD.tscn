@@ -1,0 +1,327 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2q8vn05nkxu8"]
+
+[ext_resource type="Script" path="res://res/scripts/PlayerHUD.gd" id="1_pq5j0"]
+[ext_resource type="StyleBox" uid="uid://b5dtqpvfb2y2q" path="res://res/Scenes/Player/HUDBox.tres" id="2_1u2kt"]
+[ext_resource type="Script" path="res://res/scripts/reticle.gd" id="2_ilxej"]
+
+[sub_resource type="FontVariation" id="FontVariation_y8o6t"]
+spacing_top = -20
+spacing_bottom = -20
+
+[sub_resource type="FontVariation" id="FontVariation_lrrr6"]
+spacing_top = -20
+spacing_bottom = -20
+
+[sub_resource type="FontVariation" id="FontVariation_qt44h"]
+spacing_top = -5
+spacing_bottom = -10
+
+[node name="PlayerHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_pq5j0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 15.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Top"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurrentObjectiveNode" type="Control" parent="VBoxContainer/Top/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CurrentObjectiveDescriptionNode" type="Control" parent="VBoxContainer/Top/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Middle" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 70.0
+mouse_filter = 2
+
+[node name="Transmissions" type="Control" parent="VBoxContainer/Middle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Middle/Transmissions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TransmissionsSpace" type="Control" parent="VBoxContainer/Middle/Transmissions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 25.0
+mouse_filter = 2
+
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Middle/Transmissions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 75.0
+mouse_filter = 2
+
+[node name="Reticle" type="CenterContainer" parent="VBoxContainer/Middle/Transmissions/HBoxContainer/EmptySpace"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ilxej")
+
+[node name="EmptySpace2" type="Control" parent="VBoxContainer/Middle/Transmissions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 25.0
+mouse_filter = 2
+
+[node name="Bottom" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 15.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftSpace" type="Control" parent="VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 25.0
+mouse_filter = 2
+
+[node name="MiddleSpace" type="Control" parent="VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 50.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 80.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 40.0
+theme_override_styles/panel = ExtResource("2_1u2kt")
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_y8o6t")
+theme_override_font_sizes/font_size = 72
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 40.0
+theme_override_styles/panel = ExtResource("2_1u2kt")
+
+[node name="AmmoLabel" type="Label" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_lrrr6")
+theme_override_font_sizes/font_size = 72
+text = "100"
+
+[node name="Control" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="RightSpace" type="Control" parent="VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 25.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Bottom" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="Center" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 60.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ammo1" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="AmmoLabel1" type="Label" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -13.5
+offset_right = 14.5
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_qt44h")
+
+[node name="Ammo2" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="AmmoLabel2" type="Label" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -14.0
+offset_right = 14.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_qt44h")
+
+[node name="Ammo3" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="AmmoLabel3" type="Label" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -13.5
+offset_right = 14.5
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_qt44h")
+
+[node name="Ammo4" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="AmmoLabel4" type="Label" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo4"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -14.0
+offset_right = 14.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_qt44h")
+
+[node name="Right" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2

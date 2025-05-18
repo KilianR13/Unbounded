@@ -1,5 +1,10 @@
 extends CharacterBody3D
 
+signal weapon_changed(weapon_name: String, ammo: int)
+signal ammo_updated(weapon_name: String, ammo: int)
+signal update_ult_charge(charge: int)
+signal healthChanged(currentHealth: int)
+
 var speed: float = WALK_SPEED
 var jump_count: int = 0
 var wall_momentum_stopped: bool = false
@@ -12,6 +17,7 @@ var isAlive: bool = true
 
 var was_on_floor: bool = true
 var landing_sound_enabled: bool = false
+var finished_loading: bool = false
 const WALK_SPEED: float = 8.0
 const JUMP_VELOCITY: float = 6.5
 const SENSITIVITY: float = 0.005
@@ -49,8 +55,10 @@ enum WeaponState {
 
 var current_weapon_state : WeaponState
 var currentWeapon: Node3D
-var pistolAmmo: int
-var rifleAmmo: int
+var pistolAmmo: int = 0
+var rifleAmmo: int = 0
+var specialAmmo: int = 0
+var heavyAmmo: int = 0
 var ultimateAmmo: int
 var shotFinished: bool = true
 
@@ -73,7 +81,6 @@ var has_used_ultimate: bool = false
 @onready var hitscan_RayCast_endpoint: Node3D = $playerHead/Camera3D/raycastEnd
 @onready var ultimateChargeTimer: Timer = $ultimateChargeTimer
 
-var bullet_trail: PackedScene = load("res://res/Scenes/Player/bloodSplatter.tscn")
 
 func _ready() -> void:
 	for child: Node in camera.get_children():
@@ -91,14 +98,20 @@ func _ready() -> void:
 	pistolAmmo = pistola.maxAmmo
 	rifleAmmo = rifle.maxAmmo
 	ultimateAmmo = 0
+	$HUD/PlayerHUD.updateAmmoCounts()
 	set_process(false)
 	await get_tree().process_frame  # o await get_tree().physics_frame
 	set_process(true)
 	await get_tree().create_timer(0.1).timeout
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	landing_sound_enabled = true
+	finished_loading = true
+	
 
 func _unhandled_input(event: InputEvent)-> void:
+	if !finished_loading:
+		return
+
 	if event is InputEventMouseMotion and isAlive:
 		playerHead.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
@@ -112,13 +125,16 @@ func _unhandled_input(event: InputEvent)-> void:
 		if Input.is_action_just_pressed("swapWeapon1"):
 			if current_weapon_state != WeaponState.WEAPON_PISTOL:
 				await changeWeapons(pistola, WeaponState.WEAPON_PISTOL)
+				emit_signal("weapon_changed", "Pistol", pistolAmmo)
 		elif Input.is_action_just_pressed("swapWeapon2"):
 			if current_weapon_state != WeaponState.WEAPON_RIFLE:
 				await changeWeapons(rifle, WeaponState.WEAPON_RIFLE)
+				emit_signal("weapon_changed", "Rifle", rifleAmmo)
 		elif Input.is_action_just_pressed("useUltimate"):
 			if current_weapon_state != WeaponState.ULTIMATE and ultimateCharge == 100:
 				has_used_ultimate = true
 				await changeWeapons(JudgeRevolver, WeaponState.ULTIMATE)
+				emit_signal("weapon_changed", "Ultimate", ultimateAmmo)
 		
 	
 	# Handle jump.
@@ -135,6 +151,8 @@ func _unhandled_input(event: InputEvent)-> void:
 				preserve_dash_momentum = true
 			
 		jump_count += 1
+	
+	
 
 func _process(delta: float) -> void:
 	if shake_strength > 0.01:
@@ -199,15 +217,18 @@ func _physics_process(delta: float) -> void:
 					currentWeapon.shoot(hitscan_RayCast)
 					pistolAmmo -= 1
 					print("Pistola: ", pistolAmmo)
+					emit_signal("ammo_updated", "Pistol", pistolAmmo)
 			WeaponState.WEAPON_RIFLE:
 				if rifleAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)
 					rifleAmmo -= 1
 					print("Rifle: ", rifleAmmo)
+					emit_signal("ammo_updated", "Rifle", rifleAmmo)
 			WeaponState.ULTIMATE:
 				if ultimateAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)
 					ultimateAmmo -= 1
+					emit_signal("ammo_updated", "Ultimate", ultimateAmmo)
 					if !is_shaking:
 						trigger_camera_shake(0.5)
 						is_shaking = true
@@ -322,6 +343,7 @@ func changeWeapons(newWeapon: Node3D, newState: WeaponState) -> void:
 		ultimateAmmo = 0
 		ultimateCharge = 0
 		has_used_ultimate = false
+		emit_signal("update_ult_charge", ultimateCharge)
 		ultimateChargeTimer.start()
 	current_weapon_state = newState
 	currentWeapon = newWeapon
@@ -331,17 +353,19 @@ func changeWeapons(newWeapon: Node3D, newState: WeaponState) -> void:
 func _headshot(superCharge: int) -> void:
 	if ultimateCharge < 100:
 		ultimateCharge += superCharge
+		emit_signal("update_ult_charge", ultimateCharge)
 		if ultimateCharge >= 100:
 			ultimateCharged()
 
 func _on_ultimate_charge_timer_timeout() -> void:
 	if ultimateCharge < 100:
-		ultimateCharge += 10
+		ultimateCharge += 15
+		emit_signal("update_ult_charge", ultimateCharge)
 		if ultimateCharge >= 100:
 			ultimateCharged()
 
 func ultimateCharged() -> void:
 	ultimateCharge = 100
-	ultimateAmmo = 60000
+	ultimateAmmo = 6
 	print("cargado!")
 	ultimateChargeTimer.stop()

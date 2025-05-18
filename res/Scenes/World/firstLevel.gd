@@ -11,6 +11,7 @@ extends Node3D
 @onready var train: Node3D = $LevelGeometry/SecondZone/TrainTransitionZone/train/train
 @onready var train3DDestiny: Node3D = $LevelGeometry/SecondZone/TrainTransitionZone/train/trainDestiny
 @onready var trainSFX: AudioStreamPlayer3D = $LevelGeometry/SecondZone/TrainTransitionZone/train/trainSFX
+@onready var NormalMusic: AudioStreamPlayer = $Music/RegularMusic
 @onready var CombatMusicBuildup: AudioStreamPlayer = $Music/CombatBuildup
 @onready var CombatMusicAction: AudioStreamPlayer = $Music/CombatMusic
 var combatActive: bool
@@ -117,6 +118,10 @@ func _on_mutant_trigger_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
 		CombatMusicBuildup.play()
 		combatActive = true
+		var musicTween: Tween = get_tree().create_tween()
+		musicTween.tween_property(NormalMusic, "volume_db", -80, 2.0)
+		musicTween.tween_callback(Callable(NormalMusic, "stop"))
+		#NormalMusic
 		$combat_logic/zone3/mutantSpawner/mutantTrigger.set_deferred("monitoring", false)
 		$CombatManager.start_wave(10, Callable(self, "spawnMutant"))
 		$CombatManager.start_wave(20, Callable(self, "spawnMutant"))

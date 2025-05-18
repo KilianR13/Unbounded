@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://h2d7jnxcsmt1"]
 
 [ext_resource type="Script" path="res://res/scripts/Player.gd" id="1_iprhw"]
-[ext_resource type="PackedScene" uid="uid://dkv57t3qy1bm5" path="res://res/Scenes/Player/testHUD.tscn" id="2_n472j"]
 [ext_resource type="Script" path="res://res/scripts/cameraScript.gd" id="2_xafiq"]
 [ext_resource type="PackedScene" uid="uid://eofdb4gtnsvk" path="res://res/Scenes/Player/handCannon.tscn" id="3_anlf3"]
 [ext_resource type="AudioStream" uid="uid://digtj4b6hppyu" path="res://res/sfx/DoubleJumpSFX.wav" id="3_l3tqo"]
 [ext_resource type="AudioStream" uid="uid://bid3phi2exo5k" path="res://res/sfx/WalkSFX.wav" id="4_8jfuc"]
 [ext_resource type="AudioStream" uid="uid://chtuwyo60qu2l" path="res://res/sfx/GroundLand_SFX.wav" id="5_5l5dc"]
 [ext_resource type="PackedScene" uid="uid://didk0crxigacv" path="res://res/Scenes/Player/judge_revolver.tscn" id="5_xufo1"]
+[ext_resource type="PackedScene" uid="uid://b2q8vn05nkxu8" path="res://res/Scenes/Player/HUD.tscn" id="6_nnyey"]
 [ext_resource type="AudioStream" uid="uid://crha4blily4fb" path="res://res/sfx/JumpSFX.wav" id="6_rpdws"]
 [ext_resource type="PackedScene" uid="uid://c4owva3kxuo4" path="res://res/Scenes/Player/rifle.tscn" id="6_tjkpo"]
 [ext_resource type="AudioStream" uid="uid://d00thuha2cnvw" path="res://res/sfx/playerDeathSFX.wav" id="9_5rob0"]
@@ -44,8 +44,6 @@ fov = 90.0
 near = 0.001
 script = ExtResource("2_xafiq")
 
-[node name="CanvasLayer" parent="playerHead/Camera3D" instance=ExtResource("2_n472j")]
-
 [node name="Pistol" parent="playerHead/Camera3D" instance=ExtResource("3_anlf3")]
 process_priority = 10
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.074892, -0.0545787, -0.131241)
@@ -68,6 +66,10 @@ debug_shape_thickness = 1
 
 [node name="raycastEnd" type="Node3D" parent="playerHead/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10000)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" parent="HUD" instance=ExtResource("6_nnyey")]
 
 [node name="DoubleJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_l3tqo")

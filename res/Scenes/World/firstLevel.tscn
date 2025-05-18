@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://e03yx2ymkxms"]
+[gd_scene load_steps=116 format=3 uid="uid://e03yx2ymkxms"]
 
 [ext_resource type="Script" path="res://res/Scenes/World/firstLevel.gd" id="1_54ki8"]
 [ext_resource type="PackedScene" uid="uid://h2d7jnxcsmt1" path="res://res/Scenes/Player/player.tscn" id="1_fd6uq"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cj22m8lylyx8h" path="res://res/models/world/building kit Kenny/GLB format/barricade-window-b.glb" id="7_8pjs5"]
 [ext_resource type="PackedScene" uid="uid://dwy5o0o0tebhh" path="res://res/models/world/building kit Kenny/GLB format/wall-doorway-square.glb" id="8_v0sv5"]
 [ext_resource type="PackedScene" uid="uid://os7v1nd1iid8" path="res://res/models/world/building kit Kenny/GLB format/door-rotate-square-a.glb" id="9_01bwd"]
+[ext_resource type="AudioStream" uid="uid://dwxeb1pwp0f5c" path="res://res/sfx/music/NeutralGameMusicLoop.wav" id="9_6c6h7"]
 [ext_resource type="PackedScene" uid="uid://bpbc7g0my31xr" path="res://res/models/world/building kit Kenny/GLB format/barricade-doorway-b.glb" id="10_q0741"]
 [ext_resource type="PackedScene" uid="uid://db67uqmhr8l4g" path="res://res/models/world/building kit Kenny/GLB format/door-rotate-square-b.glb" id="11_gvi3w"]
 [ext_resource type="AudioStream" uid="uid://dpve7qq6ramya" path="res://res/sfx/doorKick.wav" id="12_kx2vv"]
@@ -981,7 +982,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155, 0, 0)
 [node name="FirstFloor" type="Node3D" parent="combat_logic/FirstZoneZombies"]
 
 [node name="FirstZombieTrigger" type="Area3D" parent="combat_logic/FirstZoneZombies/FirstFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 18.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 19.4)
 collision_layer = 3
 collision_mask = 3
 
@@ -1119,6 +1120,11 @@ volume_db = -8.0
 [node name="CombatBuildup" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("32_ondn4")
 volume_db = -8.0
+
+[node name="RegularMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("9_6c6h7")
+volume_db = -16.0
+autoplay = true
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("33_llbyv")
@@ -35110,8 +35116,6 @@ shape = SubResource("BoxShape3D_cdxbv")
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="specialOcclusionNodes/firstDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.45)
 occluder = ExtResource("38_jhket")
-
-[node name="LightmapGI" type="LightmapGI" parent="."]
 
 [connection signal="body_entered" from="killzone/killzoneArea" to="." method="_on_killzone_area_body_entered"]
 [connection signal="body_entered" from="combat_logic/zone3/mutantSpawner/mutantTrigger" to="." method="_on_mutant_trigger_body_entered"]
