@@ -620,6 +620,7 @@ script = ExtResource("1_54ki8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 visible = false
 layers = 3
+light_energy = 0.0
 light_indirect_energy = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -629,7 +630,7 @@ environment = ExtResource("2_v7imq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.8548)
 
 [node name="playerSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.8548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.9548)
 
 [node name="basicBuilding_copypaste" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 52)
@@ -921,6 +922,7 @@ transform = Transform3D(4.5897e-08, -3.82137e-15, -1.05, -9.17939e-08, -1, 0, -1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 8)
 collision_layer = 3
 collision_mask = 3
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="killzone/killzoneArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
@@ -928,6 +930,7 @@ shape = SubResource("BoxShape3D_3nle0")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 29, 5.7)
+visible = false
 layers = 3
 light_color = Color(1, 1, 0, 1)
 light_energy = 4.0
@@ -960,6 +963,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
 [node name="Area3D" type="Area3D" parent="combat_logic/zone3/mutantSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="combat_logic/zone3/mutantSpawner/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0.000999808, 0.5)
@@ -970,6 +975,7 @@ shape = SubResource("BoxShape3D_fgulw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0.6, 0)
 collision_layer = 3
 collision_mask = 3
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="combat_logic/zone3/mutantSpawner/mutantTrigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 10, 0.5)
@@ -985,6 +991,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 19.4)
 collision_layer = 3
 collision_mask = 3
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="combat_logic/FirstZoneZombies/FirstFloor/FirstZombieTrigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0500001, 2, 0.1)

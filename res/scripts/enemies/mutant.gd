@@ -20,8 +20,6 @@ var state_machine: AnimationNodeStateMachinePlayback
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var generalCollisionShape: CollisionShape3D = $CollisionShape3D
 
-var ai_update_interval : int = 10  # Número de fotogramas entre cada actualización de la IA
-var ai_update_counter : int = 0  # Contador de fotogramas
 var cached_player_position : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
@@ -34,33 +32,33 @@ func _ready() -> void:
 func dump_first_physics_frame() -> void:
 	await get_tree().physics_frame
 	set_physics_process(true)
+	update_ai_loop()
 
+func update_ai_loop() -> void:
+	while not dead:
+		if player.isAlive:
+			_update_ai_logic()
+		await get_tree().create_timer(0.5).timeout
 
 func _physics_process(_delta: float) -> void:
 	if dead:
 		return
+	move_and_slide()
 	
-	if player.isAlive:
-		ai_update_counter += 1
-		
-		# Solo actualizamos la posición del jugador cada 20 ticks
-		if ai_update_counter >= ai_update_interval:
-			ai_update_counter = 0
-			cached_player_position = player.global_transform.origin
-			#velocity = Vector3.ZERO
-			match state_machine.get_current_node():
-				"runAnimation":
-					anim_tree.root_motion_track = "Armature/Skeleton3D:mixamorig_Hips"
-					navAgent.set_target_position(cached_player_position)
-					var nextNavPoint: Vector3 = navAgent.get_next_path_position()
-					velocity = (nextNavPoint - global_transform.origin).normalized() * SPEED
-				"attackAnimation":
-					velocity = Vector3.ZERO
-					anim_tree.root_motion_track = ""
-			look_at(Vector3(cached_player_position.x, global_position.y, cached_player_position.z), Vector3.UP)
-		move_and_slide()
-		anim_tree.set("parameters/conditions/attack", _target_in_range())
-		anim_tree.set("parameters/conditions/chase", !_target_in_range())
+func _update_ai_logic() -> void:
+	cached_player_position = player.global_transform.origin
+	match state_machine.get_current_node():
+		"runAnimation":
+			anim_tree.root_motion_track = "Armature/Skeleton3D:mixamorig_Hips"
+			navAgent.set_target_position(cached_player_position)
+			var nextNavPoint: Vector3 = navAgent.get_next_path_position()
+			velocity = (nextNavPoint - global_transform.origin).normalized() * SPEED
+		"attackAnimation":
+			velocity = Vector3.ZERO
+			anim_tree.root_motion_track = ""
+	look_at(Vector3(cached_player_position.x, global_position.y, cached_player_position.z), Vector3.UP)
+	anim_tree.set("parameters/conditions/attack", _target_in_range())
+	anim_tree.set("parameters/conditions/chase", !_target_in_range())
 
 func _target_in_range() -> bool:
 	return global_position.distance_to(player.global_position) < ATTACK_DETECTION_RANGE

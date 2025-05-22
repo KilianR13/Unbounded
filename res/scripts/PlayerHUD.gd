@@ -15,17 +15,20 @@ var playerHealth: int
 
 @onready var player: CharacterBody3D = get_tree().get_root().get_node("World/Player")
 @onready var ammoLabel: Label = $VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer/PanelContainer3/AmmoLabel
+@onready var ultLabel: Label = $VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer/PanelContainer2/UltimateLabel
+@onready var healthLabel: Label = $VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer/PanelContainer/HealthLabel
 @onready var remainingAmmoPistol: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo1/AmmoLabel1
 @onready var remainingAmmoRifle: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo2/AmmoLabel2
 @onready var remainingAmmoSpecial: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo3/AmmoLabel3
 @onready var remainingAmmoHeavy: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo4/AmmoLabel4
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready() -> void:
 	## Coloreado de distintos labels
 	remainingAmmoPistol.add_theme_color_override("font_color", PISTOLAMMO_COLOR)
 	remainingAmmoRifle.add_theme_color_override("font_color", RIFLEAMMO_COLOR)
 	remainingAmmoSpecial.add_theme_color_override("font_color", SPECIALAMMO_COLOR)
-	remainingAmmoHeavy.add_theme_color_override("font_color", ULTIMATEAMMO_COLOR)
+	remainingAmmoHeavy.add_theme_color_override("font_color", HEAVYAMMO_COLOR)
 	ammoLabel.add_theme_color_override("font_color", PISTOLAMMO_COLOR)
 	
 	## Conectar señales
@@ -33,6 +36,7 @@ func _ready() -> void:
 	player.connect("ammo_updated", Callable(self, "_on_ammo_updated"))
 	player.connect("update_ult_charge", Callable(self, "_on_ultimate_charge_updated"))
 	player.connect("healthChanged", Callable(self, "_on_health_updated"))
+	
 
 
 func _on_weapon_changed(weapon_name: String, ammo: int) -> void:
@@ -67,8 +71,11 @@ func updateAmmoCounts() -> void:
 	remainingAmmoHeavy.set_text(str(heavyAmmo))
 
 func _on_ultimate_charge_updated(charge: int) -> void:
-	print(charge)
-	pass
+	ultLabel.text = str(charge) + "%"
+	if charge == 100:
+		ultLabel.add_theme_color_override("font_color", Color(1.0,0.5,0.0,1.0))
+	else:
+		ultLabel.add_theme_color_override("font_color", Color(1.0,1.0,1.0,0.25))
 
 func _on_health_updated(health: int) -> void:
-	pass
+	healthLabel.set_text(str(health))

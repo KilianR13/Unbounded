@@ -14,7 +14,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	$loadingMusic.play()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	scene_load_status = ResourceLoader.load_threaded_get_status(nivel1, progress)
 	progress_bar.value = progress[0] * 100
 	if scene_load_status == ResourceLoader.THREAD_LOAD_LOADED:
@@ -25,6 +25,7 @@ func allowButton() -> void:
 	$VBoxContainer2/Control4/HBoxContainer/Control5/HBoxContainer/Control/VBoxContainer/Control2.visible = false
 	$VBoxContainer2/Control4/HBoxContainer/Control5/HBoxContainer/Control/VBoxContainer/Control3.visible = false
 	startLevelButton.visible = true
+	startLevelButton.grab_focus()
 
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(nivel1))

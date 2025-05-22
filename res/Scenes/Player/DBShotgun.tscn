@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfa4hrsqtrg6h"]
+
+[ext_resource type="PackedScene" uid="uid://bmos4hdjxrpx5" path="res://res/models/weapons/Shotgun Double Barrel.glb" id="1_ppi17"]
+
+[node name="Root Scene" instance=ExtResource("1_ppi17")]
+
+[node name="RootNode" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 4.37114e-09, 0.1, -0.1)

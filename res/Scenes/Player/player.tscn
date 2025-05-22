@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://h2d7jnxcsmt1"]
+[gd_scene load_steps=17 format=3 uid="uid://h2d7jnxcsmt1"]
 
 [ext_resource type="Script" path="res://res/scripts/Player.gd" id="1_iprhw"]
 [ext_resource type="Script" path="res://res/scripts/cameraScript.gd" id="2_xafiq"]
@@ -7,10 +7,13 @@
 [ext_resource type="AudioStream" uid="uid://bid3phi2exo5k" path="res://res/sfx/WalkSFX.wav" id="4_8jfuc"]
 [ext_resource type="AudioStream" uid="uid://chtuwyo60qu2l" path="res://res/sfx/GroundLand_SFX.wav" id="5_5l5dc"]
 [ext_resource type="PackedScene" uid="uid://didk0crxigacv" path="res://res/Scenes/Player/judge_revolver.tscn" id="5_xufo1"]
+[ext_resource type="PackedScene" uid="uid://degnrq8am8gbv" path="res://res/Scenes/Player/glassCannon.tscn" id="6_3lc7l"]
 [ext_resource type="PackedScene" uid="uid://b2q8vn05nkxu8" path="res://res/Scenes/Player/HUD.tscn" id="6_nnyey"]
 [ext_resource type="AudioStream" uid="uid://crha4blily4fb" path="res://res/sfx/JumpSFX.wav" id="6_rpdws"]
 [ext_resource type="PackedScene" uid="uid://c4owva3kxuo4" path="res://res/Scenes/Player/rifle.tscn" id="6_tjkpo"]
+[ext_resource type="PackedScene" uid="uid://dfa4hrsqtrg6h" path="res://res/Scenes/Player/DBShotgun.tscn" id="7_3ij0t"]
 [ext_resource type="AudioStream" uid="uid://d00thuha2cnvw" path="res://res/sfx/playerDeathSFX.wav" id="9_5rob0"]
+[ext_resource type="AudioStream" uid="uid://t1v2y6iniyw0" path="res://res/sfx/ultReady.wav" id="12_524jj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_clreo"]
 
@@ -46,14 +49,14 @@ script = ExtResource("2_xafiq")
 
 [node name="Pistol" parent="playerHead/Camera3D" instance=ExtResource("3_anlf3")]
 process_priority = 10
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.074892, -0.0545787, -0.131241)
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.0601814, -0.0491836, -0.122674)
 
 [node name="JudgeRevolverRoot" parent="playerHead/Camera3D" instance=ExtResource("5_xufo1")]
-transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, 0.075, -0.0730828, -0.0711148)
+transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, 0.0588016, -0.0730828, -0.0612705)
 visible = false
 
 [node name="RifleNode" parent="playerHead/Camera3D" instance=ExtResource("6_tjkpo")]
-transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.0744072, -0.0825578, -0.0533723)
+transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.0590415, -0.0801282, -0.0480065)
 visible = false
 
 [node name="hitscanRayCast" type="RayCast3D" parent="playerHead/Camera3D"]
@@ -66,6 +69,14 @@ debug_shape_thickness = 1
 
 [node name="raycastEnd" type="Node3D" parent="playerHead/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10000)
+
+[node name="GlassCannon" parent="playerHead/Camera3D" instance=ExtResource("6_3lc7l")]
+transform = Transform3D(-2.62268e-09, 0, 0.06, 0, 0.06, 0, -0.06, 0, -2.62268e-09, 0.0596254, -0.0700078, -0.111453)
+visible = false
+
+[node name="DBShotgun" parent="playerHead/Camera3D" instance=ExtResource("7_3ij0t")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0210356, -0.0304438, -0.020823)
+visible = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -97,6 +108,11 @@ pitch_scale = 1.2
 stream = ExtResource("9_5rob0")
 volume_db = 0.5
 pitch_scale = 0.9
+
+[node name="UltReadySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_524jj")
+volume_db = 3.0
+max_polyphony = 5
 
 [node name="noLadder" type="Timer" parent="."]
 wait_time = 0.2

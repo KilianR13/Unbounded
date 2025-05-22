@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft/VBoxContainerButtons:position")
+tracks/1/path = NodePath("VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -81,7 +81,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 70.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainerGeneral/Bottom"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainerGeneral/Bottom"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,12 +89,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonsLeft" type="Control" parent="VBoxContainerGeneral/Bottom/HBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainerGeneral/Bottom/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 80.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonsLeft" type="Control" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 40.0
 
-[node name="VBoxContainerButtons" type="VBoxContainer" parent="VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft"]
+[node name="VBoxContainerButtons" type="VBoxContainer" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -102,37 +115,58 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -655.0
-offset_top = -175.0
+offset_top = -123.0
 offset_right = -305.0
-offset_bottom = 175.0
+offset_bottom = 227.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="Play" type="Button" parent="VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft/VBoxContainerButtons"]
+[node name="Play" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "PLAY"
 
-[node name="Button2" type="Button" parent="VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft/VBoxContainerButtons"]
+[node name="Button2" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "TEST"
 
-[node name="Quit" type="Button" parent="VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft/VBoxContainerButtons"]
+[node name="Quit" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "QUIT"
 
-[node name="PicRight" type="Control" parent="VBoxContainerGeneral/Bottom/HBoxContainer"]
+[node name="PicRight" type="Control" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 60.0
+
+[node name="gameStartNode" type="Control" parent="VBoxContainerGeneral/Bottom/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="gameStartLabel" type="Label" parent="VBoxContainerGeneral/Bottom/VBoxContainer/gameStartNode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Press anything to wake up"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -142,7 +176,6 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4j8c3")
 volume_db = -8.0
-autoplay = true
 
-[connection signal="pressed" from="VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainerGeneral/Bottom/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Quit" to="." method="_on_quit_pressed"]

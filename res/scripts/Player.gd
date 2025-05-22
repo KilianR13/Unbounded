@@ -42,6 +42,10 @@ var t_bob: float = 0.0
 const BASE_FOV: float = 80.0
 const FOV_CHANGE: float = 1.3
 
+## Controller constants
+const JOYSTICK_SENSITIVITY: float = 5.0
+const DEADZONE: float = 0.3
+
 # Custom gravity setting to make it feel a bit more snappier.
 var gravity: int = 11
 
@@ -115,9 +119,9 @@ func _unhandled_input(event: InputEvent)-> void:
 	if event is InputEventMouseMotion and isAlive:
 		playerHead.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
-	if Input.is_action_just_pressed("ui_cancel"): # TEMPORARY
+	if Input.is_action_just_pressed("pause"): # TEMPORARY
 		get_tree().quit()
 	
 	# Lógica de cambio de armas
@@ -155,6 +159,20 @@ func _unhandled_input(event: InputEvent)-> void:
 	
 
 func _process(delta: float) -> void:
+	if !finished_loading and !isAlive:
+		return
+	
+	var look_x: float = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
+	var look_y: float = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+
+	var stick_input: Vector2 = Vector2(look_x, look_y)
+
+	# Aplicar zona muerta
+	if stick_input.length() > DEADZONE:
+		playerHead.rotate_y(-stick_input.x * JOYSTICK_SENSITIVITY * delta)
+		camera.rotate_x(-stick_input.y * JOYSTICK_SENSITIVITY * delta)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	
 	if shake_strength > 0.01:
 		shake_timer += delta * shake_frequency
 		var offset: Vector3 = Vector3(
@@ -353,19 +371,19 @@ func changeWeapons(newWeapon: Node3D, newState: WeaponState) -> void:
 func _headshot(superCharge: int) -> void:
 	if ultimateCharge < 100:
 		ultimateCharge += superCharge
-		emit_signal("update_ult_charge", ultimateCharge)
 		if ultimateCharge >= 100:
 			ultimateCharged()
+		emit_signal("update_ult_charge", ultimateCharge)
 
 func _on_ultimate_charge_timer_timeout() -> void:
 	if ultimateCharge < 100:
-		ultimateCharge += 15
-		emit_signal("update_ult_charge", ultimateCharge)
+		ultimateCharge += 100
 		if ultimateCharge >= 100:
 			ultimateCharged()
+		emit_signal("update_ult_charge", ultimateCharge)
 
 func ultimateCharged() -> void:
+	$UltReadySFX.play()
 	ultimateCharge = 100
 	ultimateAmmo = 6
-	print("cargado!")
 	ultimateChargeTimer.stop()
