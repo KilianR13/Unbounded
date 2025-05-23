@@ -21,7 +21,6 @@ func _try_start_next_wave() -> void:
 	if active_enemies == 0 and not is_spawning:
 		if wave_queue.is_empty():
 			combat_finished.emit()
-			print("Score final: ", score)
 		else:
 			var wave: Dictionary = wave_queue.pop_front()
 			is_spawning = true
@@ -43,6 +42,7 @@ func register_enemy(enemy: CharacterBody3D) -> void:
 
 func _on_enemy_died(_enemy: CharacterBody3D) -> void:
 	score += 100
+	updateScoreForUI()
 	active_enemies -= 1
 	if active_enemies <= 0:
 		_try_start_next_wave()
@@ -77,7 +77,7 @@ func unfreezeEnemies(enemies: Array) -> void:
 
 func _on_zombie1_killed() -> void:
 	currentZombies -= 1
-	score += 100
+	score += 50
 	updateScoreForUI()
 	if currentZombies <= 0:
 		await get_tree().create_timer(1.0).timeout
@@ -96,23 +96,30 @@ func startSecondFight(AllEnemies: Array) -> void:
 
 func _on_zombie2_killed() -> void:
 	currentZombies -= 1
-	score += 100
+	score += 50
 	updateScoreForUI()
 
 func _headshot_hit() -> void:
-	score += 10
+	score += 5
 	updateScoreForUI()
 
 func _headshot_kill() -> void:
-	score += 50
+	score += 25
 	updateScoreForUI()
 
 func updateScoreForUI() -> void:
 	emit_signal("updateScore", score)
 
 func saveScore() -> void:
+	var totalScore: int = 0
+	if FileAccess.file_exists(savePath):
+		var file: FileAccess  = FileAccess.open(savePath, FileAccess.READ)
+		if file != null and file.get_length() >= 4:
+			totalScore = file.get_var()
+		file.close()
+	totalScore += score
 	var file: FileAccess  = FileAccess.open(savePath, FileAccess.WRITE)
-	file.store_var(score)
+	file.store_var(totalScore)
 	file.close()
 
 func loadScore() -> int:

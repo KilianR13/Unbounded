@@ -41,6 +41,8 @@ func _ready() -> void:
 	posicion_inicial_tren = train.global_position
 	posicion_objetivo_tren = train3DDestiny.global_position
 	train.playerHit.connect(death)
+	CombatManager.score = 0
+	CombatManager.updateScoreForUI()
 
 
 func trainPass() -> void:
@@ -122,8 +124,8 @@ func _on_mutant_trigger_body_entered(body: Object) -> void:
 		
 		$combat_logic/zone3/mutantSpawner/mutantTrigger.set_deferred("monitoring", false)
 		CombatManager.start_wave(15, Callable(self, "spawnMutant"))
-		CombatManager.start_wave(30, Callable(self, "spawnMutant"))
-		CombatManager.start_wave(40, Callable(self, "spawnMutant"))
+		#CombatManager.start_wave(30, Callable(self, "spawnMutant"))
+		#CombatManager.start_wave(40, Callable(self, "spawnMutant"))
 		CombatManager.connect("combat_finished", Callable(self, "_on_combat_finished"))
 
 func _on_combat_finished() -> void:
@@ -170,7 +172,7 @@ func freezeEnemies(enemies: Array) -> void:
 				enemy.get_node("CollisionShape3D").disabled = true
 
 func stageFinished() -> void:
-	CombatManager.score += 3000
+	CombatManager.score += 1000
 	CombatManager.saveScore()
 	await get_tree().create_timer(5.0).timeout
 	Global.restartMainMenu = false
