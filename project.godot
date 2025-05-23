@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-CombatManager="res://res/scripts/world/CombatManager.gd"
+Global="*res://res/scripts/menus/Global.gd"
+CombatManager="*res://res/scripts/world/CombatManager.gd"
 
 [debug]
 

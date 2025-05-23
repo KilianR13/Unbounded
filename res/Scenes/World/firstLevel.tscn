@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://e03yx2ymkxms"]
+[gd_scene load_steps=115 format=3 uid="uid://e03yx2ymkxms"]
 
 [ext_resource type="Script" path="res://res/Scenes/World/firstLevel.gd" id="1_54ki8"]
 [ext_resource type="PackedScene" uid="uid://h2d7jnxcsmt1" path="res://res/Scenes/Player/player.tscn" id="1_fd6uq"]
@@ -36,7 +36,6 @@
 [ext_resource type="PackedScene" uid="uid://cqu5cb225q5gb" path="res://res/Scenes/World/lightlampBright.tscn" id="30_1gbep"]
 [ext_resource type="AudioStream" uid="uid://wxvu3536hlhu" path="res://res/sfx/music/Combat_Loop.wav" id="31_w6dd7"]
 [ext_resource type="AudioStream" uid="uid://ikrkeb5bff83" path="res://res/sfx/music/Combat_Buildup.wav" id="32_ondn4"]
-[ext_resource type="Script" path="res://res/scripts/world/CombatManager.gd" id="33_llbyv"]
 [ext_resource type="PackedScene" uid="uid://bx7cxbm5k174a" path="res://res/Scenes/Enemies/zombie_enemy.tscn" id="35_uskfi"]
 [ext_resource type="ArrayOccluder3D" uid="uid://opr5j8wvgdd4" path="res://res/Scenes/World/door.occ" id="38_jhket"]
 
@@ -989,8 +988,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155, 0, 0)
 
 [node name="FirstZombieTrigger" type="Area3D" parent="combat_logic/FirstZoneZombies/FirstFloor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 19.4)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="combat_logic/FirstZoneZombies/FirstFloor/FirstZombieTrigger"]
@@ -1132,9 +1131,6 @@ volume_db = -8.0
 stream = ExtResource("9_6c6h7")
 volume_db = -16.0
 autoplay = true
-
-[node name="CombatManager" type="Node" parent="."]
-script = ExtResource("33_llbyv")
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 

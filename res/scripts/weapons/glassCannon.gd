@@ -2,7 +2,7 @@ extends Node3D
 
 var damage: int = 10
 var critMultiplier: int = 1
-var maxAmmo: int = 20
+var maxAmmo: int = 10
 
 signal shotFinished
 signal criticalHit(superCharge: int)
@@ -25,9 +25,6 @@ func _ready() -> void:
 		standard_mat = mat.duplicate() as StandardMaterial3D
 		body_mesh.mesh.surface_set_material(material_index, standard_mat)
 
-#func _process(delta: float) -> void:
-	#if tween and tween.is_running():
-		#print("Tween running at:", Time.get_ticks_msec())
 
 
 func shoot(raycast: RayCast3D) -> void:
@@ -66,7 +63,6 @@ func _real_shoot(raycast: RayCast3D) -> void:
 	
 	
 	if raycast.is_colliding():
-		var area: Object = raycast.get_collider()
 	
 		var hit_position: Vector3 = raycast.get_collision_point()
 		create_flash_effect(hit_position)

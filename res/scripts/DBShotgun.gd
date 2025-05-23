@@ -2,7 +2,7 @@ extends Node3D
 
 var damage: int = 5
 var critMultiplier: int = 2
-var maxAmmo: int = 100
+var maxAmmo: int = 30
 var reloaded: bool = true
 
 @export var pellets: int = 8

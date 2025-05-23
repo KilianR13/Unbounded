@@ -17,8 +17,6 @@ extends Node3D
 var combatActive: bool
 var currentZombies: int = 0
 
-var score: int = 0
-
 var reverse_mode: bool = false
 var trainSpeed: float = 100.0
 var posicion_inicial_tren : Vector3
@@ -123,10 +121,10 @@ func _on_mutant_trigger_body_entered(body: Object) -> void:
 		musicTween.tween_callback(Callable(NormalMusic, "stop"))
 		
 		$combat_logic/zone3/mutantSpawner/mutantTrigger.set_deferred("monitoring", false)
-		$CombatManager.start_wave(15, Callable(self, "spawnMutant"))
-		$CombatManager.start_wave(30, Callable(self, "spawnMutant"))
-		$CombatManager.start_wave(40, Callable(self, "spawnMutant"))
-		$CombatManager.connect("combat_finished", Callable(self, "_on_combat_finished"))
+		CombatManager.start_wave(15, Callable(self, "spawnMutant"))
+		CombatManager.start_wave(30, Callable(self, "spawnMutant"))
+		CombatManager.start_wave(40, Callable(self, "spawnMutant"))
+		CombatManager.connect("combat_finished", Callable(self, "_on_combat_finished"))
 
 func _on_combat_finished() -> void:
 	combatActive = false
@@ -149,12 +147,13 @@ func _on_first_zombie_trigger_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
 		$combat_logic/FirstZoneZombies/FirstFloor/FirstZombieTrigger.set_deferred("monitoring", false)
 		var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
-		$CombatManager.startFirstFight(zombiesFloor1)
-		$CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
+		CombatManager.startFirstFight(zombiesFloor1)
+		CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
 
 func _triggerSecondZombieCombat() -> void:
 	var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()
-	$CombatManager.startSecondFight(zombiesFloor2)
+	openFirstDoor()
+	CombatManager.startSecondFight(zombiesFloor2)
 
 func freezeEnemies(enemies: Array) -> void:
 	for enemy: Node in enemies:
@@ -171,5 +170,8 @@ func freezeEnemies(enemies: Array) -> void:
 				enemy.get_node("CollisionShape3D").disabled = true
 
 func stageFinished() -> void:
+	CombatManager.score += 3000
+	CombatManager.saveScore()
 	await get_tree().create_timer(5.0).timeout
-	print("You won!")
+	Global.restartMainMenu = false
+	get_tree().change_scene_to_file("res://res/Scenes/Menus/main_menu.tscn")

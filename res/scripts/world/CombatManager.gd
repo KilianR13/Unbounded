@@ -2,12 +2,16 @@ extends Node
 
 signal combat_finished
 signal zombies1_finished
+signal updateScore(score: int)
+
+var savePath: String = "user://progress.save"
 
 var active_enemies: int = 0
 var wave_queue: Array = []
 var is_spawning: bool = false
-var score: int
+var score: int = 0
 var currentZombies: int
+
 
 func start_wave(enemy_count: int, spawn_func: Callable) -> void:
 	wave_queue.append({ "count": enemy_count, "spawner": spawn_func })
@@ -74,9 +78,9 @@ func unfreezeEnemies(enemies: Array) -> void:
 func _on_zombie1_killed() -> void:
 	currentZombies -= 1
 	score += 100
+	updateScoreForUI()
 	if currentZombies <= 0:
 		await get_tree().create_timer(1.0).timeout
-		get_parent().openFirstDoor()
 		zombies1_finished.emit()
 
 func startSecondFight(AllEnemies: Array) -> void:
@@ -93,12 +97,29 @@ func startSecondFight(AllEnemies: Array) -> void:
 func _on_zombie2_killed() -> void:
 	currentZombies -= 1
 	score += 100
-	if currentZombies <= 0:
-		print(score)
-	pass
+	updateScoreForUI()
 
 func _headshot_hit() -> void:
 	score += 10
+	updateScoreForUI()
 
 func _headshot_kill() -> void:
 	score += 50
+	updateScoreForUI()
+
+func updateScoreForUI() -> void:
+	emit_signal("updateScore", score)
+
+func saveScore() -> void:
+	var file: FileAccess  = FileAccess.open(savePath, FileAccess.WRITE)
+	file.store_var(score)
+	file.close()
+
+func loadScore() -> int:
+	var returnValue: int = 0
+	if FileAccess.file_exists(savePath):
+		var file: FileAccess  = FileAccess.open(savePath, FileAccess.READ)
+		returnValue = file.get_var(score)
+		file.close()
+	return returnValue
+

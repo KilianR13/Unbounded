@@ -21,6 +21,8 @@ var playerHealth: int
 @onready var remainingAmmoRifle: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo2/AmmoLabel2
 @onready var remainingAmmoSpecial: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo3/AmmoLabel3
 @onready var remainingAmmoHeavy: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo4/AmmoLabel4
+@onready var scoreLabel: Label = $VBoxContainer/Top/VBoxContainer/CurrentBonusAmmount/CurrentBonusLabel
+
 
 
 func _ready() -> void:
@@ -36,7 +38,8 @@ func _ready() -> void:
 	player.connect("ammo_updated", Callable(self, "_on_ammo_updated"))
 	player.connect("update_ult_charge", Callable(self, "_on_ultimate_charge_updated"))
 	player.connect("healthChanged", Callable(self, "_on_health_updated"))
-	
+	CombatManager.connect("updateScore", Callable(self, "_update_score"))
+	CombatManager.updateScoreForUI()
 
 
 func _on_weapon_changed(weapon_name: String, ammo: int) -> void:
@@ -50,7 +53,7 @@ func _on_weapon_changed(weapon_name: String, ammo: int) -> void:
 			ammoLabel.add_theme_color_override("font_color", SPECIALAMMO_COLOR)
 		"Ultimate":
 			ammoLabel.add_theme_color_override("font_color", ULTIMATEAMMO_COLOR)
-	
+
 func _on_ammo_updated(weapon_name: String, ammo: int) -> void:
 	ammoLabel.set_text(str(ammo))
 	match weapon_name:
@@ -62,7 +65,6 @@ func _on_ammo_updated(weapon_name: String, ammo: int) -> void:
 			remainingAmmoSpecial.set_text(str(ammo))
 		"Ultimate":
 			pass
-	
 
 func updateAmmoCounts() -> void:
 	pistolAmmo = player.pistolAmmo
@@ -83,3 +85,6 @@ func _on_ultimate_charge_updated(charge: int) -> void:
 
 func _on_health_updated(health: int) -> void:
 	healthLabel.set_text(str(health))
+
+func _update_score(score: int) -> void:
+	scoreLabel.text = str(score) + "$"

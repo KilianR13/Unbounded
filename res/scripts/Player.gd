@@ -11,6 +11,7 @@ var wall_momentum_stopped: bool = false
 var max_jump_count: int = 1
 var on_ladder: bool = false
 var can_grab_ladder: bool = true
+var gamePaused: bool = false
 
 var health: int = 100
 var isAlive: bool = true
@@ -86,6 +87,7 @@ var has_used_ultimate: bool = false
 @onready var hitscan_RayCast: RayCast3D = $playerHead/Camera3D/hitscanRayCast
 @onready var hitscan_RayCast_endpoint: Node3D = $playerHead/Camera3D/raycastEnd
 @onready var ultimateChargeTimer: Timer = $ultimateChargeTimer
+@onready var pauseMenu: Control = $HUD/PauseMenu
 
 
 func _ready() -> void:
@@ -114,7 +116,13 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	landing_sound_enabled = true
 	finished_loading = true
+	pauseMenu.connect("gameUnpaused", Callable(self, "_unpauseGame"))
 	
+
+func _unpauseGame() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pauseMenu.visible = false
+	get_tree().paused = false
 
 func _unhandled_input(event: InputEvent)-> void:
 	if !finished_loading:
@@ -126,10 +134,12 @@ func _unhandled_input(event: InputEvent)-> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
 	if Input.is_action_just_pressed("pause"): # TEMPORARY
-		# get_tree().paused = not get_tree().paused
-		get_tree().paused = true
-		await get_tree().create_timer(5.0).timeout
-		get_tree().paused = false
+		if !gamePaused:
+			pauseMenu.visible = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
+		else:
+			_unpauseGame()
 	
 	# Lógica de cambio de armas
 	if isAlive:
@@ -250,25 +260,21 @@ func _physics_process(delta: float) -> void:
 				if pistolAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)
 					pistolAmmo -= 1
-					print("Pistola: ", pistolAmmo)
 					emit_signal("ammo_updated", "Pistol", pistolAmmo)
 			WeaponState.WEAPON_RIFLE:
 				if rifleAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)
 					rifleAmmo -= 1
-					print("Rifle: ", rifleAmmo)
 					emit_signal("ammo_updated", "Rifle", rifleAmmo)
 			WeaponState.WEAPON_SPECIAL:
 				if specialAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)
 					specialAmmo -= 2
-					print("Escopeta: ", specialAmmo)
 					emit_signal("ammo_updated", "DBShotgun", specialAmmo)
 			WeaponState.WEAPON_HEAVY:
 				if heavyAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)
 					heavyAmmo -= 1
-					print("Cañón: ", heavyAmmo)
 					emit_signal("ammo_updated", "GlassCannon", heavyAmmo)
 			WeaponState.ULTIMATE:
 				if ultimateAmmo > 0:

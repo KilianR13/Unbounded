@@ -52,15 +52,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CurrentObjectiveNode" type="Control" parent="VBoxContainer/Top/VBoxContainer"]
+[node name="CurrentBonusText" type="Control" parent="VBoxContainer/Top/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="CurrentObjectiveDescriptionNode" type="Control" parent="VBoxContainer/Top/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/Top/VBoxContainer/CurrentBonusText"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -282.0
+offset_top = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Current payment bonus:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CurrentBonusAmmount" type="Control" parent="VBoxContainer/Top/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+
+[node name="CurrentBonusLabel" type="Label" parent="VBoxContainer/Top/VBoxContainer/CurrentBonusAmmount"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -282.0
+offset_bottom = 34.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Middle" type="Control" parent="VBoxContainer"]
 layout_mode = 2

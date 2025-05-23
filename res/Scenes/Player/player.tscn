@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://h2d7jnxcsmt1"]
+[gd_scene load_steps=18 format=3 uid="uid://h2d7jnxcsmt1"]
 
 [ext_resource type="Script" path="res://res/scripts/Player.gd" id="1_iprhw"]
 [ext_resource type="Script" path="res://res/scripts/cameraScript.gd" id="2_xafiq"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://crha4blily4fb" path="res://res/sfx/JumpSFX.wav" id="6_rpdws"]
 [ext_resource type="PackedScene" uid="uid://c4owva3kxuo4" path="res://res/Scenes/Player/rifle.tscn" id="6_tjkpo"]
 [ext_resource type="PackedScene" uid="uid://dfa4hrsqtrg6h" path="res://res/Scenes/Player/DBShotgun.tscn" id="7_3ij0t"]
+[ext_resource type="PackedScene" uid="uid://c3mexgrhb6joy" path="res://res/Scenes/Menus/pause_menu.tscn" id="9_2agqc"]
 [ext_resource type="AudioStream" uid="uid://d00thuha2cnvw" path="res://res/sfx/playerDeathSFX.wav" id="9_5rob0"]
 [ext_resource type="AudioStream" uid="uid://t1v2y6iniyw0" path="res://res/sfx/ultReady.wav" id="12_524jj"]
 
@@ -62,7 +63,7 @@ visible = false
 [node name="hitscanRayCast" type="RayCast3D" parent="playerHead/Camera3D"]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.05, 0)
 target_position = Vector3(0, 0, -10000)
-collision_mask = 7
+collision_mask = 5
 collide_with_areas = true
 collide_with_bodies = false
 debug_shape_thickness = 1
@@ -81,6 +82,10 @@ visible = false
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="PlayerHUD" parent="HUD" instance=ExtResource("6_nnyey")]
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("9_2agqc")]
+process_mode = 3
+visible = false
 
 [node name="DoubleJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_l3tqo")
