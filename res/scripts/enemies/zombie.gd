@@ -81,6 +81,11 @@ func receive_hit(damage: int, headshotMultiplier: int, is_headshot: bool) -> voi
 			disable_enemy_areas_local()
 			emit_signal("enemy_killed")
 		dead = true # Detiene el movimiento del enemigo.
+		var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+		var randomPitch: float = rng.randf_range(0.75, 1.0)
+		var deathSound: AudioStreamPlayer3D = $deathSFX
+		deathSound.set_pitch_scale(randomPitch)
+		deathSound.play()
 		if is_headshot:
 			emit_signal("enemy_killed_with_headshot")
 		anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.

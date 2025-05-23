@@ -1,8 +1,125 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfa4hrsqtrg6h"]
+[gd_scene load_steps=9 format=3 uid="uid://dfa4hrsqtrg6h"]
 
 [ext_resource type="PackedScene" uid="uid://bmos4hdjxrpx5" path="res://res/models/weapons/Shotgun Double Barrel.glb" id="1_ppi17"]
+[ext_resource type="Script" path="res://res/scripts/DBShotgun.gd" id="2_dtvvs"]
+[ext_resource type="AudioStream" uid="uid://xg2nyx0dinqa" path="res://res/sfx/shotgunSFX/DBRealod.wav" id="3_4xfdx"]
+[ext_resource type="AudioStream" uid="uid://4uakpqha86mw" path="res://res/sfx/shotgunSFX/DBShotgunFireSFX.wav" id="4_37bwj"]
+
+[sub_resource type="Animation" id="Animation_6hbbf"]
+resource_name = "changeGun"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hqkp4"]
+resource_name = "reload"
+length = 1.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootNode:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.55, 0.85, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5708), Vector3(1.0472, 0, -1.5708), Vector3(1.0472, 0, -1.5708), Vector3(-0.698132, 0, -1.5708), Vector3(-0.698132, 0, -1.5708), Vector3(0, 0, -1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RootNode:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 0.406126, 0.482968, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.3), Vector3(0, 0, -0.3), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gm4ir"]
+resource_name = "shoot"
+length = 0.6
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(4.37114e-09, 0.1, -0.1), Vector3(0, 0.2, 0.1), Vector3(4.37114e-09, 0.1, -0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RootNode:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5708), Vector3(0.610865, 0, -1.5708), Vector3(0, 0, -1.5708)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_28dl4"]
+_data = {
+"changeGun": SubResource("Animation_6hbbf"),
+"reload": SubResource("Animation_hqkp4"),
+"shoot": SubResource("Animation_gm4ir")
+}
 
 [node name="Root Scene" instance=ExtResource("1_ppi17")]
+script = ExtResource("2_dtvvs")
 
 [node name="RootNode" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 4.37114e-09, 0.1, -0.1)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="Barrel" type="Node3D" parent="RootNode" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -1.18)
+
+[node name="fogonazoLight" type="OmniLight3D" parent="RootNode" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -1.28)
+light_color = Color(1, 0.6, 0.2, 1)
+light_energy = 6.0
+light_bake_mode = 0
+omni_range = 10.0
+
+[node name="fogonazoSpotLight" type="SpotLight3D" parent="RootNode" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -1.18)
+light_color = Color(1, 0.780392, 0.2, 1)
+light_energy = 0.5
+light_bake_mode = 0
+spot_range = 2.0
+spot_angle = 80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_28dl4")
+}
+
+[node name="ReloadSFX" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_4xfdx")
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_37bwj")
+max_polyphony = 4
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

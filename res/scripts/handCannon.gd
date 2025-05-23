@@ -22,30 +22,32 @@ func _ready() -> void:
 
 
 func shoot(raycast: RayCast3D) -> void:
-	if !animationPlayer.is_playing():
-		animationPlayer.play("shoot")
-		fogonazo()
-		var randomPitch: float = rng.randf_range(0.75, 0.8)
-		shootSound.set_pitch_scale(randomPitch)
-		shootSound.play()
-		raycast.enabled = true
-		raycast.force_raycast_update()
-		
-		
-		if raycast.is_colliding():
-			var collider: Object = raycast.get_collider()
-			if collider.is_in_group("enemy"):
-				var enemy_node: CharacterBody3D = collider.get_owner()
-				var is_headshot: bool = collider.is_in_group("enemy_head")
-				enemy_node.receive_hit(damage, critMultiplier, is_headshot)
-				var hit_position: Vector3 = raycast.get_collision_point()
-				var blood_fx: GPUParticles3D = preload("res://res/Scenes/Player/bloodSplatter.tscn").instantiate()
-				get_tree().current_scene.add_child(blood_fx)
-				blood_fx.trigger(hit_position, barrelPos.global_position)
-				if is_headshot:
-					emit_signal("criticalHit", 5)
-		raycast.enabled = false
-		emit_signal("shotFinished")
+	if animationPlayer.is_playing():
+		return
+	
+	animationPlayer.play("shoot")
+	fogonazo()
+	var randomPitch: float = rng.randf_range(0.75, 0.8)
+	shootSound.set_pitch_scale(randomPitch)
+	shootSound.play()
+	raycast.enabled = true
+	raycast.force_raycast_update()
+	
+	
+	if raycast.is_colliding():
+		var collider: Object = raycast.get_collider()
+		if collider.is_in_group("enemy"):
+			var enemy_node: CharacterBody3D = collider.get_owner()
+			var is_headshot: bool = collider.is_in_group("enemy_head")
+			enemy_node.receive_hit(damage, critMultiplier, is_headshot)
+			var hit_position: Vector3 = raycast.get_collision_point()
+			var blood_fx: GPUParticles3D = preload("res://res/Scenes/Player/bloodSplatter.tscn").instantiate()
+			get_tree().current_scene.add_child(blood_fx)
+			blood_fx.trigger(hit_position, barrelPos.global_position)
+			if is_headshot:
+				emit_signal("criticalHit", 5)
+	raycast.enabled = false
+	emit_signal("shotFinished")
 
 
 func fogonazo() -> void:

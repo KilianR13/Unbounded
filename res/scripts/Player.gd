@@ -53,8 +53,8 @@ enum WeaponState {
 	ULTIMATE,
 	WEAPON_PISTOL,
 	WEAPON_RIFLE,
-	WEAPON_HEAVY,
-	WEAPON_SPECIAL
+	WEAPON_SPECIAL,
+	WEAPON_HEAVY
 }
 
 var current_weapon_state : WeaponState
@@ -81,6 +81,8 @@ var has_used_ultimate: bool = false
 @onready var pistola: Node3D = $playerHead/Camera3D/Pistol
 @onready var JudgeRevolver: Node3D = $playerHead/Camera3D/JudgeRevolverRoot
 @onready var rifle: Node3D = $playerHead/Camera3D/RifleNode
+@onready var DBShotgun: Node3D = $playerHead/Camera3D/DBShotgun
+@onready var GlassCannon: Node3D = $playerHead/Camera3D/GlassCannon
 @onready var hitscan_RayCast: RayCast3D = $playerHead/Camera3D/hitscanRayCast
 @onready var hitscan_RayCast_endpoint: Node3D = $playerHead/Camera3D/raycastEnd
 @onready var ultimateChargeTimer: Timer = $ultimateChargeTimer
@@ -101,6 +103,8 @@ func _ready() -> void:
 	currentWeapon = pistola
 	pistolAmmo = pistola.maxAmmo
 	rifleAmmo = rifle.maxAmmo
+	specialAmmo = DBShotgun.maxAmmo
+	heavyAmmo = GlassCannon.maxAmmo
 	ultimateAmmo = 0
 	$HUD/PlayerHUD.updateAmmoCounts()
 	set_process(false)
@@ -122,7 +126,10 @@ func _unhandled_input(event: InputEvent)-> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
 	if Input.is_action_just_pressed("pause"): # TEMPORARY
-		get_tree().quit()
+		# get_tree().paused = not get_tree().paused
+		get_tree().paused = true
+		await get_tree().create_timer(5.0).timeout
+		get_tree().paused = false
 	
 	# Lógica de cambio de armas
 	if isAlive:
@@ -134,6 +141,15 @@ func _unhandled_input(event: InputEvent)-> void:
 			if current_weapon_state != WeaponState.WEAPON_RIFLE:
 				await changeWeapons(rifle, WeaponState.WEAPON_RIFLE)
 				emit_signal("weapon_changed", "Rifle", rifleAmmo)
+		elif Input.is_action_just_pressed("swapWeapon3"):
+			if current_weapon_state != WeaponState.WEAPON_SPECIAL:
+				await changeWeapons(DBShotgun, WeaponState.WEAPON_SPECIAL)
+				DBShotgun.checkForReload()
+				emit_signal("weapon_changed", "DBShotgun", specialAmmo)
+		elif Input.is_action_just_pressed("swapWeapon4"):
+			if current_weapon_state != WeaponState.WEAPON_HEAVY:
+				await changeWeapons(GlassCannon, WeaponState.WEAPON_HEAVY)
+				emit_signal("weapon_changed", "GlassCannon", heavyAmmo)
 		elif Input.is_action_just_pressed("useUltimate"):
 			if current_weapon_state != WeaponState.ULTIMATE and ultimateCharge == 100:
 				has_used_ultimate = true
@@ -242,6 +258,18 @@ func _physics_process(delta: float) -> void:
 					rifleAmmo -= 1
 					print("Rifle: ", rifleAmmo)
 					emit_signal("ammo_updated", "Rifle", rifleAmmo)
+			WeaponState.WEAPON_SPECIAL:
+				if specialAmmo > 0:
+					currentWeapon.shoot(hitscan_RayCast)
+					specialAmmo -= 2
+					print("Escopeta: ", specialAmmo)
+					emit_signal("ammo_updated", "DBShotgun", specialAmmo)
+			WeaponState.WEAPON_HEAVY:
+				if heavyAmmo > 0:
+					currentWeapon.shoot(hitscan_RayCast)
+					heavyAmmo -= 1
+					print("Cañón: ", heavyAmmo)
+					emit_signal("ammo_updated", "GlassCannon", heavyAmmo)
 			WeaponState.ULTIMATE:
 				if ultimateAmmo > 0:
 					currentWeapon.shoot(hitscan_RayCast)

@@ -73,6 +73,7 @@ func receive_hit(damage: int, headshotMultiplier: int, is_headshot : bool) -> vo
 			disable_enemy_areas_local()
 			emit_signal("enemy_killed", self)
 		dead = true # Detiene el movimiento del enemigo.
+		$deathSFX.play()
 		if is_headshot:
 			emit_signal("enemy_killed_with_headshot")
 		anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.
