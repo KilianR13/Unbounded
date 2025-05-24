@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c51vspe6cps8o" path="res://res/models/weapons/Judge_Revolver.glb" id="1_ej0sm"]
 [ext_resource type="Script" path="res://res/scripts/judge_revolver.gd" id="2_n3p6k"]
-[ext_resource type="AudioStream" uid="uid://bliuyiucy0jmt" path="res://res/sfx/bigGunshot.wav" id="3_ubup8"]
+[ext_resource type="AudioStream" uid="uid://bliuyiucy0jmt" path="res://res/sfx/guns/bigGunshot.wav" id="3_ubup8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iakkt"]
 resource_name = "DarkWood"

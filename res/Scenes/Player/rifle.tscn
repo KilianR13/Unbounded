@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b5qrh36g7uvqq" path="res://res/models/weapons/AssaultRifle.glb" id="1_3b3ui"]
 [ext_resource type="Script" path="res://res/scripts/rifle.gd" id="2_bobp3"]
-[ext_resource type="AudioStream" uid="uid://s56bhdm7fqms" path="res://res/sfx/rifleSFX.wav" id="3_664tg"]
+[ext_resource type="AudioStream" uid="uid://s56bhdm7fqms" path="res://res/sfx/guns/rifleSFX.wav" id="3_664tg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xac6m"]
 resource_name = "Wood"

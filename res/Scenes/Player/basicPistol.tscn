@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cerilfkdcr1yq"]
 
 [ext_resource type="PackedScene" uid="uid://vaand4c0axsh" path="res://res/models/weapons/BasicPistol.glb" id="1_q8v5j"]
-[ext_resource type="AudioStream" uid="uid://7m3f6d2e0odn" path="res://res/sfx/pistolGunshot.wav" id="2_qqwfn"]
+[ext_resource type="AudioStream" uid="uid://7m3f6d2e0odn" path="res://res/sfx/guns/pistolGunshot.wav" id="2_qqwfn"]
 
 [sub_resource type="Animation" id="Animation_qhlu4"]
 resource_name = "shoot"
