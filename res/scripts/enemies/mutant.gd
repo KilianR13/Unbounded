@@ -9,6 +9,7 @@ var player: CharacterBody3D = null
 const SPEED: float = 7.0
 const ATTACK_DETECTION_RANGE: int = 3
 var health: int = 10
+var damage: int = 20
 var dead: bool = false
 var rotated: bool = false
 var state_machine: AnimationNodeStateMachinePlayback
@@ -21,10 +22,13 @@ var state_machine: AnimationNodeStateMachinePlayback
 @onready var generalCollisionShape: CollisionShape3D = $CollisionShape3D
 
 var cached_player_position : Vector3 = Vector3.ZERO
+var ai_update_interval: float = 0.2  # segundos
+var ai_offset: float = 0.0
 
 func _ready() -> void:
 	player = get_node(player_path)
 	state_machine = anim_tree.get("parameters/playback")
+	ai_offset = randf_range(0.0, ai_update_interval)
 	set_physics_process(false)
 	call_deferred("dump_first_physics_frame")
 
@@ -38,7 +42,7 @@ func update_ai_loop() -> void:
 	while not dead:
 		if player.isAlive:
 			_update_ai_logic()
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(ai_update_interval + ai_offset).timeout
 
 func _physics_process(_delta: float) -> void:
 	if dead:
@@ -52,7 +56,12 @@ func _update_ai_logic() -> void:
 			anim_tree.root_motion_track = "Armature/Skeleton3D:mixamorig_Hips"
 			navAgent.set_target_position(cached_player_position)
 			var nextNavPoint: Vector3 = navAgent.get_next_path_position()
-			velocity = (nextNavPoint - global_transform.origin).normalized() * SPEED
+			var to_point: Vector3 = nextNavPoint - global_transform.origin
+			if to_point.length() > 0.1:
+				velocity = to_point.normalized() * SPEED
+			else:
+				velocity = Vector3.ZERO
+			#velocity = (nextNavPoint - global_transform.origin).normalized() * SPEED
 		"attackAnimation":
 			velocity = Vector3.ZERO
 			anim_tree.root_motion_track = ""
@@ -73,7 +82,11 @@ func receive_hit(damage: int, headshotMultiplier: int, is_headshot : bool) -> vo
 			disable_enemy_areas_local()
 			emit_signal("enemy_killed", self)
 		dead = true # Detiene el movimiento del enemigo.
-		$deathSFX.play()
+		var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+		var randomPitch: float = rng.randf_range(0.75, 1.0)
+		var deathSound: AudioStreamPlayer3D = $deathSFX
+		deathSound.set_pitch_scale(randomPitch)
+		deathSound.play()
 		if is_headshot:
 			emit_signal("enemy_killed_with_headshot")
 		anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.

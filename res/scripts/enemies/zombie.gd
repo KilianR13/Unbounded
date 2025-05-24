@@ -9,8 +9,10 @@ var player: CharacterBody3D = null
 const SPEED: float = 7.0
 const ATTACK_DETECTION_RANGE: int = 1
 var health: int = 3
+var damage: int = 10
 var dead: bool = false
 var rotated: bool = false
+var targetInRange: bool = false
 var state_machine: AnimationNodeStateMachinePlayback
 
 
@@ -46,6 +48,10 @@ func update_ai_loop() -> void:
 func _physics_process(_delta: float) -> void:
 	if dead:
 		return
+	targetInRange = _target_in_range()
+	look_at(Vector3(cached_player_position.x, global_position.y, cached_player_position.z), Vector3.UP)
+	anim_tree.set("parameters/conditions/attack", targetInRange)
+	anim_tree.set("parameters/conditions/chase", !targetInRange)
 	move_and_slide()
 	
 func _update_ai_logic() -> void:
@@ -64,9 +70,7 @@ func _update_ai_logic() -> void:
 		"attackAnimation":
 			velocity = Vector3.ZERO
 			anim_tree.root_motion_track = ""
-	look_at(Vector3(cached_player_position.x, global_position.y, cached_player_position.z), Vector3.UP)
-	anim_tree.set("parameters/conditions/attack", _target_in_range())
-	anim_tree.set("parameters/conditions/chase", !_target_in_range())
+	
 
 func _target_in_range() -> bool:
 	return global_position.distance_to(player.global_position) < ATTACK_DETECTION_RANGE

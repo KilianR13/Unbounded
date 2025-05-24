@@ -51,6 +51,8 @@ func _on_weapon_changed(weapon_name: String, ammo: int) -> void:
 			ammoLabel.add_theme_color_override("font_color", RIFLEAMMO_COLOR)
 		"DBShotgun":
 			ammoLabel.add_theme_color_override("font_color", SPECIALAMMO_COLOR)
+		"GlassCannon":
+			ammoLabel.add_theme_color_override("font_color", HEAVYAMMO_COLOR)
 		"Ultimate":
 			ammoLabel.add_theme_color_override("font_color", ULTIMATEAMMO_COLOR)
 
@@ -63,6 +65,8 @@ func _on_ammo_updated(weapon_name: String, ammo: int) -> void:
 			remainingAmmoRifle.set_text(str(ammo))
 		"DBShotgun":
 			remainingAmmoSpecial.set_text(str(ammo))
+		"GlassCannon":
+			remainingAmmoHeavy.set_text(str(ammo))
 		"Ultimate":
 			pass
 

@@ -41,7 +41,7 @@ func register_enemy(enemy: CharacterBody3D) -> void:
 	enemy.connect("enemy_killed_with_headshot", Callable(self, "_headshot_kill"))
 
 func _on_enemy_died(_enemy: CharacterBody3D) -> void:
-	score += 100
+	score += 50
 	updateScoreForUI()
 	active_enemies -= 1
 	if active_enemies <= 0:
@@ -77,7 +77,7 @@ func unfreezeEnemies(enemies: Array) -> void:
 
 func _on_zombie1_killed() -> void:
 	currentZombies -= 1
-	score += 50
+	score += 20
 	updateScoreForUI()
 	if currentZombies <= 0:
 		await get_tree().create_timer(1.0).timeout
@@ -96,15 +96,15 @@ func startSecondFight(AllEnemies: Array) -> void:
 
 func _on_zombie2_killed() -> void:
 	currentZombies -= 1
-	score += 50
+	score += 20
 	updateScoreForUI()
 
 func _headshot_hit() -> void:
-	score += 5
+	score += 1
 	updateScoreForUI()
 
 func _headshot_kill() -> void:
-	score += 25
+	score += 10
 	updateScoreForUI()
 
 func updateScoreForUI() -> void:
