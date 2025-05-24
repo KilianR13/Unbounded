@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal weapon_changed(weapon_name: String, ammo: int)
 signal ammo_updated(weapon_name: String, ammo: int)
 signal update_ult_charge(charge: int)
-signal healthChanged(currentHealth: int)
+signal healthChanged(currentHealth: int, hurt: bool)
 
 var speed: float = WALK_SPEED
 var jump_count: int = 0
@@ -133,7 +133,7 @@ func _unhandled_input(event: InputEvent)-> void:
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
-	if Input.is_action_just_pressed("pause"): # TEMPORARY
+	if Input.is_action_just_pressed("pause"):
 		if !gamePaused:
 			pauseMenu.visible = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -166,26 +166,25 @@ func _unhandled_input(event: InputEvent)-> void:
 				await changeWeapons(JudgeRevolver, WeaponState.ULTIMATE)
 				emit_signal("weapon_changed", "Ultimate", ultimateAmmo)
 		
-	
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and isAlive:
-		if is_on_floor() or jump_count < max_jump_count or is_dashing:
-			velocity.y = JUMP_VELOCITY
-			if is_on_floor():
-				$JumpSFX.play()
-			if !is_on_floor() and jump_count < max_jump_count and !on_ladder:
-				$DoubleJump.play()
-			
-			if is_dashing:
-				is_dashing = false
-				preserve_dash_momentum = true
-			
-		jump_count += 1
+		# Handle jump.
+		if Input.is_action_just_pressed("jump") and isAlive:
+			if is_on_floor() or jump_count < max_jump_count or is_dashing:
+				velocity.y = JUMP_VELOCITY
+				if is_on_floor():
+					$JumpSFX.play()
+				if !is_on_floor() and jump_count < max_jump_count and !on_ladder:
+					$DoubleJump.play()
+				
+				if is_dashing:
+					is_dashing = false
+					preserve_dash_momentum = true
+				
+			jump_count += 1
 	
 	
 
 func _process(delta: float) -> void:
-	if !finished_loading and !isAlive:
+	if !finished_loading or !isAlive:
 		return
 	
 	var look_x: float = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
@@ -220,6 +219,9 @@ func _physics_process(delta: float) -> void:
 	#var speed_mps = velocity.length()
 	#var speed_kmh = speed_mps * 3.6
 	#print("Current speed: ", speed_kmh, " km/h")
+	
+	if !isAlive:
+		return
 	
 	if is_on_floor() and not was_on_floor and landing_sound_enabled:
 		$Jump_LandSound.play()
@@ -351,7 +353,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		preserve_dash_momentum = false
 	
-		
 	move_and_slide()
 
 
@@ -369,6 +370,7 @@ func disableShake() -> void:
 	is_shaking = false
 
 func playerDeath() -> void:
+	health = 0
 	$DeathSFX.play()
 	isAlive = false
 	velocity = Vector3(0,0,0)
@@ -403,6 +405,11 @@ func changeWeapons(newWeapon: Node3D, newState: WeaponState) -> void:
 	currentWeapon.animationPlayer.play_backwards("changeGun")
 
 func _headshot(superCharge: int) -> void:
+	if health < 100:
+		health += 5
+	elif health > 95:
+		health = 100
+	emit_signal("healthChanged", health, false)
 	if ultimateCharge < 100:
 		ultimateCharge += superCharge
 		if ultimateCharge >= 100:
@@ -411,7 +418,7 @@ func _headshot(superCharge: int) -> void:
 
 func _on_ultimate_charge_timer_timeout() -> void:
 	if ultimateCharge < 100:
-		ultimateCharge += 100
+		ultimateCharge += 1
 		if ultimateCharge >= 100:
 			ultimateCharged()
 		emit_signal("update_ult_charge", ultimateCharge)
@@ -421,3 +428,15 @@ func ultimateCharged() -> void:
 	ultimateCharge = 100
 	ultimateAmmo = 6
 	ultimateChargeTimer.stop()
+
+func recieve_hit(damage: int) -> void:
+	if isAlive:
+		health -= damage
+		emit_signal("healthChanged", health, true)
+		if health <= 0:
+			playerDeath()
+		else:
+			var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+			var randomPitch: float = rng.randf_range(0.9, 1.1)
+			$HurtSFX.set_pitch_scale(randomPitch)
+			$HurtSFX.play()

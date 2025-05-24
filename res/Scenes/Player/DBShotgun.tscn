@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bmos4hdjxrpx5" path="res://res/models/weapons/Shotgun Double Barrel.glb" id="1_ppi17"]
 [ext_resource type="Script" path="res://res/scripts/DBShotgun.gd" id="2_dtvvs"]
-[ext_resource type="AudioStream" uid="uid://xg2nyx0dinqa" path="res://res/sfx/shotgunSFX/DBRealod.wav" id="3_4xfdx"]
-[ext_resource type="AudioStream" uid="uid://4uakpqha86mw" path="res://res/sfx/shotgunSFX/DBShotgunFireSFX.wav" id="4_37bwj"]
+[ext_resource type="AudioStream" uid="uid://xg2nyx0dinqa" path="res://res/sfx/guns/shotgunSFX/DBRealod.wav" id="3_4xfdx"]
+[ext_resource type="AudioStream" uid="uid://4uakpqha86mw" path="res://res/sfx/guns/shotgunSFX/DBShotgunFireSFX.wav" id="4_37bwj"]
 
 [sub_resource type="Animation" id="Animation_6hbbf"]
 resource_name = "changeGun"

@@ -9,9 +9,10 @@ var player: CharacterBody3D = null
 const SPEED: float = 7.0
 const ATTACK_DETECTION_RANGE: int = 3
 var health: int = 10
-var damage: int = 20
+var playerDamage: int = 20
 var dead: bool = false
 var rotated: bool = false
+var can_attack: bool = true
 var state_machine: AnimationNodeStateMachinePlayback
 
 
@@ -47,13 +48,22 @@ func update_ai_loop() -> void:
 func _physics_process(_delta: float) -> void:
 	if dead:
 		return
+	look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
+	if _target_in_range() and can_attack:
+		can_attack = false
+		anim_tree.set("parameters/conditions/attack", true)
+		await get_tree().create_timer(0.1).timeout  # pequeño delay para asegurar la transición
+		anim_tree.set("parameters/conditions/attack", false)
+		await get_tree().create_timer(0.1).timeout
+		can_attack = true
+	else:
+		anim_tree.set("parameters/conditions/chase", true)
 	move_and_slide()
 	
 func _update_ai_logic() -> void:
 	cached_player_position = player.global_transform.origin
 	match state_machine.get_current_node():
 		"runAnimation":
-			anim_tree.root_motion_track = "Armature/Skeleton3D:mixamorig_Hips"
 			navAgent.set_target_position(cached_player_position)
 			var nextNavPoint: Vector3 = navAgent.get_next_path_position()
 			var to_point: Vector3 = nextNavPoint - global_transform.origin
@@ -61,13 +71,8 @@ func _update_ai_logic() -> void:
 				velocity = to_point.normalized() * SPEED
 			else:
 				velocity = Vector3.ZERO
-			#velocity = (nextNavPoint - global_transform.origin).normalized() * SPEED
 		"attackAnimation":
 			velocity = Vector3.ZERO
-			anim_tree.root_motion_track = ""
-	look_at(Vector3(cached_player_position.x, global_position.y, cached_player_position.z), Vector3.UP)
-	anim_tree.set("parameters/conditions/attack", _target_in_range())
-	anim_tree.set("parameters/conditions/chase", !_target_in_range())
 
 func _target_in_range() -> bool:
 	return global_position.distance_to(player.global_position) < ATTACK_DETECTION_RANGE
@@ -89,7 +94,6 @@ func receive_hit(damage: int, headshotMultiplier: int, is_headshot : bool) -> vo
 		deathSound.play()
 		if is_headshot:
 			emit_signal("enemy_killed_with_headshot")
-		anim_tree.root_motion_track = "" # Quita el root motion para que la animación funcione bien.
 		generalCollisionShape.disabled = true
 		if state_machine:
 			state_machine.travel("deathAnimation")
@@ -108,3 +112,7 @@ func _disable_areas_recursive(node: Node) -> void:
 		node.disabled = true
 	for subnode: Node in node.get_children():
 		_disable_areas_recursive(subnode)
+
+func dealDamage() -> void:
+	if global_position.distance_to(player.global_position) < ATTACK_DETECTION_RANGE + 1.0:
+		player.recieve_hit(playerDamage)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=106 format=3 uid="uid://degnrq8am8gbv"]
 
 [ext_resource type="Script" path="res://res/scripts/weapons/glassCannon.gd" id="1_41k4x"]
-[ext_resource type="AudioStream" uid="uid://cbe82vh4q4djr" path="res://res/sfx/enemies/heavySFX/glassCannonChargeSFX.wav" id="1_shinf"]
-[ext_resource type="AudioStream" uid="uid://bnth4hcpphse5" path="res://res/sfx/enemies/heavySFX/glassCannonShootSFX.wav" id="2_awtj5"]
+[ext_resource type="AudioStream" uid="uid://cbe82vh4q4djr" path="res://res/sfx/guns/heavySFX/glassCannonChargeSFX.wav" id="2_2ptuu"]
+[ext_resource type="AudioStream" uid="uid://bnth4hcpphse5" path="res://res/sfx/guns/heavySFX/glassCannonShootSFX.wav" id="3_m0eth"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_id5qc"]
 resource_name = "mat24"
@@ -1874,10 +1874,10 @@ mesh = SubResource("ArrayMesh_ofjvk")
 skeleton = NodePath("")
 
 [node name="ChargeSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_shinf")
+stream = ExtResource("2_2ptuu")
 
 [node name="ShootSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_awtj5")
+stream = ExtResource("3_m0eth")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

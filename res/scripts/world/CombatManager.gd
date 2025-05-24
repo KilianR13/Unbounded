@@ -10,7 +10,6 @@ var active_enemies: int = 0
 var wave_queue: Array = []
 var is_spawning: bool = false
 var score: int = 0
-var currentZombies: int
 
 
 func start_wave(enemy_count: int, spawn_func: Callable) -> void:
@@ -53,7 +52,7 @@ func startFirstFight(AllEnemies: Array) -> void:
 	for enemy: Node in AllEnemies:
 		if enemy is CharacterBody3D:
 			enemy.scale = Vector3(0.9, 0.9, 0.9)
-			currentZombies += 1
+			active_enemies += 1
 			if not enemy.is_connected("enemy_killed", Callable(self, "_on_zombie1_killed")):
 				enemy.connect("enemy_killed", Callable(self, "_on_zombie1_killed"))
 				enemy.connect("enemy_headshot", Callable(self, "_headshot_hit"))
@@ -76,10 +75,10 @@ func unfreezeEnemies(enemies: Array) -> void:
 				enemy.get_node("CollisionShape3D").disabled = true
 
 func _on_zombie1_killed() -> void:
-	currentZombies -= 1
+	active_enemies -= 1
 	score += 20
 	updateScoreForUI()
-	if currentZombies <= 0:
+	if active_enemies <= 0:
 		await get_tree().create_timer(1.0).timeout
 		zombies1_finished.emit()
 
@@ -87,7 +86,7 @@ func startSecondFight(AllEnemies: Array) -> void:
 	unfreezeEnemies(AllEnemies)
 	for enemy: Node3D in AllEnemies:
 		if enemy is CharacterBody3D:
-			currentZombies += 1
+			active_enemies += 1
 			if not enemy.is_connected("enemy_killed", Callable(self, "_on_zombie2_killed")):
 				enemy.connect("enemy_killed", Callable(self, "_on_zombie2_killed"))
 				enemy.connect("enemy_headshot", Callable(self, "_headshot_hit"))
@@ -95,7 +94,7 @@ func startSecondFight(AllEnemies: Array) -> void:
 			enemy.anim_tree.set("parameters/conditions/alerted", true)
 
 func _on_zombie2_killed() -> void:
-	currentZombies -= 1
+	active_enemies -= 1
 	score += 20
 	updateScoreForUI()
 

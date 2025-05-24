@@ -1,20 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://h2d7jnxcsmt1"]
+[gd_scene load_steps=19 format=3 uid="uid://h2d7jnxcsmt1"]
 
 [ext_resource type="Script" path="res://res/scripts/Player.gd" id="1_iprhw"]
 [ext_resource type="Script" path="res://res/scripts/cameraScript.gd" id="2_xafiq"]
 [ext_resource type="PackedScene" uid="uid://eofdb4gtnsvk" path="res://res/Scenes/Player/handCannon.tscn" id="3_anlf3"]
-[ext_resource type="AudioStream" uid="uid://digtj4b6hppyu" path="res://res/sfx/DoubleJumpSFX.wav" id="3_l3tqo"]
-[ext_resource type="AudioStream" uid="uid://bid3phi2exo5k" path="res://res/sfx/WalkSFX.wav" id="4_8jfuc"]
-[ext_resource type="AudioStream" uid="uid://chtuwyo60qu2l" path="res://res/sfx/GroundLand_SFX.wav" id="5_5l5dc"]
 [ext_resource type="PackedScene" uid="uid://didk0crxigacv" path="res://res/Scenes/Player/judge_revolver.tscn" id="5_xufo1"]
 [ext_resource type="PackedScene" uid="uid://degnrq8am8gbv" path="res://res/Scenes/Player/glassCannon.tscn" id="6_3lc7l"]
 [ext_resource type="PackedScene" uid="uid://b2q8vn05nkxu8" path="res://res/Scenes/Player/HUD.tscn" id="6_nnyey"]
-[ext_resource type="AudioStream" uid="uid://crha4blily4fb" path="res://res/sfx/JumpSFX.wav" id="6_rpdws"]
 [ext_resource type="PackedScene" uid="uid://c4owva3kxuo4" path="res://res/Scenes/Player/rifle.tscn" id="6_tjkpo"]
 [ext_resource type="PackedScene" uid="uid://dfa4hrsqtrg6h" path="res://res/Scenes/Player/DBShotgun.tscn" id="7_3ij0t"]
 [ext_resource type="PackedScene" uid="uid://c3mexgrhb6joy" path="res://res/Scenes/Menus/pause_menu.tscn" id="9_2agqc"]
-[ext_resource type="AudioStream" uid="uid://d00thuha2cnvw" path="res://res/sfx/playerDeathSFX.wav" id="9_5rob0"]
-[ext_resource type="AudioStream" uid="uid://t1v2y6iniyw0" path="res://res/sfx/ultReady.wav" id="12_524jj"]
+[ext_resource type="AudioStream" uid="uid://digtj4b6hppyu" path="res://res/sfx/player/DoubleJumpSFX.wav" id="10_qqq2w"]
+[ext_resource type="AudioStream" uid="uid://bid3phi2exo5k" path="res://res/sfx/player/WalkSFX.wav" id="11_4p6up"]
+[ext_resource type="AudioStream" uid="uid://chtuwyo60qu2l" path="res://res/sfx/player/GroundLand_SFX.wav" id="12_4mu3e"]
+[ext_resource type="AudioStream" uid="uid://crha4blily4fb" path="res://res/sfx/player/JumpSFX.wav" id="13_rb1nd"]
+[ext_resource type="AudioStream" uid="uid://d00thuha2cnvw" path="res://res/sfx/player/playerDeathSFX.wav" id="14_u2ngv"]
+[ext_resource type="AudioStream" uid="uid://t1v2y6iniyw0" path="res://res/sfx/player/ultReady.wav" id="15_htwh3"]
+[ext_resource type="AudioStream" uid="uid://xifhyaqbgtbu" path="res://res/sfx/player/playerGrunt.wav" id="16_2mpwe"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_clreo"]
 
@@ -88,36 +89,39 @@ process_mode = 3
 visible = false
 
 [node name="DoubleJump" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_l3tqo")
+stream = ExtResource("10_qqq2w")
 volume_db = 5.0
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_l3tqo")
+stream = ExtResource("10_qqq2w")
 volume_db = 2.0
 pitch_scale = 1.2
 
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_8jfuc")
+stream = ExtResource("11_4p6up")
 volume_db = 3.0
 pitch_scale = 1.6
 
 [node name="Jump_LandSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_5l5dc")
+stream = ExtResource("12_4mu3e")
 volume_db = 2.0
 
 [node name="JumpSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_rpdws")
+stream = ExtResource("13_rb1nd")
 pitch_scale = 1.2
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_5rob0")
+stream = ExtResource("14_u2ngv")
 volume_db = 0.5
 pitch_scale = 0.9
 
 [node name="UltReadySFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_524jj")
+stream = ExtResource("15_htwh3")
 volume_db = 3.0
 max_polyphony = 5
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_2mpwe")
 
 [node name="noLadder" type="Timer" parent="."]
 wait_time = 0.2

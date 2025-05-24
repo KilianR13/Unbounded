@@ -43,6 +43,9 @@ func _ready() -> void:
 	train.playerHit.connect(death)
 	CombatManager.score = 0
 	CombatManager.updateScoreForUI()
+	CombatManager.active_enemies = 0
+	if not CombatManager.is_connected("zombies1_finished", Callable(self, "_triggerSecondZombieCombat")):
+		CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
 
 
 func trainPass() -> void:
@@ -150,7 +153,7 @@ func _on_first_zombie_trigger_body_entered(body: Object) -> void:
 		$combat_logic/FirstZoneZombies/FirstFloor/FirstZombieTrigger.set_deferred("monitoring", false)
 		var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
 		CombatManager.startFirstFight(zombiesFloor1)
-		CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
+		
 
 func _triggerSecondZombieCombat() -> void:
 	var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()

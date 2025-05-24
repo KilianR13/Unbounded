@@ -23,7 +23,7 @@ var playerHealth: int
 @onready var remainingAmmoHeavy: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo4/AmmoLabel4
 @onready var scoreLabel: Label = $VBoxContainer/Top/VBoxContainer/CurrentBonusAmmount/CurrentBonusLabel
 
-
+@onready var playerHitRect: ColorRect = $playerHitRect
 
 func _ready() -> void:
 	## Coloreado de distintos labels
@@ -87,8 +87,12 @@ func _on_ultimate_charge_updated(charge: int) -> void:
 	else:
 		ultLabel.add_theme_color_override("font_color", Color(1.0,1.0,1.0,0.25))
 
-func _on_health_updated(health: int) -> void:
+func _on_health_updated(health: int, damaged: bool) -> void:
 	healthLabel.set_text(str(health))
+	if damaged:
+		playerHitRect.visible = true
+		await get_tree().create_timer(0.1).timeout
+		playerHitRect.visible = false
 
 func _update_score(score: int) -> void:
 	scoreLabel.text = str(score) + "$"
