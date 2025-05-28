@@ -236,7 +236,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = SubResource("FontVariation_lrrr6")
 theme_override_font_sizes/font_size = 48
-text = "100"
+text = "50"
 
 [node name="BottomSpace" type="Control" parent="VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer"]
 layout_mode = 2

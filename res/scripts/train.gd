@@ -3,7 +3,7 @@ extends Node3D
 @onready var frontLight: SpotLight3D = $frontWagon/SpotLight3D
 @onready var backLight: SpotLight3D = $backWagon/SpotLight3D
 
-signal playerHit(body: CharacterBody3D)
+signal playerHit()
 
 @onready var hit_area: Area3D = $playerImpact
 
@@ -23,4 +23,4 @@ func lightOff() -> void:
 
 func _on_player_impact_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
-		emit_signal("playerHit", body)
+		emit_signal("playerHit")

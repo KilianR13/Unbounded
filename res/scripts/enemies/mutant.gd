@@ -48,8 +48,9 @@ func update_ai_loop() -> void:
 func _physics_process(_delta: float) -> void:
 	if dead:
 		return
-	look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
+	
 	if _target_in_range() and can_attack:
+		look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
 		can_attack = false
 		anim_tree.set("parameters/conditions/attack", true)
 		await get_tree().create_timer(0.1).timeout  # pequeño delay para asegurar la transición
@@ -57,7 +58,7 @@ func _physics_process(_delta: float) -> void:
 		await get_tree().create_timer(0.1).timeout
 		can_attack = true
 	else:
-		anim_tree.set("parameters/conditions/chase", true)
+		anim_tree.set("parameters/conditions/chase", true)		
 	move_and_slide()
 	
 func _update_ai_logic() -> void:
@@ -67,6 +68,12 @@ func _update_ai_logic() -> void:
 			navAgent.set_target_position(cached_player_position)
 			var nextNavPoint: Vector3 = navAgent.get_next_path_position()
 			var to_point: Vector3 = nextNavPoint - global_transform.origin
+			
+			var horizontal_dir: Vector3 = to_point
+			horizontal_dir.y = 0
+			if horizontal_dir.length() > 0.01:
+				look_at(global_transform.origin + horizontal_dir, Vector3.UP)
+			
 			if to_point.length() > 0.1:
 				velocity = to_point.normalized() * SPEED
 			else:

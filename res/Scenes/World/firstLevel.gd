@@ -16,6 +16,7 @@ extends Node3D
 @onready var CombatMusicAction: AudioStreamPlayer = $Music/CombatMusic
 var combatActive: bool
 var currentZombies: int = 0
+var payment: int = 800
 
 var reverse_mode: bool = false
 var trainSpeed: float = 100.0
@@ -40,7 +41,7 @@ func _ready() -> void:
 	trainWaitTimer.start()
 	posicion_inicial_tren = train.global_position
 	posicion_objetivo_tren = train3DDestiny.global_position
-	train.playerHit.connect(death)
+	train.playerHit.connect(Callable(self,"dangerDeath"))
 	CombatManager.score = 0
 	CombatManager.updateScoreForUI()
 	CombatManager.active_enemies = 0
@@ -68,9 +69,11 @@ func openFirstDoor() -> void:
 
 func _on_killzone_area_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
-		#player.playerDeath()
-		death(body) #TEMP
+		dangerDeath()
 
+func dangerDeath() -> void:
+	if player.isAlive:
+		player.playerDeath()
 
 func _on_train_wait_timer_timeout()  -> void:
 	trainWaitTimer.set_wait_time(24.0)
@@ -87,9 +90,6 @@ func _on_animation_player_animation_finished(anim_name: String)  -> void:
 			trainSFX.play()
 			trainPassTimer.start()
 
-func death(_body: CharacterBody3D) -> void:
-	pass
-	#player.global_position = secondSpawnTest.global_position # TEMP
 
 func _on_train_pass_timer_timeout() -> void:
 	reverse_mode = true
@@ -175,8 +175,8 @@ func freezeEnemies(enemies: Array) -> void:
 				enemy.get_node("CollisionShape3D").disabled = true
 
 func stageFinished() -> void:
-	CombatManager.score += 300
-	CombatManager.saveScore()
-	await get_tree().create_timer(5.0).timeout
-	Global.restartMainMenu = false
-	get_tree().change_scene_to_file("res://res/Scenes/Menus/main_menu.tscn")
+	CombatManager.levelObtainedScore = CombatManager.score
+	CombatManager.score += payment
+	CombatManager.levelBaseScore = payment
+	await get_tree().create_timer(8.0).timeout
+	get_tree().change_scene_to_file("res://res/Scenes/Menus/victoryScreen.tscn")

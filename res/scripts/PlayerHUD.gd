@@ -12,6 +12,7 @@ var specialAmmo: int = 0
 var heavyAmmo: int = 0
 var ultimateAmmo: int
 var playerHealth: int
+var playerIsAlive: bool = true
 
 @onready var player: CharacterBody3D = get_tree().get_root().get_node("World/Player")
 @onready var ammoLabel: Label = $VBoxContainer/Bottom/HBoxContainer/MiddleSpace/VBoxContainer/HBoxContainer/PanelContainer3/AmmoLabel
@@ -40,6 +41,8 @@ func _ready() -> void:
 	player.connect("healthChanged", Callable(self, "_on_health_updated"))
 	CombatManager.connect("updateScore", Callable(self, "_update_score"))
 	CombatManager.updateScoreForUI()
+	playerHitRect.visible = false
+	playerIsAlive = true
 
 
 func _on_weapon_changed(weapon_name: String, ammo: int) -> void:
@@ -92,7 +95,12 @@ func _on_health_updated(health: int, damaged: bool) -> void:
 	if damaged:
 		playerHitRect.visible = true
 		await get_tree().create_timer(0.1).timeout
-		playerHitRect.visible = false
+		if playerIsAlive:
+			playerHitRect.visible = false
+
+func playerDeath() -> void:
+	playerIsAlive = false
+	playerHitRect.visible = true
 
 func _update_score(score: int) -> void:
 	scoreLabel.text = str(score) + "$"

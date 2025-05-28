@@ -7,10 +7,12 @@ signal updateScore(score: int)
 var savePath: String = "user://progress.save"
 
 var active_enemies: int = 0
+var active_zombies: int = 0
 var wave_queue: Array = []
 var is_spawning: bool = false
 var score: int = 0
-
+var levelObtainedScore: int
+var levelBaseScore: int
 
 func start_wave(enemy_count: int, spawn_func: Callable) -> void:
 	wave_queue.append({ "count": enemy_count, "spawner": spawn_func })
@@ -52,7 +54,7 @@ func startFirstFight(AllEnemies: Array) -> void:
 	for enemy: Node in AllEnemies:
 		if enemy is CharacterBody3D:
 			enemy.scale = Vector3(0.9, 0.9, 0.9)
-			active_enemies += 1
+			active_zombies += 1
 			if not enemy.is_connected("enemy_killed", Callable(self, "_on_zombie1_killed")):
 				enemy.connect("enemy_killed", Callable(self, "_on_zombie1_killed"))
 				enemy.connect("enemy_headshot", Callable(self, "_headshot_hit"))
@@ -75,10 +77,10 @@ func unfreezeEnemies(enemies: Array) -> void:
 				enemy.get_node("CollisionShape3D").disabled = true
 
 func _on_zombie1_killed() -> void:
-	active_enemies -= 1
+	active_zombies -= 1
 	score += 20
 	updateScoreForUI()
-	if active_enemies <= 0:
+	if active_zombies <= 0:
 		await get_tree().create_timer(1.0).timeout
 		zombies1_finished.emit()
 
@@ -86,7 +88,7 @@ func startSecondFight(AllEnemies: Array) -> void:
 	unfreezeEnemies(AllEnemies)
 	for enemy: Node3D in AllEnemies:
 		if enemy is CharacterBody3D:
-			active_enemies += 1
+			active_zombies += 1
 			if not enemy.is_connected("enemy_killed", Callable(self, "_on_zombie2_killed")):
 				enemy.connect("enemy_killed", Callable(self, "_on_zombie2_killed"))
 				enemy.connect("enemy_headshot", Callable(self, "_headshot_hit"))
@@ -94,7 +96,7 @@ func startSecondFight(AllEnemies: Array) -> void:
 			enemy.anim_tree.set("parameters/conditions/alerted", true)
 
 func _on_zombie2_killed() -> void:
-	active_enemies -= 1
+	active_zombies -= 1
 	score += 20
 	updateScoreForUI()
 
@@ -112,12 +114,12 @@ func updateScoreForUI() -> void:
 func saveScore() -> void:
 	var totalScore: int = 0
 	if FileAccess.file_exists(savePath):
-		var file: FileAccess  = FileAccess.open(savePath, FileAccess.READ)
-		if file != null and file.get_length() >= 4:
-			totalScore = file.get_var()
-		file.close()
+		var checkFile: FileAccess = FileAccess.open(savePath, FileAccess.READ)
+		if checkFile != null and checkFile.get_length() >= 4:
+			totalScore = checkFile.get_var()
+		checkFile.close()
 	totalScore += score
-	var file: FileAccess  = FileAccess.open(savePath, FileAccess.WRITE)
+	var file: FileAccess = FileAccess.open(savePath, FileAccess.WRITE)
 	file.store_var(totalScore)
 	file.close()
 

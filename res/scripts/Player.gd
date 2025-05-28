@@ -88,6 +88,7 @@ var has_used_ultimate: bool = false
 @onready var hitscan_RayCast_endpoint: Node3D = $playerHead/Camera3D/raycastEnd
 @onready var ultimateChargeTimer: Timer = $ultimateChargeTimer
 @onready var pauseMenu: Control = $HUD/PauseMenu
+@onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
@@ -125,10 +126,10 @@ func _unpauseGame() -> void:
 	get_tree().paused = false
 
 func _unhandled_input(event: InputEvent)-> void:
-	if !finished_loading:
+	if !finished_loading or !isAlive:
 		return
 
-	if event is InputEventMouseMotion and isAlive:
+	if event is InputEventMouseMotion:
 		playerHead.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
@@ -142,45 +143,45 @@ func _unhandled_input(event: InputEvent)-> void:
 			_unpauseGame()
 	
 	# Lógica de cambio de armas
-	if isAlive:
-		if Input.is_action_just_pressed("swapWeapon1"):
-			if current_weapon_state != WeaponState.WEAPON_PISTOL:
-				await changeWeapons(pistola, WeaponState.WEAPON_PISTOL)
-				emit_signal("weapon_changed", "Pistol", pistolAmmo)
-		elif Input.is_action_just_pressed("swapWeapon2"):
-			if current_weapon_state != WeaponState.WEAPON_RIFLE:
-				await changeWeapons(rifle, WeaponState.WEAPON_RIFLE)
-				emit_signal("weapon_changed", "Rifle", rifleAmmo)
-		elif Input.is_action_just_pressed("swapWeapon3"):
-			if current_weapon_state != WeaponState.WEAPON_SPECIAL:
-				await changeWeapons(DBShotgun, WeaponState.WEAPON_SPECIAL)
-				DBShotgun.checkForReload()
-				emit_signal("weapon_changed", "DBShotgun", specialAmmo)
-		elif Input.is_action_just_pressed("swapWeapon4"):
-			if current_weapon_state != WeaponState.WEAPON_HEAVY:
-				await changeWeapons(GlassCannon, WeaponState.WEAPON_HEAVY)
-				emit_signal("weapon_changed", "GlassCannon", heavyAmmo)
-		elif Input.is_action_just_pressed("useUltimate"):
-			if current_weapon_state != WeaponState.ULTIMATE and ultimateCharge == 100:
-				has_used_ultimate = true
-				await changeWeapons(JudgeRevolver, WeaponState.ULTIMATE)
-				emit_signal("weapon_changed", "Ultimate", ultimateAmmo)
-		
-		# Handle jump.
-		if Input.is_action_just_pressed("jump") and isAlive:
-			if is_on_floor() or jump_count < max_jump_count or is_dashing:
-				velocity.y = JUMP_VELOCITY
-				if is_on_floor():
-					$JumpSFX.play()
-				if !is_on_floor() and jump_count < max_jump_count and !on_ladder:
-					$DoubleJump.play()
-				
-				if is_dashing:
-					is_dashing = false
-					preserve_dash_momentum = true
-				
-			jump_count += 1
+
+	if Input.is_action_just_pressed("swapWeapon1"):
+		if current_weapon_state != WeaponState.WEAPON_PISTOL:
+			await changeWeapons(pistola, WeaponState.WEAPON_PISTOL)
+			emit_signal("weapon_changed", "Pistol", pistolAmmo)
+	elif Input.is_action_just_pressed("swapWeapon2"):
+		if current_weapon_state != WeaponState.WEAPON_RIFLE:
+			await changeWeapons(rifle, WeaponState.WEAPON_RIFLE)
+			emit_signal("weapon_changed", "Rifle", rifleAmmo)
+	elif Input.is_action_just_pressed("swapWeapon3"):
+		if current_weapon_state != WeaponState.WEAPON_SPECIAL:
+			await changeWeapons(DBShotgun, WeaponState.WEAPON_SPECIAL)
+			DBShotgun.checkForReload()
+			emit_signal("weapon_changed", "DBShotgun", specialAmmo)
+	elif Input.is_action_just_pressed("swapWeapon4"):
+		if current_weapon_state != WeaponState.WEAPON_HEAVY:
+			await changeWeapons(GlassCannon, WeaponState.WEAPON_HEAVY)
+			emit_signal("weapon_changed", "GlassCannon", heavyAmmo)
+	elif Input.is_action_just_pressed("useUltimate"):
+		if current_weapon_state != WeaponState.ULTIMATE and ultimateCharge == 100:
+			has_used_ultimate = true
+			await changeWeapons(JudgeRevolver, WeaponState.ULTIMATE)
+			emit_signal("weapon_changed", "Ultimate", ultimateAmmo)
 	
+	# Handle jump.
+	if Input.is_action_just_pressed("jump") and isAlive:
+		if is_on_floor() or jump_count < max_jump_count or is_dashing:
+			velocity.y = JUMP_VELOCITY
+			if is_on_floor():
+				$JumpSFX.play()
+			if !is_on_floor() and jump_count < max_jump_count and !on_ladder:
+				$DoubleJump.play()
+			
+			if is_dashing:
+				is_dashing = false
+				preserve_dash_momentum = true
+			
+		jump_count += 1
+
 	
 
 func _process(delta: float) -> void:
@@ -215,21 +216,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# TESTING
-	#var speed_mps = velocity.length()
-	#var speed_kmh = speed_mps * 3.6
-	#print("Current speed: ", speed_kmh, " km/h")
 	
-	if !isAlive:
-		return
-	
-	if is_on_floor() and not was_on_floor and landing_sound_enabled:
-		$Jump_LandSound.play()
-	
-	
-	was_on_floor = is_on_floor()
-	
-	# Add the gravity.
 	if !is_on_floor() and !on_ladder:
 		velocity.y -= gravity * delta
 		if $WalkSound.playing:
@@ -237,122 +224,130 @@ func _physics_process(delta: float) -> void:
 	elif is_on_floor():
 		jump_count = 0
 	
-	if on_ladder and isAlive:
-		jump_count = 0
-		if Input.is_action_pressed("moveForward"):
-			velocity.y = speed * delta * 20
-		elif Input.is_action_pressed("moveBackwards"):
-			velocity.y = -speed * delta * 20
-		else:
-			velocity.y = 0
+	if isAlive:
 		
-		# Jump from the ladder
-		if Input.is_action_just_pressed("jump") and on_ladder:
-			var jump_direction: Vector3 = global_transform.basis.z.normalized()
-			velocity = jump_direction * 5
-			velocity.y = JUMP_VELOCITY
-			on_ladder = false
-			can_grab_ladder = false
-			get_tree().create_timer(0.5).timeout.connect(func() -> void: can_grab_ladder = true)
 	
-	# Lógica del disparo
-	if Input.is_action_pressed("shoot") and isAlive and !currentWeapon.animationPlayer.is_playing():
-		match current_weapon_state:
-			WeaponState.WEAPON_PISTOL:
-				if pistolAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast)
-					pistolAmmo -= 1
-					emit_signal("ammo_updated", "Pistol", pistolAmmo)
-			WeaponState.WEAPON_RIFLE:
-				if rifleAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast)
-					rifleAmmo -= 1
-					emit_signal("ammo_updated", "Rifle", rifleAmmo)
-			WeaponState.WEAPON_SPECIAL:
-				if specialAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast)
-					specialAmmo -= 2
-					emit_signal("ammo_updated", "DBShotgun", specialAmmo)
-			WeaponState.WEAPON_HEAVY:
-				if heavyAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast)
-					heavyAmmo -= 1
-					emit_signal("ammo_updated", "GlassCannon", heavyAmmo)
-			WeaponState.ULTIMATE:
-				if ultimateAmmo > 0:
-					currentWeapon.shoot(hitscan_RayCast)
-					ultimateAmmo -= 1
-					emit_signal("ammo_updated", "Ultimate", ultimateAmmo)
-					if !is_shaking:
-						trigger_camera_shake(0.5)
-						is_shaking = true
+		if is_on_floor() and not was_on_floor and landing_sound_enabled:
+			$Jump_LandSound.play()
+		
+		was_on_floor = is_on_floor()
+		
+		if on_ladder and isAlive:
+			jump_count = 0
+			if Input.is_action_pressed("moveForward"):
+				velocity.y = speed * delta * 20
+			elif Input.is_action_pressed("moveBackwards"):
+				velocity.y = -speed * delta * 20
+			else:
+				velocity.y = 0
+			
+			# Jump from the ladder
+			if Input.is_action_just_pressed("jump") and on_ladder:
+				var jump_direction: Vector3 = global_transform.basis.z.normalized()
+				velocity = jump_direction * 5
+				velocity.y = JUMP_VELOCITY
+				on_ladder = false
+				can_grab_ladder = false
+				get_tree().create_timer(0.5).timeout.connect(func() -> void: can_grab_ladder = true)
+		
+		# Lógica del disparo
+		if Input.is_action_pressed("shoot") and isAlive and !currentWeapon.animationPlayer.is_playing():
+			match current_weapon_state:
+				WeaponState.WEAPON_PISTOL:
+					if pistolAmmo > 0:
+						currentWeapon.shoot(hitscan_RayCast)
+						pistolAmmo -= 1
+						emit_signal("ammo_updated", "Pistol", pistolAmmo)
+				WeaponState.WEAPON_RIFLE:
+					if rifleAmmo > 0:
+						currentWeapon.shoot(hitscan_RayCast)
+						rifleAmmo -= 1
+						emit_signal("ammo_updated", "Rifle", rifleAmmo)
+				WeaponState.WEAPON_SPECIAL:
+					if specialAmmo > 0:
+						currentWeapon.shoot(hitscan_RayCast)
+						specialAmmo -= 2
+						emit_signal("ammo_updated", "DBShotgun", specialAmmo)
+				WeaponState.WEAPON_HEAVY:
+					if heavyAmmo > 0:
+						currentWeapon.shoot(hitscan_RayCast)
+						heavyAmmo -= 1
+						emit_signal("ammo_updated", "GlassCannon", heavyAmmo)
+				WeaponState.ULTIMATE:
+					if ultimateAmmo > 0:
+						currentWeapon.shoot(hitscan_RayCast)
+						ultimateAmmo -= 1
+						emit_signal("ammo_updated", "Ultimate", ultimateAmmo)
+						if !is_shaking:
+							trigger_camera_shake(0.5)
+							is_shaking = true
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir: Vector2 = Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBackwards")
-	if not preserve_dash_momentum:
-		if isAlive:
-			var direction: Vector3 = (playerHead.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-			if is_on_floor():
-				if direction:
-					velocity.x = direction.x * speed
-					velocity.z = direction.z * speed
-					if not $WalkSound.playing:
-						$WalkSound.play()
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var input_dir: Vector2 = Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBackwards")
+		if not preserve_dash_momentum:
+			if isAlive:
+				var direction: Vector3 = (playerHead.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+				if is_on_floor():
+					if direction:
+						velocity.x = direction.x * speed
+						velocity.z = direction.z * speed
+						if not $WalkSound.playing:
+							$WalkSound.play()
+					else:
+						velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
+						velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
+						if $WalkSound.playing:
+							$WalkSound.stop()
 				else:
-					velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
-					velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
+					if direction:
+						velocity.x = lerp(velocity.x, direction.x * speed, delta * 5.0)
+						velocity.z = lerp(velocity.z, direction.z * speed, delta * 5.0)
+					else:
+						velocity.x = lerp(velocity.x, direction.x * speed, delta * 1.0)
+						velocity.z = lerp(velocity.z, direction.z * speed, delta * 1.0)
 					if $WalkSound.playing:
 						$WalkSound.stop()
-			else:
-				if direction:
-					velocity.x = lerp(velocity.x, direction.x * speed, delta * 5.0)
-					velocity.z = lerp(velocity.z, direction.z * speed, delta * 5.0)
-				else:
-					velocity.x = lerp(velocity.x, direction.x * speed, delta * 1.0)
-					velocity.z = lerp(velocity.z, direction.z * speed, delta * 1.0)
-				if $WalkSound.playing:
-					$WalkSound.stop()
-			
-			if Input.is_action_just_pressed("dash") and !is_dashing and dash_cooldown_timer <= 0.0:
-				$DashSFX.play()
-				if direction != Vector3.ZERO:
-					dash_direction = direction.normalized()
-				else:
-					# Si no hay input de movimiento, dash hacia adelante
-					dash_direction = -playerHead.transform.basis.z.normalized()
+				
+				if Input.is_action_just_pressed("dash") and !is_dashing and dash_cooldown_timer <= 0.0:
+					$DashSFX.play()
+					if direction != Vector3.ZERO:
+						dash_direction = direction.normalized()
+					else:
+						# Si no hay input de movimiento, dash hacia adelante
+						dash_direction = -playerHead.transform.basis.z.normalized()
 
-				is_dashing = true
-				dash_timer = DASH_DURATION
-				dash_cooldown_timer = DASH_COOLDOWN
+					is_dashing = true
+					dash_timer = DASH_DURATION
+					dash_cooldown_timer = DASH_COOLDOWN
+			
+				
+				# Head bob
+				t_bob += delta * velocity.length() * float(is_on_floor())
+				camera.transform.origin = _headbob(t_bob)
+				
+				if is_dashing:
+					velocity = dash_direction * DASH_FORCE
+					dash_timer -= delta
+					if dash_timer <= 0.0:
+						is_dashing = false
+						velocity = velocity.lerp(Vector3.ZERO, 0.7)
+				else:
+					dash_cooldown_timer -= delta
+				
+				
+				# FOV 
+				var velocity_clamped: float = clamp(velocity.length(), 0.5, WALK_SPEED * 2)
+				var fov_multiplier: float
+				if is_dashing:
+					fov_multiplier = 1.5
+				else:
+					fov_multiplier = 1.0  # durante dash, reduce el cambio
+				var target_fov: float = BASE_FOV + FOV_CHANGE * velocity_clamped * fov_multiplier
+				camera.fov = lerp(camera.fov, target_fov, delta * 6.0)
+		else:
+			preserve_dash_momentum = false
 		
-			
-			# Head bob
-			t_bob += delta * velocity.length() * float(is_on_floor())
-			camera.transform.origin = _headbob(t_bob)
-			
-			if is_dashing:
-				velocity = dash_direction * DASH_FORCE
-				dash_timer -= delta
-				if dash_timer <= 0.0:
-					is_dashing = false
-					velocity = velocity.lerp(Vector3.ZERO, 0.7)
-			else:
-				dash_cooldown_timer -= delta
-			
-			
-			# FOV 
-			var velocity_clamped: float = clamp(velocity.length(), 0.5, WALK_SPEED * 2)
-			var fov_multiplier: float
-			if is_dashing:
-				fov_multiplier = 1.5
-			else:
-				fov_multiplier = 1.0  # durante dash, reduce el cambio
-			var target_fov: float = BASE_FOV + FOV_CHANGE * velocity_clamped * fov_multiplier
-			camera.fov = lerp(camera.fov, target_fov, delta * 6.0)
-	else:
-		preserve_dash_momentum = false
-	
 	move_and_slide()
 
 
@@ -370,10 +365,19 @@ func disableShake() -> void:
 	is_shaking = false
 
 func playerDeath() -> void:
+	animPlayer.play("deathAnimation")
 	health = 0
+	emit_signal("healthChanged", health, true)
 	$DeathSFX.play()
 	isAlive = false
-	velocity = Vector3(0,0,0)
+	$HUD/PlayerHUD.playerDeath()
+	var facing_direction: Vector3 = -playerHead.global_transform.basis.z.normalized()
+	look_at(global_transform.origin + facing_direction, Vector3.UP)
+	velocity = Vector3(0, velocity.y, 0)
+	currentWeapon.visible = false
+	ultimateChargeTimer.stop()
+	await get_tree().create_timer(5.0).timeout
+	get_tree().call_deferred("change_scene_to_file", "res://res/Scenes/Menus/deathScreen.tscn")
 
 
 func _on_ladder_area_body_entered(body: Object) -> void:
