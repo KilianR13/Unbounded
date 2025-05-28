@@ -48,8 +48,8 @@ libraries = {
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.48879, 0.560868, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="gunshot" type="AudioStreamPlayer2D" parent="RootNode" index="3"]
+[node name="gunshot" type="AudioStreamPlayer" parent="RootNode" index="3"]
 stream = ExtResource("2_qqwfn")
 pitch_scale = 0.8
 max_polyphony = 3
-panning_strength = 0.0
+bus = &"GunsSFX"

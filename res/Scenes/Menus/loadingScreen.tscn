@@ -212,5 +212,6 @@ mouse_filter = 2
 [node name="loadingMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_dvabt")
 volume_db = -8.0
+bus = &"MusicSFX"
 
 [connection signal="pressed" from="VBoxContainer2/Control4/HBoxContainer/Control4/Button" to="." method="_on_button_pressed"]

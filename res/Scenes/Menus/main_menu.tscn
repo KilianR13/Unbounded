@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckhfmynaavo4m"]
+[gd_scene load_steps=6 format=3 uid="uid://ckhfmynaavo4m"]
 
 [ext_resource type="Script" path="res://res/scripts/menus/MainMenu.gd" id="1_uqo7g"]
 [ext_resource type="AudioStream" uid="uid://c84unc3oswa6t" path="res://res/sfx/music/MainMenuMusic.wav" id="2_4j8c3"]
+[ext_resource type="PackedScene" uid="uid://bxfd8bgnugmxu" path="res://res/Scenes/Menus/options.tscn" id="3_4oeb1"]
 
 [sub_resource type="Animation" id="Animation_64b7s"]
 resource_name = "startup"
@@ -117,7 +118,7 @@ anchor_bottom = 0.5
 offset_left = -655.0
 offset_top = -175.0
 offset_right = -304.997
-offset_bottom = 175.0
+offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -125,19 +126,25 @@ size_flags_vertical = 4
 theme_override_constants/separation = 25
 
 [node name="Play" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
-custom_minimum_size = Vector2(350, 100)
+custom_minimum_size = Vector2(350, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "PLAY"
 
-[node name="Button2" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
-custom_minimum_size = Vector2(350, 100)
+[node name="Options" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
+custom_minimum_size = Vector2(350, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "TEST"
+text = "OPTIONS"
+
+[node name="Credits" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "CREDITS"
 
 [node name="Quit" type="Button" parent="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons" groups=["menuButton"]]
-custom_minimum_size = Vector2(350, 100)
+custom_minimum_size = Vector2(350, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "QUIT"
@@ -190,9 +197,14 @@ libraries = {
 "": SubResource("AnimationLibrary_vtrup")
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4j8c3")
-volume_db = -8.0
+bus = &"MusicSFX"
+
+[node name="Options" parent="." instance=ExtResource("3_4oeb1")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Quit" to="." method="_on_quit_pressed"]

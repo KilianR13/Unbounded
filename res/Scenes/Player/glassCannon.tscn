@@ -1691,7 +1691,7 @@ _data = {
 script = ExtResource("1_41k4x")
 
 [node name="GlassCannon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="group1777393000" type="MeshInstance3D" parent="GlassCannon"]
 mesh = SubResource("ArrayMesh_54lgy")
@@ -1875,9 +1875,11 @@ skeleton = NodePath("")
 
 [node name="ChargeSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_2ptuu")
+bus = &"GunsSFX"
 
 [node name="ShootSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_m0eth")
+bus = &"GunsSFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

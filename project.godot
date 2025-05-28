@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SoundManager="*res://res/scripts/menus/SoundManager.gd"
 Global="*res://res/scripts/menus/Global.gd"
 CombatManager="*res://res/scripts/world/CombatManager.gd"
 

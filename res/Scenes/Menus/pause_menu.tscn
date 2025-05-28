@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3mexgrhb6joy"]
+[gd_scene load_steps=5 format=3 uid="uid://c3mexgrhb6joy"]
 
 [ext_resource type="Shader" path="res://res/Scenes/Menus/pause_menu.gdshader" id="1_3ofwi"]
 [ext_resource type="Script" path="res://res/scripts/menus/pauseMenu.gd" id="1_id7gd"]
+[ext_resource type="PackedScene" uid="uid://bxfd8bgnugmxu" path="res://res/Scenes/Menus/options.tscn" id="3_10f1a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0go66"]
 shader = ExtResource("1_3ofwi")
@@ -99,7 +100,29 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="quitButton" type="Button" parent="VBoxContainer/Control3/HBoxContainer/Control2"]
+[node name="optionsMenu" type="Button" parent="VBoxContainer/Control3/HBoxContainer/Control2"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "RESUME"
+
+[node name="Control3" type="Control" parent="VBoxContainer/Control3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="quitButton" type="Button" parent="VBoxContainer/Control3/HBoxContainer/Control3"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 1
 anchors_preset = 8
@@ -116,5 +139,10 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "QUIT"
 
+[node name="Options" parent="." instance=ExtResource("3_10f1a")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainer/Control3/HBoxContainer/Control/resumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control3/HBoxContainer/Control2/quitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Control3/HBoxContainer/Control2/optionsMenu" to="." method="_on_options_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Control3/HBoxContainer/Control3/quitButton" to="." method="_on_quit_button_pressed"]

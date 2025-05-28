@@ -124,38 +124,46 @@ visible = false
 [node name="DoubleJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_qqq2w")
 volume_db = 5.0
+bus = &"PlayerSFX"
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_qqq2w")
 volume_db = 2.0
 pitch_scale = 1.2
+bus = &"PlayerSFX"
 
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_4p6up")
 volume_db = 3.0
 pitch_scale = 1.6
+bus = &"PlayerSFX"
 
 [node name="Jump_LandSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_4mu3e")
 volume_db = 2.0
+bus = &"PlayerSFX"
 
 [node name="JumpSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_rb1nd")
 pitch_scale = 1.2
+bus = &"PlayerSFX"
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_u2ngv")
 volume_db = 0.5
 pitch_scale = 0.9
+bus = &"PlayerSFX"
 
 [node name="UltReadySFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_htwh3")
 volume_db = 3.0
 max_polyphony = 5
+bus = &"PlayerSFX"
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_2mpwe")
 max_polyphony = 10
+bus = &"PlayerSFX"
 
 [node name="noLadder" type="Timer" parent="."]
 wait_time = 0.2

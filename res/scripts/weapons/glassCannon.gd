@@ -7,7 +7,6 @@ var maxAmmo: int = 10
 signal shotFinished
 signal criticalHit(superCharge: int)
 
-@onready var body_mesh: MeshInstance3D = $GlassCannon/group1777393000
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var chargeSound: AudioStreamPlayer = $ChargeSFX
 @onready var shootSound: AudioStreamPlayer = $ShootSFX
@@ -18,20 +17,10 @@ var material_index: int = 0
 var standard_mat: StandardMaterial3D
 var tween: Tween
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var mat: Material = body_mesh.mesh.surface_get_material(material_index)
-	if mat is StandardMaterial3D:
-		standard_mat = mat.duplicate() as StandardMaterial3D
-		body_mesh.mesh.surface_set_material(material_index, standard_mat)
-
-
-
 func shoot(raycast: RayCast3D) -> void:
 	if animationPlayer.is_playing():
 		return 
 	
-	_chargeCannon()
 	animationPlayer.play("chargeShot")
 	chargeSound.play()
 	await get_tree().create_timer(2.49).timeout
@@ -41,19 +30,6 @@ func shoot(raycast: RayCast3D) -> void:
 	animationPlayer.play("shoot")
 	shootSound.play()
 
-func _chargeCannon() -> void:
-	if standard_mat:
-		
-		#print("Tween started at time:", Time.get_ticks_msec())
-		#standard_mat.emission_enabled = true
-		# Si hay un tween corriendo, lo matamos
-		if tween and tween.is_running():
-			tween.kill()
-
-		tween = create_tween()
-		tween.tween_property(standard_mat, "emission", target_color, color_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		tween.tween_interval(0.01)
-		tween.tween_property(standard_mat, "emission", target_color, 0.0)
 
 func _real_shoot(raycast: RayCast3D) -> void:
 	shootSound.play()
@@ -61,9 +37,7 @@ func _real_shoot(raycast: RayCast3D) -> void:
 	raycast.set_collide_with_bodies(true)
 	raycast.force_raycast_update()
 	
-	
 	if raycast.is_colliding():
-	
 		var hit_position: Vector3 = raycast.get_collision_point()
 		create_flash_effect(hit_position)
 

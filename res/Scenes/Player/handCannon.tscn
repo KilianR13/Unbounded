@@ -159,3 +159,4 @@ libraries = {
 stream = ExtResource("2_adlwm")
 pitch_scale = 0.8
 max_polyphony = 3
+bus = &"GunsSFX"

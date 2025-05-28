@@ -7,12 +7,13 @@ var gameStarted: bool = false
 @onready var moneyEarnedLabel: Label = $VBoxContainerGeneral/Bottom/VBoxContainer/gameStartNode/MoneyEarnedLabel
 
 func _ready() -> void:
+	SoundManager.load_settings()
 	if !Global.restartMainMenu:
 		Global.restartMainMenu = true
 		_game_started()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+	$Options.connect("closeOptions", Callable(self, "_closeOptionsMenu"))
 	var scoreSoFar: int = CombatManager.loadScore()
 	moneyEarnedLabel.text = "You've earned " + str(scoreSoFar) + "$ so far."
 
@@ -35,7 +36,7 @@ func _game_started() -> void:
 	gameStarted = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	gameStartLabel.visible = false
-	$AudioStreamPlayer.play()
+	$MainMenuMusic.play()
 	playButton.grab_focus()
 	$AnimationPlayer.play("startup")
 	await get_tree().create_timer(0.5).timeout
@@ -47,3 +48,10 @@ func _on_play_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_options_pressed() -> void:
+	$Options.visible = true
+
+func _closeOptionsMenu() -> void:
+	$Options.visible = false
