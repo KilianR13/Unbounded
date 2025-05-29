@@ -43,7 +43,7 @@ func _real_shoot(raycast: RayCast3D) -> void:
 
 		var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 		var shape: SphereShape3D = SphereShape3D.new()
-		shape.radius = 3.0  # Radio de efecto
+		shape.radius = 8.0  # Radio de efecto
 
 		var query: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
 		query.shape = shape
@@ -68,7 +68,7 @@ func _real_shoot(raycast: RayCast3D) -> void:
 func create_flash_effect(explosionPosition: Vector3) -> void:
 	var flash: MeshInstance3D = MeshInstance3D.new()
 	get_tree().current_scene.add_child(flash)
-	var radius: float = 3.0
+	var radius: float = 8.0
 	flash.mesh = SphereMesh.new()
 	flash.scale = Vector3.ONE * radius
 	flash.global_position = explosionPosition

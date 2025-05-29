@@ -108,7 +108,6 @@ func load_video_settings() -> void:
 		var index: int = config.get_value("video", "resolution_index", 2)
 		var fullscreen: bool = config.get_value("video", "fullscreen", false)
 		
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		
 		resolutionOptionButton.select(index)
 		_on_resolution_selected(index)

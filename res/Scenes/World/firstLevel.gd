@@ -45,6 +45,7 @@ func _ready() -> void:
 	CombatManager.score = 0
 	CombatManager.updateScoreForUI()
 	CombatManager.active_enemies = 0
+	CombatManager.active_zombies = 0
 	if not CombatManager.is_connected("zombies1_finished", Callable(self, "_triggerSecondZombieCombat")):
 		CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
 

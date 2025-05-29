@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://e03yx2ymkxms"]
+[gd_scene load_steps=124 format=3 uid="uid://e03yx2ymkxms"]
 
 [ext_resource type="Script" path="res://res/Scenes/World/firstLevel.gd" id="1_54ki8"]
 [ext_resource type="PackedScene" uid="uid://h2d7jnxcsmt1" path="res://res/Scenes/Player/player.tscn" id="1_fd6uq"]
@@ -84,8 +84,11 @@ size = Vector3(1, 7, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ofy1u"]
 size = Vector3(24, 40, 18)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1blyi"]
+size = Vector3(8.05, 50, 17.4)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0kqxf"]
-size = Vector3(8, 50, 13)
+size = Vector3(8.05, 50, 13.056)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfhbw"]
 resource_name = "glass"
@@ -647,7 +650,7 @@ environment = ExtResource("2_v7imq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.8548)
 
 [node name="playerSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.0541, 0, 3.9548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0541, 0, 8.9548)
 
 [node name="basicBuilding_copypaste" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 52)
@@ -7499,8 +7502,8 @@ transform = Transform3D(4.5897e-08, -3.82137e-15, -1.05, -9.17939e-08, -1, 0, -1
 [node name="collision" type="StaticBody3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Decoration/decorationBuildings/building3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Decoration/decorationBuildings/building3/collision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 25, 6.5)
-shape = SubResource("BoxShape3D_0kqxf")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9563, 25, 4.35593)
+shape = SubResource("BoxShape3D_1blyi")
 
 [node name="building5" type="Node3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Decoration/decorationBuildings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10.25)
