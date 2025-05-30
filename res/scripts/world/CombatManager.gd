@@ -8,6 +8,7 @@ var savePath: String = "user://progress.save"
 
 var active_enemies: int = 0
 var active_zombies: int = 0
+var array_zombies_despawneable: Array[CharacterBody3D] =  []
 var wave_queue: Array = []
 var is_spawning: bool = false
 var score: int = 0
@@ -68,7 +69,7 @@ func unfreezeEnemies(enemies: Array) -> void:
 			enemy.set_process(true)
 			enemy.set_physics_process(true)
 			enemy.visible = true
-
+		
 			if enemy.has_node("Skeleton3D"):
 				enemy.get_node("Armature/Skeleton3D").visible = true
 			if has_node("AnimationTree"):
@@ -83,6 +84,11 @@ func _on_zombie1_killed() -> void:
 	if active_zombies <= 0:
 		await get_tree().create_timer(1.0).timeout
 		zombies1_finished.emit()
+
+func add_zombie(AllEnemies: Array) -> void:
+	for enemy: Node3D in AllEnemies:
+		if enemy is CharacterBody3D:
+			array_zombies_despawneable.append(enemy)
 
 func startSecondFight(AllEnemies: Array) -> void:
 	unfreezeEnemies(AllEnemies)
@@ -99,6 +105,12 @@ func _on_zombie2_killed() -> void:
 	active_zombies -= 1
 	score += 20
 	updateScoreForUI()
+
+func clear_zombies() -> void:
+	for enemy: CharacterBody3D in array_zombies_despawneable:
+		if is_instance_valid(enemy):
+			enemy.queue_free()
+	array_zombies_despawneable.clear()
 
 func _headshot_hit() -> void:
 	score += 1

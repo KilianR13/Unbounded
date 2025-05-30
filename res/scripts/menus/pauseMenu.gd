@@ -7,7 +7,7 @@ func _ready() -> void:
 	$Options.connect("closeOptions", Callable(self, "_closeOptionsMenu"))
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		toggle_pause()
 

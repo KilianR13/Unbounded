@@ -67,8 +67,8 @@ func on_accept_pressed() -> void:
 	SoundManager.save_settings()
 	save_video_settings()
 
-func get_slider_by_name(name: String) -> HSlider:
-	match name:
+func get_slider_by_name(SliderName: String) -> HSlider:
+	match SliderName:
 		"MasterSlider": return MasterSlider
 		"PlayerSFXSlider": return PlayerSFXSlider
 		"EnemySFXSlider": return EnemySFXSlider

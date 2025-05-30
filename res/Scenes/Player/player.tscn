@@ -116,6 +116,7 @@ visible = false
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="PlayerHUD" parent="HUD" instance=ExtResource("6_nnyey")]
+visible = false
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("9_2agqc")]
 process_mode = 3

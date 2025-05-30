@@ -28,15 +28,20 @@ var tween: Tween
 @onready var mutantEnemy: PackedScene = preload("res://res/Scenes/Enemies/mutant_enemy.tscn")
 @onready var mutantSpawnArea: Area3D = $combat_logic/zone3/mutantSpawner/Area3D
 @onready var mutantSpawnShape: CollisionShape3D = $combat_logic/zone3/mutantSpawner/Area3D/CollisionShape3D
+@onready var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
+@onready var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()
+
 
 var firstDoorOpen:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
 	freezeEnemies(zombiesFloor1)
-	var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()
 	freezeEnemies(zombiesFloor2)
+	CombatManager.clear_zombies()
+	CombatManager.add_zombie(zombiesFloor1)
+	CombatManager.add_zombie(zombiesFloor2)
+	
 	player.global_position = playerSpawn.global_position
 	trainWaitTimer.start()
 	posicion_inicial_tren = train.global_position
@@ -48,7 +53,8 @@ func _ready() -> void:
 	CombatManager.active_zombies = 0
 	if not CombatManager.is_connected("zombies1_finished", Callable(self, "_triggerSecondZombieCombat")):
 		CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
-
+	#array_zombies_despawneable.clear()
+	
 
 func trainPass() -> void:
 	var distancia: float = posicion_inicial_tren.distance_to(posicion_objetivo_tren)
@@ -122,6 +128,7 @@ func _on_mutant_trigger_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
 		CombatMusicBuildup.play()
 		combatActive = true
+		CombatManager.clear_zombies()
 		var musicTween: Tween = get_tree().create_tween()
 		musicTween.tween_property(NormalMusic, "volume_db", -80, 2.0)
 		musicTween.tween_callback(Callable(NormalMusic, "stop"))
@@ -152,12 +159,12 @@ func _on_combat_buildup_finished() -> void:
 func _on_first_zombie_trigger_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
 		$combat_logic/FirstZoneZombies/FirstFloor/FirstZombieTrigger.set_deferred("monitoring", false)
-		var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
+		#var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
 		CombatManager.startFirstFight(zombiesFloor1)
 		
 
 func _triggerSecondZombieCombat() -> void:
-	var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()
+	#var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()
 	openFirstDoor()
 	CombatManager.startSecondFight(zombiesFloor2)
 

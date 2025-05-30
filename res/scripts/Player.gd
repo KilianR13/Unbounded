@@ -49,6 +49,7 @@ const DEADZONE: float = 0.3
 
 # Custom gravity setting to make it feel a bit more snappier.
 var gravity: int = 11
+var fallingGravity: int = 22
 
 enum WeaponState {
 	ULTIMATE,
@@ -240,7 +241,10 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if !is_on_floor() and !on_ladder:
-		velocity.y -= gravity * delta
+		if velocity.y > 0:
+			velocity.y -= gravity * delta
+		else:
+			velocity.y -= fallingGravity * delta
 		if $WalkSound.playing:
 			$WalkSound.stop()
 	elif is_on_floor():
