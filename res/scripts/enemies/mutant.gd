@@ -28,6 +28,7 @@ var ai_offset: float = 0.0
 
 func _ready() -> void:
 	player = get_node(player_path)
+	look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
 	state_machine = anim_tree.get("parameters/playback")
 	ai_offset = randf_range(0.0, ai_update_interval)
 	set_physics_process(false)
