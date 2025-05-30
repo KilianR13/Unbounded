@@ -61,7 +61,7 @@ func _physics_process(_delta: float) -> void:
 		await get_tree().create_timer(0.1).timeout
 		can_attack = true
 	else:
-		anim_tree.set("parameters/conditions/chase", true)		
+		anim_tree.set("parameters/conditions/chase", true)
 	move_and_slide()
 	
 func _update_ai_logic() -> void:

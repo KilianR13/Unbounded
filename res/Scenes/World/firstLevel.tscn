@@ -718,7 +718,7 @@ environment = ExtResource("2_v7imq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.8548)
 
 [node name="playerSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.0541, 20, 2.9548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.054, 0, 28.955)
 
 [node name="basicBuilding_copypaste" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 52)
@@ -21189,29 +21189,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, -10)
 
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 13)
-
 [node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 13)
 
 [node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 13)
@@ -21282,9 +21261,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 0, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("4_r0glt")]
-transform = Transform3D(1.25211e-08, 0, -1.05, 0, 1, 0, 1.05, 0, 1.25211e-08, -14, 0, 12)
-
 [node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular" instance=ExtResource("4_r0glt")]
 transform = Transform3D(1.05, 0, 5.84181e-08, 0, 1, 0, -5.84181e-08, 0, 1.05, 8, 0, 12)
 
@@ -21329,30 +21305,6 @@ transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -12, 2.75, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -10, 2.75, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -8, 2.75, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -6, 2.75, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -4, 2.75, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -2, 2.75, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 2, 2.75, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 0, 2.75, 13)
 
 [node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
 transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 4, 2.75, 13)
@@ -21423,9 +21375,6 @@ transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("5_ofppm")]
 transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 1.50996e-07, -4.37114e-08, -12, 2.75, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("4_r0glt")]
-transform = Transform3D(-1.05, 8.74228e-08, 0, -9.17939e-08, -1, 0, 0, 0, 1.05, -14, 2.75, 12)
-
 [node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped" instance=ExtResource("4_r0glt")]
 transform = Transform3D(4.5897e-08, -3.82137e-15, 1.05, -9.17939e-08, -1, 0, 1.05, -8.74228e-08, -4.5897e-08, 8, 2.75, 12)
 
@@ -21470,36 +21419,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 13)
-
-[node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 13)
-
-[node name="wall21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 13)
 
 [node name="wall22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
@@ -21564,9 +21483,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 0, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("4_r0glt")]
-transform = Transform3D(1.25211e-08, 0, -1.05, 0, 1, 0, 1.05, 0, 1.25211e-08, -14, 0, 12)
-
 [node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular2" instance=ExtResource("4_r0glt")]
 transform = Transform3D(1.05, 0, 5.84181e-08, 0, 1, 0, -5.84181e-08, 0, 1.05, 8, 0, 12)
 
@@ -21578,9 +21494,6 @@ transform = Transform3D(-1.05, 0, 3.33758e-08, 0, 1, 0, -3.33758e-08, 0, -1.05, 
 
 [node name="wallsFlipped2" type="Node3D" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7, 0)
-
-[node name="wall1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 10)
 
 [node name="wall2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 8)
@@ -21611,39 +21524,6 @@ transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -12, 2.75, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -10, 2.75, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -8, 2.75, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -6, 2.75, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -4, 2.75, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -2, 2.75, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 2, 2.75, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 0, 2.75, 13)
-
-[node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 4, 2.75, 13)
-
-[node name="wall21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 6, 2.75, 13)
-
-[node name="wall22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 10)
 
 [node name="wall23" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 8)
@@ -21705,12 +21585,6 @@ transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("5_ofppm")]
 transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 1.50996e-07, -4.37114e-08, -12, 2.75, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("4_r0glt")]
-transform = Transform3D(-1.05, 8.74228e-08, 0, -9.17939e-08, -1, 0, 0, 0, 1.05, -14, 2.75, 12)
-
-[node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("4_r0glt")]
-transform = Transform3D(4.5897e-08, -3.82137e-15, 1.05, -9.17939e-08, -1, 0, 1.05, -8.74228e-08, -4.5897e-08, 8, 2.75, 12)
-
 [node name="wall-corner3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped2" instance=ExtResource("4_r0glt")]
 transform = Transform3D(1.05, -8.74228e-08, -9.17939e-08, -9.17939e-08, -1, -3.26117e-22, -9.17939e-08, 7.64274e-15, -1.05, 8, 2.75, -12)
 
@@ -21719,9 +21593,6 @@ transform = Transform3D(4.5897e-08, -3.82137e-15, -1.05, -9.17939e-08, -1, 0, -1
 
 [node name="wallsRegular3" type="Node3D" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.4, 0)
-
-[node name="wall1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, 10)
 
 [node name="wall2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, 8)
@@ -21752,39 +21623,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 13)
-
-[node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 13)
-
-[node name="wall21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 13)
-
-[node name="wall22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
 
 [node name="wall23" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
@@ -21846,12 +21684,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 0, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("4_r0glt")]
-transform = Transform3D(1.25211e-08, 0, -1.05, 0, 1, 0, 1.05, 0, 1.25211e-08, -14, 0, 12)
-
-[node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("4_r0glt")]
-transform = Transform3D(1.05, 0, 5.84181e-08, 0, 1, 0, -5.84181e-08, 0, 1.05, 8, 0, 12)
-
 [node name="wall-corner3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular3" instance=ExtResource("4_r0glt")]
 transform = Transform3D(-1.04315e-07, 0, 1.05, 0, 1, 0, -1.05, 0, -1.04315e-07, 8, 0, -12)
 
@@ -21860,9 +21692,6 @@ transform = Transform3D(-1.05, 0, 3.33758e-08, 0, 1, 0, -3.33758e-08, 0, -1.05, 
 
 [node name="wallsFlipped3" type="Node3D" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.4, 0)
-
-[node name="wall1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 10)
 
 [node name="wall2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 8)
@@ -21893,39 +21722,6 @@ transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -12, 2.75, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -10, 2.75, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -8, 2.75, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -6, 2.75, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -4, 2.75, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -2, 2.75, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 2, 2.75, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 0, 2.75, 13)
-
-[node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 4, 2.75, 13)
-
-[node name="wall21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 6, 2.75, 13)
-
-[node name="wall22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 10)
 
 [node name="wall23" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 8)
@@ -21987,12 +21783,6 @@ transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("5_ofppm")]
 transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 1.50996e-07, -4.37114e-08, -12, 2.75, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("4_r0glt")]
-transform = Transform3D(-1.05, 8.74228e-08, 0, -9.17939e-08, -1, 0, 0, 0, 1.05, -14, 2.75, 12)
-
-[node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("4_r0glt")]
-transform = Transform3D(4.5897e-08, -3.82137e-15, 1.05, -9.17939e-08, -1, 0, 1.05, -8.74228e-08, -4.5897e-08, 8, 2.75, 12)
-
 [node name="wall-corner3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped3" instance=ExtResource("4_r0glt")]
 transform = Transform3D(1.05, -8.74228e-08, -9.17939e-08, -9.17939e-08, -1, -3.26117e-22, -9.17939e-08, 7.64274e-15, -1.05, 8, 2.75, -12)
 
@@ -22001,12 +21791,6 @@ transform = Transform3D(4.5897e-08, -3.82137e-15, -1.05, -9.17939e-08, -1, 0, -1
 
 [node name="wallsRegular4" type="Node3D" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.1, 0)
-
-[node name="wall1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, 10)
-
-[node name="wall2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, 8)
 
 [node name="wall3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, 6)
@@ -22034,42 +21818,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 13)
-
-[node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 13)
-
-[node name="wall21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 13)
-
-[node name="wall22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
-
-[node name="wall23" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
 
 [node name="wall24" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
@@ -22128,12 +21876,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 0, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("4_r0glt")]
-transform = Transform3D(1.25211e-08, 0, -1.05, 0, 1, 0, 1.05, 0, 1.25211e-08, -14, 0, 12)
-
-[node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("4_r0glt")]
-transform = Transform3D(1.05, 0, 5.84181e-08, 0, 1, 0, -5.84181e-08, 0, 1.05, 8, 0, 12)
-
 [node name="wall-corner3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsRegular4" instance=ExtResource("4_r0glt")]
 transform = Transform3D(-1.04315e-07, 0, 1.05, 0, 1, 0, -1.05, 0, -1.04315e-07, 8, 0, -12)
 
@@ -22142,12 +21884,6 @@ transform = Transform3D(-1.05, 0, 3.33758e-08, 0, 1, 0, -3.33758e-08, 0, -1.05, 
 
 [node name="wallsFlipped4" type="Node3D" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.1, 0)
-
-[node name="wall1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 10)
-
-[node name="wall2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 8)
 
 [node name="wall3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, 6)
@@ -22175,42 +21911,6 @@ transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2
 
 [node name="wall11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, -15, 2.75, -10)
-
-[node name="wall12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -12, 2.75, 13)
-
-[node name="wall13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -10, 2.75, 13)
-
-[node name="wall14" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -8, 2.75, 13)
-
-[node name="wall15" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -6, 2.75, 13)
-
-[node name="wall16" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -4, 2.75, 13)
-
-[node name="wall17" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, -2, 2.75, 13)
-
-[node name="wall18" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 2, 2.75, 13)
-
-[node name="wall19" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 0, 2.75, 13)
-
-[node name="wall20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 4, 2.75, 13)
-
-[node name="wall21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(4.37114e-08, -6.60024e-15, 1, -1.50996e-07, -1, 0, 1, -1.50996e-07, -4.37114e-08, 6, 2.75, 13)
-
-[node name="wall22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 10)
-
-[node name="wall23" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
-transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 8)
 
 [node name="wall24" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, 9, 2.75, 6)
@@ -22269,20 +21969,11 @@ transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 
 [node name="wall42" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("5_ofppm")]
 transform = Transform3D(4.37114e-08, -6.60024e-15, -1, -1.50996e-07, -1, 0, -1, 1.50996e-07, -4.37114e-08, -12, 2.75, -13)
 
-[node name="wall-corner1" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("4_r0glt")]
-transform = Transform3D(-1.05, 8.74228e-08, 0, -9.17939e-08, -1, 0, 0, 0, 1.05, -14, 2.75, 12)
-
-[node name="wall-corner2" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("4_r0glt")]
-transform = Transform3D(4.5897e-08, -3.82137e-15, 1.05, -9.17939e-08, -1, 0, 1.05, -8.74228e-08, -4.5897e-08, 8, 2.75, 12)
-
 [node name="wall-corner3" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("4_r0glt")]
 transform = Transform3D(1.05, -8.74228e-08, -9.17939e-08, -9.17939e-08, -1, -3.26117e-22, -9.17939e-08, 7.64274e-15, -1.05, 8, 2.75, -12)
 
 [node name="wall-corner4" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15/wallsFlipped4" instance=ExtResource("4_r0glt")]
 transform = Transform3D(4.5897e-08, -3.82137e-15, -1.05, -9.17939e-08, -1, 0, -1.05, 8.74228e-08, -4.5897e-08, -14, 2.75, -12)
-
-[node name="border-corner10" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("15_usld0")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 8, 18.8, 12)
 
 [node name="border-corner11" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("15_usld0")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 18.8, -12)
@@ -22290,17 +21981,11 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 18.
 [node name="border-corner12" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("15_usld0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -14, 18.8, -12)
 
-[node name="border-corner13" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("15_usld0")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -14, 18.8, 12)
-
 [node name="border20" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("14_nddev")]
 transform = Transform3D(1, 0, -7.15199e-07, 0, 1, 0, 6.35732e-08, 0, 11.25, 8.95, 18.8, 0.200001)
 
 [node name="border21" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("14_nddev")]
 transform = Transform3D(-1, 0, -2.68308e-07, 0, 1, 0, 2.38496e-08, 0, -11.25, -14.95, 18.8, 0.200001)
-
-[node name="border22" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("14_nddev")]
-transform = Transform3D(6.7561e-08, 0, -10.125, 0, 1, 0, 1, 0, 6.84055e-07, -2.95, 18.8, 12.95)
 
 [node name="border23" parent="LevelGeometry/SecondZone/TrainTransitionZone/BigBuildingCopyPasta15" instance=ExtResource("14_nddev")]
 transform = Transform3D(-1.54984e-07, 0, 10.125, 0, 1, 0, -1, 0, -1.56921e-06, -2.95, 18.8, -12.95)
@@ -39275,29 +38960,29 @@ occluder = ExtResource("38_jhket")
 [node name="otherDecoration" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="otherDecoration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 477, 1500, 3358)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 477, 2500, 3358)
 material_override = SubResource("StandardMaterial3D_lpg2m")
-size = Vector3(10, 3000, 10)
+size = Vector3(10, 5000, 10)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="otherDecoration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2082, 1500, 211)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2082, 2500, 211)
 material_override = SubResource("StandardMaterial3D_lpg2m")
-size = Vector3(10, 3000, 10)
+size = Vector3(10, 5000, 10)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="otherDecoration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2901, 1500, -2123)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2901, 2500, -2123)
 material_override = SubResource("StandardMaterial3D_lpg2m")
-size = Vector3(10, 3000, 10)
+size = Vector3(10, 5000, 10)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="otherDecoration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1485, 1500, 572)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1485, 2500, 572)
 material_override = SubResource("StandardMaterial3D_lpg2m")
-size = Vector3(10, 3000, 10)
+size = Vector3(10, 5000, 10)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="otherDecoration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1614, 1500, 1879)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1614, 2500, 1879)
 material_override = SubResource("StandardMaterial3D_lpg2m")
-size = Vector3(10, 3000, 10)
+size = Vector3(10, 5000, 10)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="otherDecoration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1239, 1500, -3194)
