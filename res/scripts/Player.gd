@@ -92,6 +92,7 @@ var has_used_ultimate: bool = false
 
 
 func _ready() -> void:
+	finished_loading = false
 	for child: Node in camera.get_children():
 		# Solo conectar si el nodo tiene las señales
 		if child.has_signal("criticalHit") and child.has_signal("shotFinished"):
@@ -118,12 +119,7 @@ func _ready() -> void:
 	landing_sound_enabled = true
 	finished_loading = true
 	pauseMenu.connect("gameUnpaused", Callable(self, "_unpauseGame"))
-	
 
-func _unpauseGame() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pauseMenu.visible = false
-	get_tree().paused = false
 
 func _unhandled_input(event: InputEvent)-> void:
 	if !finished_loading or !isAlive:
@@ -133,39 +129,41 @@ func _unhandled_input(event: InputEvent)-> void:
 		playerHead.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-		
-	if Input.is_action_just_pressed("pause"):
-		if !gamePaused:
-			pauseMenu.visible = true
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			get_tree().paused = true
-		else:
-			_unpauseGame()
-	
-	# Lógica de cambio de armas
 
+	# Lógica de cambio de armas
 	if Input.is_action_just_pressed("swapWeapon1"):
-		if current_weapon_state != WeaponState.WEAPON_PISTOL:
-			await changeWeapons(pistola, WeaponState.WEAPON_PISTOL)
-			emit_signal("weapon_changed", "Pistol", pistolAmmo)
+		_switch_weapon_state(WeaponState.WEAPON_PISTOL)
 	elif Input.is_action_just_pressed("swapWeapon2"):
-		if current_weapon_state != WeaponState.WEAPON_RIFLE:
-			await changeWeapons(rifle, WeaponState.WEAPON_RIFLE)
-			emit_signal("weapon_changed", "Rifle", rifleAmmo)
+		_switch_weapon_state(WeaponState.WEAPON_RIFLE)
 	elif Input.is_action_just_pressed("swapWeapon3"):
-		if current_weapon_state != WeaponState.WEAPON_SPECIAL:
-			await changeWeapons(DBShotgun, WeaponState.WEAPON_SPECIAL)
-			DBShotgun.checkForReload()
-			emit_signal("weapon_changed", "DBShotgun", specialAmmo)
+		_switch_weapon_state(WeaponState.WEAPON_SPECIAL)
 	elif Input.is_action_just_pressed("swapWeapon4"):
-		if current_weapon_state != WeaponState.WEAPON_HEAVY:
-			await changeWeapons(GlassCannon, WeaponState.WEAPON_HEAVY)
-			emit_signal("weapon_changed", "GlassCannon", heavyAmmo)
+		_switch_weapon_state(WeaponState.WEAPON_HEAVY)
 	elif Input.is_action_just_pressed("useUltimate"):
 		if current_weapon_state != WeaponState.ULTIMATE and ultimateCharge == 100:
 			has_used_ultimate = true
-			await changeWeapons(JudgeRevolver, WeaponState.ULTIMATE)
-			emit_signal("weapon_changed", "Ultimate", ultimateAmmo)
+			_switch_weapon_state(WeaponState.ULTIMATE)
+	
+	var weapon_list: Array = [
+		WeaponState.WEAPON_PISTOL,
+		WeaponState.WEAPON_RIFLE,
+		WeaponState.WEAPON_SPECIAL,
+		WeaponState.WEAPON_HEAVY
+	]
+	if event is InputEventMouseButton:
+		var mb_event: InputEventMouseButton = event as InputEventMouseButton
+		if mb_event.pressed:
+			var index: int = weapon_list.find(current_weapon_state)
+			if index == -1:
+				index = 0
+
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and index < weapon_list.size() - 1:
+				var next_state: int = weapon_list[index + 1]
+				await _switch_weapon_state(next_state)
+
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP and index > 0:
+				var prev_state: int = weapon_list[index - 1]
+				await _switch_weapon_state(prev_state)
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and isAlive:
@@ -182,7 +180,29 @@ func _unhandled_input(event: InputEvent)-> void:
 			
 		jump_count += 1
 
-	
+func _switch_weapon_state(state: int) -> void:
+	if current_weapon_state == state:
+		return
+
+	match state:
+		WeaponState.WEAPON_PISTOL:
+			await changeWeapons(pistola, state)
+			emit_signal("weapon_changed", "Pistol", pistolAmmo)
+		WeaponState.WEAPON_RIFLE:
+			await changeWeapons(rifle, state)
+			emit_signal("weapon_changed", "Rifle", rifleAmmo)
+		WeaponState.WEAPON_SPECIAL:
+			await changeWeapons(DBShotgun, state)
+			DBShotgun.checkForReload()
+			emit_signal("weapon_changed", "DBShotgun", specialAmmo)
+		WeaponState.WEAPON_HEAVY:
+			await changeWeapons(GlassCannon, state)
+			emit_signal("weapon_changed", "GlassCannon", heavyAmmo)
+		WeaponState.ULTIMATE:
+			await changeWeapons(JudgeRevolver, state)
+			emit_signal("weapon_changed", "Ultimate", ultimateAmmo)
+
+	current_weapon_state = state
 
 func _process(delta: float) -> void:
 	if !finished_loading or !isAlive:
@@ -216,6 +236,8 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if !finished_loading:
+		return
 	
 	if !is_on_floor() and !on_ladder:
 		velocity.y -= gravity * delta
@@ -225,8 +247,6 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 	
 	if isAlive:
-		
-	
 		if is_on_floor() and not was_on_floor and landing_sound_enabled:
 			$Jump_LandSound.play()
 		

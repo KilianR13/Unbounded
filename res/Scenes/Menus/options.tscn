@@ -556,11 +556,11 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
 
-[node name="Controls" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
+[node name="Gameplay" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -569,17 +569,17 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
 
-[node name="VideoOptionTop" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer"]
+[node name="VideoOptionTop" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer/VideoOptionTop"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionTop"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -587,20 +587,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer/VideoOptionTop/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionTop/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer/VideoOptionTop/HBoxContainer"]
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionTop/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VideoOptionBottom" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer"]
+[node name="VideoOptionBottom" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer/VideoOptionBottom"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionBottom"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -608,15 +608,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer/VideoOptionBottom/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionBottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer/VideoOptionBottom/HBoxContainer"]
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionBottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Controls/VBoxContainer"]
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0

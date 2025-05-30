@@ -2,7 +2,7 @@ extends Node3D
 
 var damage: int = 2
 var critMultiplier: int = 2
-var maxAmmo: int = 200
+var maxAmmo: int = 200 * 2
 
 signal shotFinished
 signal criticalHit(superCharge: int)

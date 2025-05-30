@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpq7w2hy3nm82"]
+[gd_scene load_steps=15 format=3 uid="uid://dpq7w2hy3nm82"]
 
 [ext_resource type="PackedScene" uid="uid://cr3el4u37u8ip" path="res://res/models/world/Santo Spirito Fountain.glb" id="1_6ry2o"]
+[ext_resource type="AudioStream" uid="uid://ijr4803617j1" path="res://res/sfx/fountainWaterSFX.wav" id="2_c3dy7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk16a"]
 resource_name = "mat22"
@@ -11,6 +12,8 @@ emission_enabled = true
 resource_name = "mat15"
 albedo_color = Color(0.815251, 0.854306, 0.865042, 1)
 emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cf0e0"]
 resource_name = "mat16"
@@ -257,3 +260,10 @@ shape = SubResource("CylinderShape3D_uhym5")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.079326, 0.1, 0.0252545)
 shape = SubResource("CylinderShape3D_olonr")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("2_c3dy7")
+volume_db = 8.0
+autoplay = true
+max_distance = 100.0
+bus = &"WorldSFX"

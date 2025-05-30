@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://e03yx2ymkxms"]
+[gd_scene load_steps=130 format=3 uid="uid://e03yx2ymkxms"]
 
 [ext_resource type="Script" path="res://res/Scenes/World/firstLevel.gd" id="1_54ki8"]
 [ext_resource type="PackedScene" uid="uid://h2d7jnxcsmt1" path="res://res/Scenes/Player/player.tscn" id="1_fd6uq"]
@@ -36,11 +36,14 @@
 [ext_resource type="PackedScene" uid="uid://cqu5cb225q5gb" path="res://res/Scenes/World/lightlampBright.tscn" id="30_1gbep"]
 [ext_resource type="AudioStream" uid="uid://wxvu3536hlhu" path="res://res/sfx/music/Combat_Loop.wav" id="31_w6dd7"]
 [ext_resource type="AudioStream" uid="uid://ikrkeb5bff83" path="res://res/sfx/music/Combat_Buildup.wav" id="32_ondn4"]
+[ext_resource type="Texture2D" uid="uid://bwcgknd6x1gt4" path="res://res/textures/sandy-artificial-grass-1498-mm-architextures.jpg" id="33_67htb"]
 [ext_resource type="PackedScene" uid="uid://bx7cxbm5k174a" path="res://res/Scenes/Enemies/zombie_enemy.tscn" id="35_uskfi"]
 [ext_resource type="PackedScene" uid="uid://b03cbdu02gvmd" path="res://res/models/world/childrenParkStructure.glb" id="36_v7v3g"]
 [ext_resource type="PackedScene" uid="uid://ds7jhqo8f8uri" path="res://res/models/world/parkBench.glb" id="37_llnaw"]
 [ext_resource type="ArrayOccluder3D" uid="uid://opr5j8wvgdd4" path="res://res/Scenes/World/door.occ" id="38_jhket"]
 [ext_resource type="PackedScene" uid="uid://dpq7w2hy3nm82" path="res://res/Scenes/World/coolFountain.tscn" id="38_nxg6f"]
+[ext_resource type="PackedScene" uid="uid://cda430gycgqdg" path="res://res/models/world/Trash Container Open.glb" id="39_si3gd"]
+[ext_resource type="PackedScene" uid="uid://by7f6t2wmn542" path="res://res/models/world/Tree.glb" id="40_7b4bu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3nle0"]
 size = Vector3(13, 0.5, 100)
@@ -441,6 +444,10 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 albedo_texture = ExtResource("4_b058n")
 uv1_scale = Vector3(25, 25, 25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q21lg"]
+albedo_texture = ExtResource("33_67htb")
+uv1_scale = Vector3(24, 24, 24)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_dyu57"]
 size = Vector3(24, 18.5, 26)
 
@@ -605,6 +612,13 @@ size = Vector3(9.2, 3, 2.7)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1w518"]
 size = Vector3(0.6, 0.13, 0.2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_lmclp"]
+size = Vector3(2.7, 2.5, 1.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c65o3"]
+height = 1.2
+radius = 0.15
+
 [sub_resource type="Animation" id="Animation_sqcbi"]
 length = 0.001
 
@@ -650,7 +664,7 @@ environment = ExtResource("2_v7imq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.8548)
 
 [node name="playerSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0541, 0, 8.9548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.0541, 21, 8.9548)
 
 [node name="basicBuilding_copypaste" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 52)
@@ -989,8 +1003,8 @@ shape = SubResource("BoxShape3D_fgulw")
 
 [node name="mutantTrigger" type="Area3D" parent="combat_logic/zone3/mutantSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0.6, 0)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 monitoring = false
 monitorable = false
 
@@ -1239,6 +1253,12 @@ transform = Transform3D(9, 0, 0, 0, 1, 0, 0, 0, 26, 25.5, 7.2, 5)
 material_override = SubResource("StandardMaterial3D_n7567")
 use_collision = true
 size = Vector3(1, 0.2, 1)
+
+[node name="fireLight2" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Floors/balcony1" instance=ExtResource("21_tvobq")]
+transform = Transform3D(0.111111, 0, 0, 0, 0.9, 0, 0, 0, 0.0384615, -0.0555556, 0.1, 0.307692)
+
+[node name="fireLight3" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Floors/balcony1" instance=ExtResource("21_tvobq")]
+transform = Transform3D(0.111111, 0, 0, 0, 0.9, 0, 0, 0, 0.0384615, -0.0555556, 0.1, -0.307692)
 
 [node name="Walls" type="Node3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90735e-06, 0, -4.76837e-07)
@@ -22256,14 +22276,37 @@ collision_mask = 3
 size = Vector3(150, 0.1, 50)
 material = SubResource("StandardMaterial3D_re2gm")
 
+[node name="Grass" type="CSGBox3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, 0, 0)
+size = Vector3(104, 0.101, 51)
+material = SubResource("StandardMaterial3D_q21lg")
+
 [node name="lamp" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112, 0, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115, 0, -9)
 
 [node name="lamp2" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115, 0, 6)
 
 [node name="lamp3" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112, 0, 21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115, 0, 21)
+
+[node name="lamp4" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84, 0, -9)
+
+[node name="lamp5" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84, 0, 21)
+
+[node name="lamp6" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53, 0, -9)
+
+[node name="lamp7" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53, 0, 21)
+
+[node name="lamp8" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -9)
+
+[node name="lamp9" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("30_1gbep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 21)
 
 [node name="suroundingBuildings" type="Node3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D"]
 
@@ -37428,27 +37471,24 @@ mesh = SubResource("TextMesh_0v4tp")
 skeleton = NodePath("../../../..")
 
 [node name="childrenParkStructure" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("36_v7v3g")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -104, 0, 18)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -96, 0, 18)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/childrenParkStructure"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/childrenParkStructure/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, 3.05)
 shape = SubResource("BoxShape3D_br7uv")
-disabled = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/childrenParkStructure/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, -2.95)
 shape = SubResource("BoxShape3D_br7uv")
-disabled = true
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/childrenParkStructure/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0.0500002)
 shape = SubResource("BoxShape3D_8la4i")
-disabled = true
 
 [node name="ParkBench" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("37_llnaw")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -108, 0, 1)
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -115, 0, 1)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench"]
 
@@ -37456,14 +37496,71 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -108, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0722595, 0.052832)
 shape = SubResource("BoxShape3D_1w518")
 
+[node name="ParkBench3" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("37_llnaw")]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -115, 0, 11)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0722595, 0.052832)
+shape = SubResource("BoxShape3D_1w518")
+
+[node name="ParkBench4" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("37_llnaw")]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -115, 0, 16)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0722595, 0.052832)
+shape = SubResource("BoxShape3D_1w518")
+
+[node name="ParkBench2" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("37_llnaw")]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -115, 0, -4)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/ParkBench2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0722595, 0.052832)
+shape = SubResource("BoxShape3D_1w518")
+
 [node name="Santo Spirito Fountain" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("38_nxg6f")]
-transform = Transform3D(11.8682, 0, 1.77371, 0, 10, 0, -1.77371, 0, 11.8682, -100, 1.45355, 5.97728)
+transform = Transform3D(11.8682, 0, 1.77371, 0, 5, 0, -1.77371, 0, 11.8682, -100, 0.75, 6)
 
-[node name="fireLight2" parent="LevelGeometry/ThirdZone" instance=ExtResource("21_tvobq")]
-transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1, -166, 7.3, 13)
+[node name="Trash" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("39_si3gd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -103, 0, 30)
 
-[node name="fireLight3" parent="LevelGeometry/ThirdZone" instance=ExtResource("21_tvobq")]
-transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1, -166, 7.3, -3)
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Trash"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Trash/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0499954, 0.75, -0.0499992)
+shape = SubResource("BoxShape3D_lmclp")
+
+[node name="Trash2" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("39_si3gd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103, 0, -18)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Trash2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Trash2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0499954, 0.75, -0.0499992)
+shape = SubResource("BoxShape3D_lmclp")
+
+[node name="Tree" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("40_7b4bu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -108, 5, -6.5)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Tree"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Tree/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.625, 0)
+shape = SubResource("CylinderShape3D_c65o3")
+
+[node name="Tree2" parent="LevelGeometry/ThirdZone/NavigationRegion3D" instance=ExtResource("40_7b4bu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -108, 5, 18.5)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Tree2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/Tree2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.625, 0)
+shape = SubResource("CylinderShape3D_c65o3")
 
 [node name="specialOcclusionNodes" type="Node3D" parent="."]
 

@@ -2,7 +2,7 @@ extends Node3D
 
 var damage: int = 5
 var critMultiplier: int = 2
-var maxAmmo: int = 50
+var maxAmmo: int = 50 * 2
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 signal shotFinished

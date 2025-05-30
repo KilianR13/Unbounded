@@ -1694,182 +1694,227 @@ script = ExtResource("1_41k4x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="group1777393000" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_54lgy")
 skeleton = NodePath("")
 
 [node name="group842207604" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_x2rp7")
 skeleton = NodePath("")
 
 [node name="group1444106915" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_h3yeh")
 skeleton = NodePath("")
 
 [node name="group135960578" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_8yf0k")
 skeleton = NodePath("")
 
 [node name="group1510567094" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_hshj3")
 skeleton = NodePath("")
 
 [node name="group1115626762" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_uuk03")
 skeleton = NodePath("")
 
 [node name="group1099646593" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_04rc8")
 skeleton = NodePath("")
 
 [node name="group918554143" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_xhoja")
 skeleton = NodePath("")
 
 [node name="group52382891" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_47glu")
 skeleton = NodePath("")
 
 [node name="group935516115" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_6ir01")
 skeleton = NodePath("")
 
 [node name="group1922152000" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_qxe0j")
 skeleton = NodePath("")
 
 [node name="group2057356538" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_aet5h")
 skeleton = NodePath("")
 
 [node name="group1142974232" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_unpwi")
 skeleton = NodePath("")
 
 [node name="group763080554" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_xqa44")
 skeleton = NodePath("")
 
 [node name="group1393133119" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_sppdc")
 skeleton = NodePath("")
 
 [node name="group1168073469" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_417me")
 skeleton = NodePath("")
 
 [node name="group1191133670" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_srhrn")
 skeleton = NodePath("")
 
 [node name="group354881602" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_80vbp")
 skeleton = NodePath("")
 
 [node name="group1037674653" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_wj52q")
 skeleton = NodePath("")
 
 [node name="group628841216" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_f2ian")
 skeleton = NodePath("")
 
 [node name="group1803587080" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_dw4nr")
 skeleton = NodePath("")
 
 [node name="group1597803463" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_irs27")
 skeleton = NodePath("")
 
 [node name="group1486182468" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_42sl3")
 skeleton = NodePath("")
 
 [node name="group1902389874" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_fc7vf")
 skeleton = NodePath("")
 
 [node name="group1446190826" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_8vbqr")
 skeleton = NodePath("")
 
 [node name="group616989639" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_5y0tq")
 skeleton = NodePath("")
 
 [node name="group137228285" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_7msxy")
 skeleton = NodePath("")
 
 [node name="group497385985" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_65s3c")
 skeleton = NodePath("")
 
 [node name="group2068609645" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_tncwo")
 skeleton = NodePath("")
 
 [node name="group697440236" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_woat5")
 skeleton = NodePath("")
 
 [node name="group608492224" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_7tele")
 skeleton = NodePath("")
 
 [node name="group1212731138" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_cvcia")
 skeleton = NodePath("")
 
 [node name="group2067869812" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_hcr7g")
 skeleton = NodePath("")
 
 [node name="group496241409" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_q8jn3")
 skeleton = NodePath("")
 
 [node name="group1240724460" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_8kkin")
 skeleton = NodePath("")
 
 [node name="group640279416" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_pmft1")
 skeleton = NodePath("")
 
 [node name="group1494670281" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_mtl55")
 skeleton = NodePath("")
 
 [node name="group1125165645" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_1kt55")
 skeleton = NodePath("")
 
 [node name="group739833" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_tu76v")
 skeleton = NodePath("")
 
 [node name="group1011786200" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_as0uy")
 skeleton = NodePath("")
 
 [node name="group1224994220" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_10jk5")
 skeleton = NodePath("")
 
 [node name="group84442875" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_7m2b3")
 skeleton = NodePath("")
 
 [node name="group1143055742" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_84lx2")
 skeleton = NodePath("")
 
 [node name="group1031863260" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_lothe")
 skeleton = NodePath("")
 
 [node name="group1014599259" type="MeshInstance3D" parent="GlassCannon"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_ofjvk")
 skeleton = NodePath("")
 

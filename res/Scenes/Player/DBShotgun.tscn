@@ -92,6 +92,9 @@ script = ExtResource("2_dtvvs")
 [node name="RootNode" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 
+[node name="Shotgun_doubleBarrel" parent="RootNode" index="0"]
+cast_shadow = 0
+
 [node name="Barrel" type="Node3D" parent="RootNode" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -1.18)
 

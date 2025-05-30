@@ -64,7 +64,7 @@ func _on_slider_changed(value: float, slider_name: String) -> void:
 
 func on_accept_pressed() -> void:
 	# Guardar configuración en disco desde SoundManager
-	#SoundManager.save_settings()
+	SoundManager.save_settings()
 	save_video_settings()
 
 func get_slider_by_name(name: String) -> HSlider:
