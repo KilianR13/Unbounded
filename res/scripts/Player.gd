@@ -240,6 +240,10 @@ func _physics_process(delta: float) -> void:
 	if !finished_loading:
 		return
 	
+	var speed_mps: float = velocity.length()
+	var speed_kmh: float = speed_mps * 3.6
+	print("Current speed: ", speed_kmh, " km/h")
+	
 	if !is_on_floor() and !on_ladder:
 		if velocity.y > 0:
 			velocity.y -= gravity * delta
@@ -292,6 +296,11 @@ func _physics_process(delta: float) -> void:
 						currentWeapon.shoot(hitscan_RayCast)
 						specialAmmo -= 2
 						emit_signal("ammo_updated", "DBShotgun", specialAmmo)
+						if !is_on_floor():
+							var recoilDirection: Vector3 = (hitscan_RayCast.global_transform.basis.z).normalized()
+							var recoilStrength: float = currentWeapon.recoil
+							velocity += recoilDirection * recoilStrength
+							pass
 				WeaponState.WEAPON_HEAVY:
 					if heavyAmmo > 0:
 						currentWeapon.shoot(hitscan_RayCast)

@@ -182,6 +182,7 @@ func freezeEnemies(enemies: Array) -> void:
 				enemy.get_node("AnimationTree").active = false
 			if has_node("CollisionShape3D"):
 				enemy.get_node("CollisionShape3D").disabled = true
+			enemy.canBeDamaged = false
 
 func stageFinished() -> void:
 	CombatManager.levelObtainedScore = CombatManager.score

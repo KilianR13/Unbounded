@@ -48,7 +48,7 @@ func _real_shoot(raycast: RayCast3D) -> void:
 		var query: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
 		query.shape = shape
 		query.transform = Transform3D(Basis(), hit_position)
-		query.collision_mask = 1 << 0  # Capa 1 para cuerpos físicos
+		query.collision_mask = 1 << 1  # Capa 1 para cuerpos físicos
 		query.collide_with_areas = false
 		query.collide_with_bodies = true
 
@@ -58,8 +58,10 @@ func _real_shoot(raycast: RayCast3D) -> void:
 			var body: Object = result["collider"]
 			if body is CharacterBody3D and body.is_in_group("enemy"):
 				var enemy: CharacterBody3D = body as CharacterBody3D
-				var is_headshot: bool = false  # No hay precisión de cabeza en AOE
-				enemy.receive_hit(damage, critMultiplier, is_headshot)
+				enemy.receive_hit(damage, critMultiplier, false)
+			if body is CharacterBody3D and body.is_in_group("player"):
+				var player: CharacterBody3D = body as CharacterBody3D
+				player.recieve_hit(40)
 	raycast.enabled = false
 	raycast.set_collide_with_bodies(false)
 	emit_signal("shotFinished")

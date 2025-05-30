@@ -47,7 +47,6 @@ func apply_volumes() -> void:
 
 func save_settings() -> void:
 	var config: ConfigFile = ConfigFile.new()
-	print("saving")
 	for bus_name: String in BUS_NAMES.values():
 		config.set_value("audio", bus_name, volumes[bus_name])
 		config.save(CONFIG_PATH)

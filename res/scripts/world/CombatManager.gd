@@ -28,7 +28,6 @@ func reset() -> void:
 	is_spawning = false
 
 func _try_start_next_wave() -> void:
-	print(active_enemies)
 	if active_enemies == 0 and not is_spawning:
 		if wave_queue.is_empty():
 			combat_finished.emit()
@@ -98,6 +97,7 @@ func unfreezeEnemies(enemies: Array) -> void:
 				enemy.get_node("AnimationTree").active = true
 			if has_node("CollisionShape3D"):
 				enemy.get_node("CollisionShape3D").disabled = true
+			enemy.canBeDamaged = true
 
 func _on_zombie1_killed() -> void:
 	active_zombies -= 1

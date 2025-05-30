@@ -2,6 +2,7 @@ extends Node3D
 
 var damage: int = 5
 var critMultiplier: int = 2
+var recoil: float = 6.0
 var maxAmmo: int = 30 * 2
 var reloaded: bool = true
 

@@ -13,6 +13,7 @@ var playerDamage: int = 10
 var dead: bool = false
 var rotated: bool = false
 var can_attack: bool = true
+var canBeDamaged: bool = true
 var state_machine: AnimationNodeStateMachinePlayback
 
 
@@ -45,10 +46,13 @@ func update_ai_loop() -> void:
 		if player.isAlive:
 			_update_ai_logic()
 		await get_tree().create_timer(ai_update_interval + ai_offset).timeout
+		if !is_inside_tree() or is_queued_for_deletion():
+			break
 
 func _physics_process(_delta: float) -> void:
-	if dead or !player.isAlive:
+	if dead:
 		return
+	
 	if _target_in_range() and can_attack:
 		look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
 		can_attack = false
@@ -89,6 +93,9 @@ func _target_in_range() -> bool:
 		return false
 
 func receive_hit(damage: int, headshotMultiplier: int, is_headshot: bool) -> void:
+	if !canBeDamaged:
+		return
+	
 	if is_headshot:
 		damage *= headshotMultiplier
 		emit_signal("enemy_headshot")
