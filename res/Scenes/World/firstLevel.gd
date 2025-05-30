@@ -126,6 +126,7 @@ func get_random_position_spawn() -> Vector3:
 
 func _on_mutant_trigger_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
+		CombatManager.reset()
 		CombatMusicBuildup.play()
 		combatActive = true
 		CombatManager.clear_zombies()
@@ -134,9 +135,9 @@ func _on_mutant_trigger_body_entered(body: Object) -> void:
 		musicTween.tween_callback(Callable(NormalMusic, "stop"))
 		
 		$combat_logic/zone3/mutantSpawner/mutantTrigger.set_deferred("monitoring", false)
-		CombatManager.start_wave(10, Callable(self, "spawnMutant"))
-		CombatManager.start_wave(30, Callable(self, "spawnMutant"))
-		CombatManager.start_wave(50, Callable(self, "spawnMutant"))
+		CombatManager.start_wave(10, "spawnMutant", get_path())
+		CombatManager.start_wave(30, "spawnMutant", get_path())
+		CombatManager.start_wave(50, "spawnMutant", get_path())
 		CombatManager.connect("combat_finished", Callable(self, "_on_combat_finished"))
 
 func _on_combat_finished() -> void:

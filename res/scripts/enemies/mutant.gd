@@ -45,6 +45,8 @@ func update_ai_loop() -> void:
 		if player.isAlive:
 			_update_ai_logic()
 		await get_tree().create_timer(ai_update_interval + ai_offset).timeout
+		if !is_inside_tree() or is_queued_for_deletion():
+			break
 
 func _physics_process(_delta: float) -> void:
 	if dead:

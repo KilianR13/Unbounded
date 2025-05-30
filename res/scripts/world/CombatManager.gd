@@ -15,24 +15,46 @@ var score: int = 0
 var levelObtainedScore: int
 var levelBaseScore: int
 
-func start_wave(enemy_count: int, spawn_func: Callable) -> void:
-	wave_queue.append({ "count": enemy_count, "spawner": spawn_func })
+func _ready() -> void:
+	active_enemies = 0
+
+func start_wave(enemy_count: int, spawn_func_name: String, spawn_context: NodePath) -> void:
+	wave_queue.append({ "count": enemy_count, "spawner_name": spawn_func_name, "context": spawn_context })
 	_try_start_next_wave()
 
+func reset() -> void:
+	wave_queue.clear()
+	active_enemies = 0
+	is_spawning = false
+
 func _try_start_next_wave() -> void:
+	print(active_enemies)
 	if active_enemies == 0 and not is_spawning:
 		if wave_queue.is_empty():
 			combat_finished.emit()
 		else:
 			var wave: Dictionary = wave_queue.pop_front()
 			is_spawning = true
-			spawn_wave(wave.count, wave.spawner)
+			spawn_wave(wave.count, wave.spawner_name, wave.context)
 
-func spawn_wave(count: int, spawn_func: Callable) -> void:
+func spawn_wave(count: int, spawner_name: String, context_path: NodePath) -> void:
 	for i: int in count:
-		await get_tree().create_timer(0.1).timeout  # opcional: espaciado
+		await get_tree().create_timer(0.1).timeout
+		if !is_inside_tree() or get_tree().get_current_scene() == null:
+			return
+
+		var context: Node = get_node_or_null(context_path)
+		if context == null:
+			return
+
+		var spawn_func: Callable = Callable(context, spawner_name)
+		if not spawn_func.is_valid():
+			return
+
 		var enemy: CharacterBody3D = spawn_func.call()
-		register_enemy(enemy)
+		if enemy:
+			register_enemy(enemy)
+
 	is_spawning = false
 	_try_start_next_wave()
 
