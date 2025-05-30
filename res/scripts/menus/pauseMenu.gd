@@ -18,6 +18,7 @@ func toggle_pause() -> void:
 		visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
+		$VBoxContainer/Control3/HBoxContainer/Control/resumeButton.grab_focus()
 		# Pausar
 		get_tree().paused = true
 		visible = true
@@ -26,6 +27,9 @@ func toggle_pause() -> void:
 
 
 func _on_resume_button_pressed() -> void:
+	get_tree().paused = false
+	visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	emit_signal("gameUnpaused")
 
 

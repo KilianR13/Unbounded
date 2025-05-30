@@ -21,7 +21,7 @@ var landing_sound_enabled: bool = false
 var finished_loading: bool = false
 const WALK_SPEED: float = 8.0
 const JUMP_VELOCITY: float = 6.5
-const SENSITIVITY: float = 0.005
+var SENSITIVITY: float = 0.5
 
 const DASH_FORCE: float = 45.0
 const DASH_DURATION: float = 0.2
@@ -44,7 +44,7 @@ const BASE_FOV: float = 80.0
 const FOV_CHANGE: float = 1.3
 
 ## Controller constants
-const JOYSTICK_SENSITIVITY: float = 5.0
+const JOYSTICK_SENSITIVITY: float = 0.5
 const DEADZONE: float = 0.3
 
 # Custom gravity setting to make it feel a bit more snappier.
@@ -126,8 +126,8 @@ func _unhandled_input(event: InputEvent)-> void:
 		return
 
 	if event is InputEventMouseMotion:
-		playerHead.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		playerHead.rotate_y(-event.relative.x * SENSITIVITY * 0.01)
+		camera.rotate_x(-event.relative.y * SENSITIVITY * 0.01)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 	# Lógica de cambio de armas
@@ -215,8 +215,8 @@ func _process(delta: float) -> void:
 
 	# Aplicar zona muerta
 	if stick_input.length() > DEADZONE:
-		playerHead.rotate_y(-stick_input.x * JOYSTICK_SENSITIVITY * delta)
-		camera.rotate_x(-stick_input.y * JOYSTICK_SENSITIVITY * delta)
+		playerHead.rotate_y(-stick_input.x * JOYSTICK_SENSITIVITY * 10 * delta)
+		camera.rotate_x(-stick_input.y * JOYSTICK_SENSITIVITY * 10 * delta)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 	if shake_strength > 0.01:
