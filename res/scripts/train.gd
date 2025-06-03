@@ -3,7 +3,7 @@ extends Node3D
 @onready var frontLight: SpotLight3D = $frontWagon/SpotLight3D
 @onready var backLight: SpotLight3D = $backWagon/SpotLight3D
 
-signal playerHit()
+signal playerHit
 
 @onready var hit_area: Area3D = $playerImpact
 

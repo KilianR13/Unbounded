@@ -43,7 +43,10 @@ func load_settings() -> void:
 func apply_volumes() -> void:
 	for bus_name: String in BUS_NAMES.values():
 		var bus_index: int = AudioServer.get_bus_index(bus_name)
-		AudioServer.set_bus_volume_db(bus_index, linear_to_db(volumes[bus_name]))
+		var final_volume: float = volumes[bus_name]
+		if bus_name != "Master" and final_volume > volumes["Master"]:
+			final_volume = volumes["Master"]
+		AudioServer.set_bus_volume_db(bus_index, linear_to_db(final_volume))
 
 func save_settings() -> void:
 	var config: ConfigFile = ConfigFile.new()
@@ -53,15 +56,6 @@ func save_settings() -> void:
 
 func set_volume(bus_name: String, value: float) -> void:
 	volumes[bus_name] = value
-	if bus_name != "Master":
-	# No dejar que volumen secundario supere al master
-		if volumes[bus_name] > volumes["Master"]:
-			volumes[bus_name] = volumes["Master"]
-	else:
-		# Ajustar secundarios si master baja
-		for key: String in volumes.keys():
-			if key != "Master" and volumes[key] > volumes["Master"]:
-				volumes[key] = volumes["Master"]
 	apply_volumes()
 
 func linear_to_db(linear: float) -> float:

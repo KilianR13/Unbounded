@@ -72,7 +72,7 @@ theme_override_constants/margin_bottom = 0
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 1
+current_tab = 2
 
 [node name="Audio" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
 visible = false
@@ -442,6 +442,7 @@ step = 0.01
 value = 0.5
 
 [node name="Video" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Video"]
@@ -557,29 +558,57 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
 
 [node name="Gameplay" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
+[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 40.0
 
-[node name="VideoOptionTop" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
+[node name="Left" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 10.0
+size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionTop"]
+[node name="ControlsExplanation" type="Label" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Keyboard:
+WASD - Move
+Mouse 1 - Shoot
+1 / 2 / 3 / 4 / Scroll wheel - Change between weapons
+F - Use your special ability when charged
+Shift - Dash
+Space - Jump
+Escape - Pause
+Controller:
+Left Joystick - Move
+Right joystick - Move the camera
+R1/RB - Shoot
+Arrow Up / Right / Down / Left - Change between weapons
+Circle / B - Use your special ability when charged
+Square / X - Dash
+Cross / A - Jump
+Start - Pause"
+
+[node name="Right" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -587,20 +616,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionTop/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionTop/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VideoOptionBottom" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
+[node name="ControlKeyboard" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 10.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionBottom"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -608,18 +628,91 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionBottom/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer/VideoOptionBottom/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/VBoxContainer"]
+[node name="ControlLabel" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 40.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard/VBoxContainer/ControlLabel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = -23.0
+offset_right = 29.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Mouse sensitivity:"
+
+[node name="ControlSlider" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="KeyboardSensSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard/VBoxContainer/ControlSlider"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 16.0
+grow_horizontal = 2
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="ControlJoystick" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlLabel" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick/VBoxContainer/ControlLabel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = -23.0
+offset_right = 29.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Joystick sensitivity:"
+
+[node name="ControlSlider" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JoystickSensSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick/VBoxContainer/ControlSlider"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 16.0
+grow_horizontal = 2
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.5
 
 [node name="AcceptButtons" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -695,5 +788,7 @@ text = "ACCEPT"
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Video/VBoxContainer/VideoOptionTop/HBoxContainer/ControlValue/ResolutionDropdown" to="." method="_on_resolution_selected"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Video/VBoxContainer/VideoOptionBottom/HBoxContainer/ControlOption/FullScreenToggle" to="." method="_on_full_screen_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard/VBoxContainer/ControlSlider/KeyboardSensSlider" to="." method="_on_keyboard_sens_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick/VBoxContainer/ControlSlider/JoystickSensSlider" to="." method="_on_joystick_sens_slider_value_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AcceptButtons/HBoxContainer/ControlCancelButton/MarginContainer/Cancel/cancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AcceptButtons/HBoxContainer/ControlAcceptButton/MarginContainer/Accept/acceptButton" to="." method="_on_accept_button_pressed"]

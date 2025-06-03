@@ -32,7 +32,8 @@ var resolutions: Array = [
 @onready var resolutionOptionButton: OptionButton = $MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Video/VBoxContainer/VideoOptionTop/HBoxContainer/ControlValue/ResolutionDropdown
 @onready var fullScreenCheckBox: CheckBox = $MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Video/VBoxContainer/VideoOptionBottom/HBoxContainer/ControlOption/FullScreenToggle
 
-
+@onready var mouseSensSlider: HSlider = $MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlKeyboard/VBoxContainer/ControlSlider/KeyboardSensSlider
+@onready var joystickSensSlider: HSlider = $MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay/MarginContainer/VBoxContainer2/Right/VBoxContainer/ControlJoystick/VBoxContainer/ControlSlider/JoystickSensSlider
 
 func _ready() -> void:
 	# Conectar sliders a la función _on_slider_changed
@@ -45,9 +46,15 @@ func _ready() -> void:
 	for res: Vector2i in resolutions:
 		resolutionOptionButton.add_item("%dx%d" % [res.x, res.y])
 	load_video_settings()
+	load_input_settings()
 	DisplayServer.window_set_position(Vector2i(0, 0))
 	
-	
+
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		_on_cancel_button_pressed()
+
+
 func load_audio_settings() -> void:
 	# Carga los valores directamente desde SoundManager y actualiza sliders
 	for slider_name: String in BUS_NAMES.keys():
@@ -65,6 +72,7 @@ func _on_slider_changed(value: float, slider_name: String) -> void:
 func on_accept_pressed() -> void:
 	# Guardar configuración en disco desde SoundManager
 	SoundManager.save_settings()
+	InputManager.save_settings()
 	save_video_settings()
 
 func get_slider_by_name(SliderName: String) -> HSlider:
@@ -115,3 +123,16 @@ func load_video_settings() -> void:
 		fullScreenCheckBox.button_pressed = fullscreen
 		if fullscreen:
 			_on_full_screen_toggled(true)
+
+func load_input_settings() -> void:
+	mouseSensSlider.value = InputManager.mouse_sensitivity
+	joystickSensSlider.value = InputManager.joystick_sensitivity
+	#mouseSensSliderjoystickSensSlider
+	pass
+
+func _on_keyboard_sens_slider_value_changed(value: float) -> void:
+	InputManager.mouse_sensitivity = value
+
+
+func _on_joystick_sens_slider_value_changed(value: float) -> void:
+	InputManager.joystick_sensitivity = value

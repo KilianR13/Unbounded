@@ -22,7 +22,7 @@ var playerIsAlive: bool = true
 @onready var remainingAmmoRifle: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo2/AmmoLabel2
 @onready var remainingAmmoSpecial: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo3/AmmoLabel3
 @onready var remainingAmmoHeavy: Label = $VBoxContainer/Bottom/HBoxContainer/RightSpace/VBoxContainer/Bottom/HBoxContainer/Center/HBoxContainer/Ammo4/AmmoLabel4
-@onready var scoreLabel: Label = $VBoxContainer/Top/VBoxContainer/CurrentBonusAmmount/CurrentBonusLabel
+@onready var scoreLabel: Label = $VBoxContainer/Top/MarginContainer/VBoxContainer/CurrentBonusAmmount/CurrentBonusLabel
 
 @onready var playerHitRect: ColorRect = $playerHitRect
 

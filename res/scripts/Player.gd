@@ -4,6 +4,7 @@ signal weapon_changed(weapon_name: String, ammo: int)
 signal ammo_updated(weapon_name: String, ammo: int)
 signal update_ult_charge(charge: int)
 signal healthChanged(currentHealth: int, hurt: bool)
+signal playerDeathEnviroment
 
 var speed: float = WALK_SPEED
 var jump_count: int = 0
@@ -21,7 +22,6 @@ var landing_sound_enabled: bool = false
 var finished_loading: bool = false
 const WALK_SPEED: float = 8.0
 const JUMP_VELOCITY: float = 6.5
-var SENSITIVITY: float = 0.5
 
 const DASH_FORCE: float = 45.0
 const DASH_DURATION: float = 0.2
@@ -44,7 +44,6 @@ const BASE_FOV: float = 80.0
 const FOV_CHANGE: float = 1.3
 
 ## Controller constants
-const JOYSTICK_SENSITIVITY: float = 0.5
 const DEADZONE: float = 0.3
 
 # Custom gravity setting to make it feel a bit more snappier.
@@ -127,8 +126,8 @@ func _unhandled_input(event: InputEvent)-> void:
 		return
 
 	if event is InputEventMouseMotion:
-		playerHead.rotate_y(-event.relative.x * SENSITIVITY * 0.01)
-		camera.rotate_x(-event.relative.y * SENSITIVITY * 0.01)
+		playerHead.rotate_y(-event.relative.x * InputManager.mouse_sensitivity * 0.01)
+		camera.rotate_x(-event.relative.y * InputManager.mouse_sensitivity * 0.01)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 	# Lógica de cambio de armas
@@ -216,8 +215,8 @@ func _process(delta: float) -> void:
 
 	# Aplicar zona muerta
 	if stick_input.length() > DEADZONE:
-		playerHead.rotate_y(-stick_input.x * JOYSTICK_SENSITIVITY * 10 * delta)
-		camera.rotate_x(-stick_input.y * JOYSTICK_SENSITIVITY * 10 * delta)
+		playerHead.rotate_y(-stick_input.x * InputManager.joystick_sensitivity * 10 * delta)
+		camera.rotate_x(-stick_input.y * InputManager.joystick_sensitivity * 10 * delta)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 	if shake_strength > 0.01:
@@ -240,9 +239,9 @@ func _physics_process(delta: float) -> void:
 	if !finished_loading:
 		return
 	
-	var speed_mps: float = velocity.length()
-	var speed_kmh: float = speed_mps * 3.6
-	print("Current speed: ", speed_kmh, " km/h")
+	#var speed_mps: float = velocity.length()
+	#var speed_kmh: float = speed_mps * 3.6
+	#print("Current speed: ", speed_kmh, " km/h")
 	
 	if !is_on_floor() and !on_ladder:
 		if velocity.y > 0:
@@ -399,6 +398,7 @@ func disableShake() -> void:
 
 func playerDeath() -> void:
 	animPlayer.play("deathAnimation")
+	emit_signal("playerDeathEnviroment")
 	health = 0
 	emit_signal("healthChanged", health, true)
 	$DeathSFX.play()

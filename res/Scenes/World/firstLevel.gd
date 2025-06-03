@@ -46,14 +46,14 @@ func _ready() -> void:
 	trainWaitTimer.start()
 	posicion_inicial_tren = train.global_position
 	posicion_objetivo_tren = train3DDestiny.global_position
-	train.playerHit.connect(Callable(self,"dangerDeath"))
+	train.connect("playerHit", Callable(self,"playerDeathInLevel"))
 	CombatManager.score = 0
 	CombatManager.updateScoreForUI()
 	CombatManager.active_enemies = 0
 	CombatManager.active_zombies = 0
 	if not CombatManager.is_connected("zombies1_finished", Callable(self, "_triggerSecondZombieCombat")):
 		CombatManager.connect("zombies1_finished", Callable(self, "_triggerSecondZombieCombat"))
-	#array_zombies_despawneable.clear()
+	player.connect("playerDeathEnviroment", Callable(self, "stopMusicFromDeath"))
 	
 
 func trainPass() -> void:
@@ -76,11 +76,19 @@ func openFirstDoor() -> void:
 
 func _on_killzone_area_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
-		dangerDeath()
+		playerDeathInLevel()
+		
 
-func dangerDeath() -> void:
+func playerDeathInLevel() -> void:
 	if player.isAlive:
+		stopMusicFromDeath()
 		player.playerDeath()
+
+func stopMusicFromDeath() -> void:
+	if player.isAlive:
+		NormalMusic.stop()
+		CombatMusicBuildup.stop()
+		CombatMusicAction.stop()
 
 func _on_train_wait_timer_timeout()  -> void:
 	trainWaitTimer.set_wait_time(24.0)

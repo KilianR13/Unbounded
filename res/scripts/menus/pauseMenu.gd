@@ -2,13 +2,16 @@ extends Control
 
 signal gameUnpaused
 
+var changingOptions: bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	changingOptions = false
 	$Options.connect("closeOptions", Callable(self, "_closeOptionsMenu"))
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and !changingOptions:
 		toggle_pause()
 
 func toggle_pause() -> void:
@@ -41,6 +44,10 @@ func _on_quit_button_pressed() -> void:
 
 func _closeOptionsMenu() -> void:
 	$Options.visible = false
+	await get_tree().create_timer(0.1).timeout
+	changingOptions = false
 
 func _on_options_menu_pressed() -> void:
 	$Options.visible = true
+	
+	changingOptions = true

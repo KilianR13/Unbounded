@@ -2,11 +2,13 @@ extends Control
 
 
 var gameStarted: bool = false
+var changingOptions: bool
 @onready var playButton: Button = $VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Play
 @onready var gameStartLabel: Label = $VBoxContainerGeneral/Bottom/VBoxContainer/gameStartNode/gameStartLabel
 @onready var moneyEarnedLabel: Label = $VBoxContainerGeneral/Bottom/VBoxContainer/gameStartNode/MoneyEarnedLabel
 
 func _ready() -> void:
+	changingOptions = false
 	SoundManager.load_settings()
 	if !Global.restartMainMenu:
 		Global.restartMainMenu = true
@@ -52,6 +54,8 @@ func _on_quit_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	$Options.visible = true
+	changingOptions = true
 
 func _closeOptionsMenu() -> void:
 	$Options.visible = false
+	changingOptions = false
