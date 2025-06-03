@@ -60,7 +60,7 @@ albedo_color = Color(0, 0, 0, 1)
 size = Vector3(11, 0.001, 42)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ysrf"]
-size = Vector3(3, 27, 45)
+size = Vector3(3, 27, 51)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3bdc2"]
 size = Vector3(2.1, 5, 0.2)
@@ -81,7 +81,7 @@ uv1_scale = Vector3(17, 17, 17)
 albedo_color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7k04t"]
-size = Vector3(7.9, 12.9, 0.1)
+size = Vector3(7.9, 15, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aak6f"]
 size = Vector3(1, 7, 0.6)
@@ -1324,11 +1324,14 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Walls/Fence/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.249996, 4.25, 0.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.249996, 5.3, 0.05)
 shape = SubResource("BoxShape3D_7k04t")
 
 [node name="Fence2" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Walls/Fence" instance=ExtResource("6_p6nfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8, 0)
+
+[node name="Fence3" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Walls/Fence" instance=ExtResource("6_p6nfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.6, 0)
 
 [node name="Decoration" type="Node3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90735e-06, 0, -4.76837e-07)
@@ -1353,7 +1356,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_3npmb")
 
 [node name="ladder2" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Decoration/ladder" instance=ExtResource("3_f00g7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
 
 [node name="decorationBuildings" type="Node3D" parent="LevelGeometry/FirstZone/NavigationRegion_Zone1/Decoration"]
 

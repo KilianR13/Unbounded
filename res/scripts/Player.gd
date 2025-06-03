@@ -253,6 +253,7 @@ func _physics_process(delta: float) -> void:
 	elif is_on_floor():
 		jump_count = 0
 	
+	
 	if isAlive:
 		if is_on_floor() and not was_on_floor and landing_sound_enabled:
 			$Jump_LandSound.play()
