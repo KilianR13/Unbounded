@@ -3,19 +3,17 @@ extends Node3D
 var damage: int = 10
 var critMultiplier: int = 1
 var maxAmmo: int = 10 * 2
+var rayCast: RayCast3D
 
 signal shotFinished
 signal criticalHit(superCharge: int)
 
+var ammo_consumer: Callable  # Esto se asignará desde el jugador
+
+
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var chargeSound: AudioStreamPlayer = $ChargeSFX
 @onready var shootSound: AudioStreamPlayer = $ShootSFX
-var original_color: Color = Color(0.922, 0.949, 0.941, 0.4)
-var target_color: Color = Color(0.922, 0.949, 0.1, 0.4)
-var color_duration: float = 2.49
-var material_index: int = 0
-var standard_mat: StandardMaterial3D
-var tween: Tween
 
 func shoot(raycast: RayCast3D) -> void:
 	if animationPlayer.is_playing():
@@ -23,15 +21,18 @@ func shoot(raycast: RayCast3D) -> void:
 	
 	animationPlayer.play("chargeShot")
 	chargeSound.play()
-	await get_tree().create_timer(2.49).timeout
-	_real_shoot(raycast)
+	rayCast = raycast
+	
 
-	# Ahora reproducimos la animación shoot y sonido de disparo
-	animationPlayer.play("shoot")
-	shootSound.play()
-
+func _on_charge_shot_animation_end() -> void:
+	if rayCast:
+		_real_shoot(rayCast)
+		rayCast = null
 
 func _real_shoot(raycast: RayCast3D) -> void:
+	if ammo_consumer:
+		ammo_consumer.call()
+	animationPlayer.play("shoot")
 	shootSound.play()
 	raycast.enabled = true
 	raycast.set_collide_with_bodies(true)

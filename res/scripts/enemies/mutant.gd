@@ -41,7 +41,7 @@ func dump_first_physics_frame() -> void:
 	update_ai_loop()
 
 func update_ai_loop() -> void:
-	while not dead:
+	while is_inside_tree() && !dead:
 		if player.isAlive:
 			_update_ai_logic()
 		await get_tree().create_timer(ai_update_interval + ai_offset).timeout

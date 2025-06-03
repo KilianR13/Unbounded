@@ -1056,7 +1056,6 @@ shape = SubResource("BoxShape3D_fgulw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0.6, 0)
 collision_layer = 2
 collision_mask = 2
-monitoring = false
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="combat_logic/zone3/mutantSpawner/mutantTrigger"]
@@ -23221,7 +23220,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 9.75, 0)
 shape = SubResource("BoxShape3D_dyu57")
 
 [node name="BigBuildingCopyPasta2" type="Node3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/suroundingBuildings"]
-transform = Transform3D(1, 0, 0, 0, 1.4, 0, 0, 0, 1, -110, 0, 44)
+transform = Transform3D(1, 0, 0, 0, 1.82, 0, 0, 0, 1, -110, 0, 44)
 
 [node name="wallsRegular" type="Node3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/suroundingBuildings/BigBuildingCopyPasta2"]
 
@@ -24384,7 +24383,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 9.75, 0)
 shape = SubResource("BoxShape3D_dyu57")
 
 [node name="BigBuildingCopyPasta7" type="Node3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/suroundingBuildings"]
-transform = Transform3D(1, 0, 0, 0, 1.4, 0, 0, 0, 1, -110, 0, -32)
+transform = Transform3D(1, 0, 0, 0, 2.1, 0, 0, 0, 1, -110, 0, -32)
 
 [node name="wallsRegular" type="Node3D" parent="LevelGeometry/ThirdZone/NavigationRegion3D/suroundingBuildings/BigBuildingCopyPasta7"]
 

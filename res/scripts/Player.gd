@@ -183,7 +183,7 @@ func _unhandled_input(event: InputEvent)-> void:
 func _switch_weapon_state(state: int) -> void:
 	if current_weapon_state == state:
 		return
-
+	stop_all_sounds_in_scene(currentWeapon)
 	match state:
 		WeaponState.WEAPON_PISTOL:
 			await changeWeapons(pistola, state)
@@ -302,9 +302,10 @@ func _physics_process(delta: float) -> void:
 							pass
 				WeaponState.WEAPON_HEAVY:
 					if heavyAmmo > 0:
+						currentWeapon.ammo_consumer = func() -> void: 
+							heavyAmmo -= 1
+							emit_signal("ammo_updated", "GlassCannon", heavyAmmo)
 						currentWeapon.shoot(hitscan_RayCast)
-						heavyAmmo -= 1
-						emit_signal("ammo_updated", "GlassCannon", heavyAmmo)
 				WeaponState.ULTIMATE:
 					if ultimateAmmo > 0:
 						currentWeapon.shoot(hitscan_RayCast)
@@ -408,10 +409,22 @@ func playerDeath() -> void:
 	look_at(global_transform.origin + facing_direction, Vector3.UP)
 	velocity = Vector3(0, velocity.y, 0)
 	currentWeapon.visible = false
+	stop_all_sounds_in_scene(currentWeapon)
 	ultimateChargeTimer.stop()
 	await get_tree().create_timer(5.0).timeout
 	get_tree().call_deferred("change_scene_to_file", "res://res/Scenes/Menus/deathScreen.tscn")
 
+func stop_all_sounds_in_scene(scene_root: Node) -> void:
+	for child: Node in scene_root.get_children():
+		if child is AudioStreamPlayer or child is AudioStreamPlayer3D:
+			child.stop()
+		elif child.get_child_count() > 0:
+			stop_all_sounds_in_scene(child)
+	for child: Node in scene_root.get_children():
+		if child is AnimationPlayer:
+			child.stop()
+		elif child.get_child_count() > 0:
+			stop_all_sounds_in_scene(child)
 
 func _on_ladder_area_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
