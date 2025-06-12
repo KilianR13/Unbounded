@@ -72,10 +72,8 @@ theme_override_constants/margin_bottom = 0
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 2
 
 [node name="Audio" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Audio"]
@@ -558,6 +556,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
 
 [node name="Gameplay" type="Control" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ControlOptionsSliders/MarginContainer/TabContainer/Gameplay"]

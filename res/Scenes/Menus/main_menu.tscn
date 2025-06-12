@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckhfmynaavo4m"]
+[gd_scene load_steps=7 format=3 uid="uid://ckhfmynaavo4m"]
 
 [ext_resource type="Script" path="res://res/scripts/menus/MainMenu.gd" id="1_uqo7g"]
 [ext_resource type="AudioStream" uid="uid://c84unc3oswa6t" path="res://res/sfx/music/MainMenuMusic.wav" id="2_4j8c3"]
 [ext_resource type="PackedScene" uid="uid://bxfd8bgnugmxu" path="res://res/Scenes/Menus/options.tscn" id="3_4oeb1"]
+[ext_resource type="PackedScene" uid="uid://rqvvi24i8e2w" path="res://res/Scenes/Menus/credits.tscn" id="4_s37kt"]
 
 [sub_resource type="Animation" id="Animation_64b7s"]
 resource_name = "startup"
@@ -205,6 +206,11 @@ bus = &"MusicSFX"
 visible = false
 layout_mode = 1
 
+[node name="Credits" parent="." instance=ExtResource("4_s37kt")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Quit" to="." method="_on_quit_pressed"]

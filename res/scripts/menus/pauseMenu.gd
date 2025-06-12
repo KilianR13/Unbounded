@@ -11,7 +11,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause") and !changingOptions:
+	if (Input.is_action_just_pressed("pause") || Input.is_action_just_pressed("menuBack")) and !changingOptions:
 		toggle_pause()
 
 func toggle_pause() -> void:

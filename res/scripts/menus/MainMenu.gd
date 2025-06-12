@@ -3,12 +3,14 @@ extends Control
 
 var gameStarted: bool = false
 var changingOptions: bool
+var seeingCredits: bool
 @onready var playButton: Button = $VBoxContainerGeneral/Bottom/VBoxContainer/Control/HBoxContainer/ButtonsLeft/VBoxContainerButtons/Play
 @onready var gameStartLabel: Label = $VBoxContainerGeneral/Bottom/VBoxContainer/gameStartNode/gameStartLabel
 @onready var moneyEarnedLabel: Label = $VBoxContainerGeneral/Bottom/VBoxContainer/gameStartNode/MoneyEarnedLabel
 
 func _ready() -> void:
 	changingOptions = false
+	seeingCredits = false
 	SoundManager.load_settings()
 	if !Global.restartMainMenu:
 		Global.restartMainMenu = true
@@ -16,6 +18,7 @@ func _ready() -> void:
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$Options.connect("closeOptions", Callable(self, "_closeOptionsMenu"))
+	$Credits.connect("closeCredits", Callable(self, "_closeCreditsMenu"))
 	var scoreSoFar: int = CombatManager.loadScore()
 	moneyEarnedLabel.text = "You've earned " + str(scoreSoFar) + "$ so far."
 
@@ -59,3 +62,11 @@ func _on_options_pressed() -> void:
 func _closeOptionsMenu() -> void:
 	$Options.visible = false
 	changingOptions = false
+
+func _closeCreditsMenu() -> void:
+	$Credits.visible = false
+	seeingCredits = false
+
+func _on_credits_pressed() -> void:
+	$Credits.visible = true
+	seeingCredits = true

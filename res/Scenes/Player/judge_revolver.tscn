@@ -251,6 +251,7 @@ mesh = SubResource("ArrayMesh_fv2aj")
 
 [node name="Barrel" type="Node3D" parent="RootNode" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75332, 0.421381, 0)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {

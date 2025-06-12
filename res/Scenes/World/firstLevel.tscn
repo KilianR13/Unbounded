@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://e03yx2ymkxms"]
+[gd_scene load_steps=135 format=3 uid="uid://e03yx2ymkxms"]
 
 [ext_resource type="Script" path="res://res/Scenes/World/firstLevel.gd" id="1_54ki8"]
 [ext_resource type="PackedScene" uid="uid://h2d7jnxcsmt1" path="res://res/Scenes/Player/player.tscn" id="1_fd6uq"]
@@ -49,9 +49,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3nle0"]
 size = Vector3(13, 0.5, 100)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqgf1"]
-albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46a0o"]
 albedo_color = Color(0, 0, 0, 1)
@@ -718,7 +715,7 @@ environment = ExtResource("2_v7imq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05414, 0, 28.8548)
 
 [node name="playerSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.054, 19.4, 4.955)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.054, 0, 28.955)
 
 [node name="basicBuilding_copypaste" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 52)
@@ -1015,13 +1012,6 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="killzone/killzoneArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
 shape = SubResource("BoxShape3D_3nle0")
-
-[node name="Roof" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3000, 0)
-visible = false
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Roof"]
-material = SubResource("StandardMaterial3D_aqgf1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 5.5)

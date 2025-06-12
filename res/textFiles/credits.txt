@@ -1,0 +1,76 @@
+[center]
+[font_size=20]
+[b]Lead developer:[/b]
+Me
+
+[b]General design:[/b]
+Me
+
+[b]Programming, sound design, level design, player design, animations, narrative:[/b]
+Me
+
+[b]Music:[/b]
+Combat music:
+Boom Kitty - Tokyo Takedown
+
+Loading screen music:
+Atmospheric Ambiance Loop #3 by Sirkoto51 -- https://freesound.org/s/427452/ -- License: Attribution 4.0
+
+
+[b]Sound effects:[/b]
+Double jump SFX:
+Dragon Wing Flap by EminYILDIRIM -- https://freesound.org/s/571563/ -- License: Attribution 4.0
+
+Player steps SFX:
+steps.wav by benzix2 -- https://freesound.org/s/417291/ -- License: Attribution 3.0
+
+Player landing SFX:
+Landing On The Ground [6] by SoundDesignForYou -- https://freesound.org/s/646663/ -- License: Creative Commons 0
+
+Fire SFX for barrels:
+Small Bonfire by DrinkingWindGames -- https://freesound.org/s/463737/ -- License: Attribution 4.0
+
+
+[b]3D models:[/b]
+Regular pistol model:
+Pistol by Zsky [CC-BY] via Poly Pizza
+
+Ladder:
+Simple Vertical Ladder by Jarlan Perez [CC-BY] via Poly Pizza
+
+Cyber City asset pack:
+"Cyber City", created by "papptimus" via https://papptimus.itch.io/cyber-city and in accordance to CC BY 4.0. https://creativecommons.org/licenses/by/4.0/
+
+Air conditioner:
+Air conditioner by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/3a3MIdsS17a)
+
+Lamp posts:
+Lantern by Ian MacGillivray [CC-BY] via Poly Pizza
+
+Train sound:
+freight train 140 kmh 01 190613_0029.wav by klankbeeld -- https://freesound.org/s/476295/ -- License: Attribution 4.0
+
+Glass Cannon model:
+Glass Cannon by Ray Fields [CC-BY] via Poly Pizza
+
+Fence:
+Fence by J-Toastie [CC-BY] via Poly Pizza
+
+Fountain:
+Santo Spirito Fountain by Don Carson [CC-BY] via Poly Pizza
+
+Child's toy in the park:
+Jungle gym by Poly by Google [CC-BY] via Poly Pizza
+
+Trees:
+Tree by Marc Solà [CC-BY] via Poly Pizza
+
+[b]Special thanks to:[/b]
+My dad
+Izan "Izan5555" Gutiérrez
+Isaac "GamingSecrets" Albala
+Gerardo "grgx" González
+GranadaJam
+And of course, you :)
+[/font_size]
+[/center]
