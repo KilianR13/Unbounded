@@ -143,7 +143,7 @@ func _on_mutant_trigger_body_entered(body: Object) -> void:
 		musicTween.tween_callback(Callable(NormalMusic, "stop"))
 		
 		$combat_logic/zone3/mutantSpawner/mutantTrigger.set_deferred("monitoring", false)
-		CombatManager.start_wave(10, "spawnMutant", get_path())
+		CombatManager.start_wave(100, "spawnMutant", get_path())
 		CombatManager.start_wave(30, "spawnMutant", get_path())
 		CombatManager.start_wave(50, "spawnMutant", get_path())
 		CombatManager.connect("combat_finished", Callable(self, "_on_combat_finished"))
@@ -168,12 +168,10 @@ func _on_combat_buildup_finished() -> void:
 func _on_first_zombie_trigger_body_entered(body: Object) -> void:
 	if body.is_in_group("player"):
 		$combat_logic/FirstZoneZombies/FirstFloor/FirstZombieTrigger.set_deferred("monitoring", false)
-		#var zombiesFloor1: Array = $combat_logic/FirstZoneZombies/FirstFloor.get_children()
 		CombatManager.startFirstFight(zombiesFloor1)
 		
 
 func _triggerSecondZombieCombat() -> void:
-	#var zombiesFloor2: Array = $combat_logic/FirstZoneZombies/FirstFloorInside.get_children()
 	openFirstDoor()
 	CombatManager.startSecondFight(zombiesFloor2)
 

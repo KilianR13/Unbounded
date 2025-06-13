@@ -77,15 +77,18 @@ var ultimateCharge: int
 var has_used_ultimate: bool = false
 
 @onready var playerHead: Node3D = $playerHead
-@onready var camera: Camera3D = $playerHead/Camera3D
+@onready var cameraPivot: Node3D = $playerHead/cameraPivot
+@onready var cameraBob: Node3D = $playerHead/cameraPivot/cameraBob
+@onready var cameraShake: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake
+@onready var camera: Camera3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D
 @onready var base_transform: Transform3D = camera.transform
-@onready var pistola: Node3D = $playerHead/Camera3D/Pistol
-@onready var JudgeRevolver: Node3D = $playerHead/Camera3D/JudgeRevolverRoot
-@onready var rifle: Node3D = $playerHead/Camera3D/RifleNode
-@onready var DBShotgun: Node3D = $playerHead/Camera3D/DBShotgun
-@onready var GlassCannon: Node3D = $playerHead/Camera3D/GlassCannon
-@onready var hitscan_RayCast: RayCast3D = $playerHead/Camera3D/hitscanRayCast
-@onready var hitscan_RayCast_endpoint: Node3D = $playerHead/Camera3D/raycastEnd
+@onready var pistola: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/Pistol
+@onready var JudgeRevolver: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/JudgeRevolverRoot
+@onready var rifle: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/RifleNode
+@onready var DBShotgun: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/DBShotgun
+@onready var GlassCannon: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/GlassCannon
+@onready var hitscan_RayCast: RayCast3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/hitscanRayCast
+@onready var hitscan_RayCast_endpoint: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/raycastEnd
 @onready var ultimateChargeTimer: Timer = $ultimateChargeTimer
 @onready var pauseMenu: Control = $HUD/PauseMenu
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
@@ -127,8 +130,8 @@ func _unhandled_input(event: InputEvent)-> void:
 
 	if event is InputEventMouseMotion:
 		playerHead.rotate_y(-event.relative.x * InputManager.mouse_sensitivity * 0.01)
-		camera.rotate_x(-event.relative.y * InputManager.mouse_sensitivity * 0.01)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		cameraPivot.rotate_x(-event.relative.y * InputManager.mouse_sensitivity * 0.01)
+		cameraPivot.rotation.x = clamp(cameraPivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 	# Lógica de cambio de armas
 	if Input.is_action_just_pressed("swapWeapon1"):
@@ -216,29 +219,31 @@ func _process(delta: float) -> void:
 	# Aplicar zona muerta
 	if stick_input.length() > DEADZONE:
 		playerHead.rotate_y(-stick_input.x * InputManager.joystick_sensitivity * 10 * delta)
-		camera.rotate_x(-stick_input.y * InputManager.joystick_sensitivity * 10 * delta)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		cameraPivot.rotate_x(-stick_input.y * InputManager.joystick_sensitivity * 10 * delta)
+		cameraPivot.rotation.x = clamp(cameraPivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 	if shake_strength > 0.01:
 		shake_timer += delta * shake_frequency
 		var offset: Vector3 = Vector3(
-		randf_range(-1.0, 1.0),
-		randf_range(-1.0, 1.0),
-		randf_range(-1.0, 1.0)
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0)
 		) * shake_strength
 		# Aplica el shake a la posición local de la cámara
-		camera.transform.origin = offset
+		cameraShake.transform.origin = offset
 		# Decae el shake
 		shake_strength = lerp(shake_strength, 0.0, delta * shake_decay)
 	else:
 		# Resetea la posición cuando no hay shake
-		camera.transform.origin = Vector3.ZERO
+		cameraShake.transform.origin = Vector3.ZERO
+		#camera.transform.origin = Vector3.ZERO
 
 
 func _physics_process(delta: float) -> void:
 	if !finished_loading:
 		return
-	
+	#camera.transform.origin = Vector3(0, sin(t_bob * 10.0) * 0.2, 0)
+	#print(camera.transform.origin)
 	#var speed_mps: float = velocity.length()
 	#var speed_kmh: float = speed_mps * 3.6
 	#print("Current speed: ", speed_kmh, " km/h")
@@ -358,7 +363,7 @@ func _physics_process(delta: float) -> void:
 				
 				# Head bob
 				t_bob += delta * velocity.length() * float(is_on_floor())
-				camera.transform.origin = _headbob(t_bob)
+				cameraBob.transform.origin = _headbob(t_bob)
 				
 				if is_dashing:
 					velocity = dash_direction * DASH_FORCE

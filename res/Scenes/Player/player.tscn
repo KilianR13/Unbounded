@@ -76,39 +76,44 @@ shape = SubResource("CapsuleShape3D_k54xs")
 [node name="playerHead" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
-[node name="Camera3D" type="Camera3D" parent="playerHead"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+[node name="cameraPivot" type="Node3D" parent="playerHead"]
+
+[node name="cameraBob" type="Node3D" parent="playerHead/cameraPivot"]
+
+[node name="cameraShake" type="Node3D" parent="playerHead/cameraPivot/cameraBob"]
+
+[node name="Camera3D" type="Camera3D" parent="playerHead/cameraPivot/cameraBob/cameraShake"]
 fov = 90.0
 near = 0.001
 script = ExtResource("2_xafiq")
 
-[node name="Pistol" parent="playerHead/Camera3D" instance=ExtResource("3_anlf3")]
+[node name="Pistol" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D" instance=ExtResource("3_anlf3")]
 process_priority = 10
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.0601814, -0.0491836, -0.122674)
 
-[node name="JudgeRevolverRoot" parent="playerHead/Camera3D" instance=ExtResource("5_xufo1")]
+[node name="JudgeRevolverRoot" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D" instance=ExtResource("5_xufo1")]
 transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, 0.0588016, -0.0730828, -0.0612705)
 visible = false
 
-[node name="RifleNode" parent="playerHead/Camera3D" instance=ExtResource("6_tjkpo")]
+[node name="RifleNode" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D" instance=ExtResource("6_tjkpo")]
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.0590415, -0.0801282, -0.0480065)
 visible = false
 
-[node name="hitscanRayCast" type="RayCast3D" parent="playerHead/Camera3D"]
+[node name="hitscanRayCast" type="RayCast3D" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D"]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.05, 0)
 target_position = Vector3(0, 0, -10000)
 collision_mask = 5
 collide_with_areas = true
 debug_shape_thickness = 1
 
-[node name="raycastEnd" type="Node3D" parent="playerHead/Camera3D"]
+[node name="raycastEnd" type="Node3D" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10000)
 
-[node name="GlassCannon" parent="playerHead/Camera3D" instance=ExtResource("6_3lc7l")]
+[node name="GlassCannon" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D" instance=ExtResource("6_3lc7l")]
 transform = Transform3D(-2.62268e-09, 0, 0.06, 0, 0.06, 0, -0.06, 0, -2.62268e-09, 0.0596254, -0.0700078, -0.111453)
 visible = false
 
-[node name="DBShotgun" parent="playerHead/Camera3D" instance=ExtResource("7_3ij0t")]
+[node name="DBShotgun" parent="playerHead/cameraPivot/cameraBob/cameraShake/Camera3D" instance=ExtResource("7_3ij0t")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0210356, -0.0304438, -0.020823)
 visible = false
 
