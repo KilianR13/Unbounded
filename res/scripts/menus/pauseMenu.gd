@@ -3,6 +3,7 @@ extends Control
 signal gameUnpaused
 
 var changingOptions: bool
+var canPause: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,17 +16,18 @@ func _unhandled_input(_event: InputEvent) -> void:
 		toggle_pause()
 
 func toggle_pause() -> void:
-	if get_tree().paused:
-		# Despausar
-		get_tree().paused = false
-		visible = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	else:
-		$VBoxContainer/Control3/HBoxContainer/Control/resumeButton.grab_focus()
-		# Pausar
-		get_tree().paused = true
-		visible = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if canPause:
+		if get_tree().paused:
+			# Despausar
+			get_tree().paused = false
+			visible = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			$VBoxContainer/Control3/HBoxContainer/Control/resumeButton.grab_focus()
+			# Pausar
+			get_tree().paused = true
+			visible = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 

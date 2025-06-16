@@ -13,7 +13,6 @@ var wall_momentum_stopped: bool = false
 var max_jump_count: int = 1
 var on_ladder: bool = false
 var can_grab_ladder: bool = true
-var gamePaused: bool = false
 
 var health: int = 100
 var isAlive: bool = true
@@ -98,8 +97,8 @@ var has_used_ultimate: bool = false
 @onready var hitscan_RayCast: RayCast3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/hitscanRayCast
 @onready var hitscan_RayCast_endpoint: Node3D = $playerHead/cameraPivot/cameraBob/cameraShake/Camera3D/raycastEnd
 @onready var ultimateChargeTimer: Timer = $ultimateChargeTimer
-@onready var pauseMenu: Control = $HUD/PauseMenu
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
+@onready var pauseMenu: Control = $HUD/PauseMenu
 
 
 func _ready() -> void:
@@ -129,9 +128,9 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	landing_sound_enabled = true
 	finished_loading = true
-	pauseMenu.connect("gameUnpaused", Callable(self, "_unpauseGame"))
 	currentPlayerState = StateMachine.GROUNDED
 	emit_signal("playerStateChanged", currentPlayerState)
+	pauseMenu.canPause = true
 
 
 func _unhandled_input(event: InputEvent)-> void:
@@ -418,6 +417,7 @@ func disableShake() -> void:
 	is_shaking = false
 
 func playerDeath() -> void:
+	pauseMenu.canPause = false
 	animPlayer.play("deathAnimation")
 	emit_signal("playerDeathEnviroment")
 	health = 0

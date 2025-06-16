@@ -41,7 +41,7 @@ func _ready() -> void:
 	player.connect("ammo_updated", Callable(self, "_on_ammo_updated"))
 	player.connect("update_ult_charge", Callable(self, "_on_ultimate_charge_updated"))
 	player.connect("healthChanged", Callable(self, "_on_health_updated"))
-	player.connect("playerStateChanged", Callable(self, "_stateMachine"))
+	#player.connect("playerStateChanged", Callable(self, "_stateMachine"))
 	CombatManager.connect("updateScore", Callable(self, "_update_score"))
 	CombatManager.updateScoreForUI()
 	playerHitRect.visible = false

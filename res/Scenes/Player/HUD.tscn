@@ -390,6 +390,7 @@ size_flags_stretch_ratio = 20.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 45.0
 offset_top = 28.0
