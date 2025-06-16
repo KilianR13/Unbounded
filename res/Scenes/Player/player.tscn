@@ -181,4 +181,9 @@ libraries = {
 "": SubResource("AnimationLibrary_m1ir0")
 }
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="ultimateChargeTimer" to="." method="_on_ultimate_charge_timer_timeout"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

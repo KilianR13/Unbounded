@@ -5,6 +5,7 @@ signal ammo_updated(weapon_name: String, ammo: int)
 signal update_ult_charge(charge: int)
 signal healthChanged(currentHealth: int, hurt: bool)
 signal playerDeathEnviroment
+signal playerStateChanged(currentPlayerState: int)
 
 var speed: float = WALK_SPEED
 var jump_count: int = 0
@@ -57,6 +58,13 @@ enum WeaponState {
 	WEAPON_SPECIAL,
 	WEAPON_HEAVY
 }
+
+enum StateMachine {
+	GROUNDED,
+	AIRBORNE
+}
+
+var currentPlayerState : StateMachine
 
 var current_weapon_state : WeaponState
 var currentWeapon: Node3D
@@ -122,6 +130,8 @@ func _ready() -> void:
 	landing_sound_enabled = true
 	finished_loading = true
 	pauseMenu.connect("gameUnpaused", Callable(self, "_unpauseGame"))
+	currentPlayerState = StateMachine.GROUNDED
+	emit_signal("playerStateChanged", currentPlayerState)
 
 
 func _unhandled_input(event: InputEvent)-> void:
@@ -170,18 +180,24 @@ func _unhandled_input(event: InputEvent)-> void:
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and isAlive:
-		if is_on_floor() or jump_count < max_jump_count or is_dashing:
+		if currentPlayerState == StateMachine.GROUNDED:
 			velocity.y = JUMP_VELOCITY
-			if is_on_floor():
-				$JumpSFX.play()
-			if !is_on_floor() and jump_count < max_jump_count and !on_ladder:
-				$DoubleJump.play()
-			
-			if is_dashing:
-				is_dashing = false
-				preserve_dash_momentum = true
-			
-		jump_count += 1
+			$JumpSFX.play()
+			currentPlayerState = StateMachine.AIRBORNE
+			$CoyoteTimer.stop()
+
+		elif currentPlayerState == StateMachine.AIRBORNE and jump_count < max_jump_count and !on_ladder:
+			# Doble salto en aire
+			velocity.y = JUMP_VELOCITY
+			$DoubleJump.play()
+			jump_count += 1
+				
+		emit_signal("playerStateChanged", currentPlayerState)
+		if is_dashing:
+			is_dashing = false
+			preserve_dash_momentum = true
+		
+		
 
 func _switch_weapon_state(state: int) -> void:
 	if current_weapon_state == state:
@@ -236,17 +252,12 @@ func _process(delta: float) -> void:
 	else:
 		# Resetea la posición cuando no hay shake
 		cameraShake.transform.origin = Vector3.ZERO
-		#camera.transform.origin = Vector3.ZERO
 
 
 func _physics_process(delta: float) -> void:
 	if !finished_loading:
 		return
-	#camera.transform.origin = Vector3(0, sin(t_bob * 10.0) * 0.2, 0)
-	#print(camera.transform.origin)
-	#var speed_mps: float = velocity.length()
-	#var speed_kmh: float = speed_mps * 3.6
-	#print("Current speed: ", speed_kmh, " km/h")
+	
 	
 	if !is_on_floor() and !on_ladder:
 		if velocity.y > 0:
@@ -255,16 +266,16 @@ func _physics_process(delta: float) -> void:
 			velocity.y -= fallingGravity * delta
 		if $WalkSound.playing:
 			$WalkSound.stop()
-	elif is_on_floor():
-		jump_count = 0
-	
 	
 	if isAlive:
-		if is_on_floor() and not was_on_floor and landing_sound_enabled:
-			$Jump_LandSound.play()
-		
-		was_on_floor = is_on_floor()
-		
+		if is_on_floor() and !was_on_floor:
+			jump_count = 0
+			$CoyoteTimer.stop()
+			currentPlayerState = StateMachine.GROUNDED
+			emit_signal("playerStateChanged", currentPlayerState)
+			if landing_sound_enabled:
+				$Jump_LandSound.play()
+
 		if on_ladder and isAlive:
 			jump_count = 0
 			if Input.is_action_pressed("moveForward"):
@@ -387,6 +398,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			preserve_dash_momentum = false
 		
+		if was_on_floor and !is_on_floor():
+			$CoyoteTimer.start()
+	was_on_floor = is_on_floor()
 	move_and_slide()
 
 
@@ -496,3 +510,8 @@ func recieve_hit(damage: int) -> void:
 			var randomPitch: float = rng.randf_range(0.9, 1.1)
 			$HurtSFX.set_pitch_scale(randomPitch)
 			$HurtSFX.play()
+
+
+func _on_coyote_timer_timeout() -> void:
+	currentPlayerState = StateMachine.AIRBORNE
+	emit_signal("playerStateChanged", currentPlayerState)

@@ -26,6 +26,8 @@ var playerIsAlive: bool = true
 
 @onready var playerHitRect: ColorRect = $playerHitRect
 
+@onready var stateLabel: Label = $Label
+
 func _ready() -> void:
 	## Coloreado de distintos labels
 	remainingAmmoPistol.add_theme_color_override("font_color", PISTOLAMMO_COLOR)
@@ -39,6 +41,7 @@ func _ready() -> void:
 	player.connect("ammo_updated", Callable(self, "_on_ammo_updated"))
 	player.connect("update_ult_charge", Callable(self, "_on_ultimate_charge_updated"))
 	player.connect("healthChanged", Callable(self, "_on_health_updated"))
+	player.connect("playerStateChanged", Callable(self, "_stateMachine"))
 	CombatManager.connect("updateScore", Callable(self, "_update_score"))
 	CombatManager.updateScoreForUI()
 	playerHitRect.visible = false
@@ -104,3 +107,10 @@ func playerDeath() -> void:
 
 func _update_score(score: int) -> void:
 	scoreLabel.text = str(score) + "$"
+
+func _stateMachine(playerState: int) -> void:
+	match playerState:
+		player.StateMachine.GROUNDED:
+			stateLabel.set_text("Suelo")
+		player.StateMachine.AIRBORNE:
+			stateLabel.set_text("Saltando")
